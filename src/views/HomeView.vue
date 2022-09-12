@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <Login title="Sisse logimine"/>
+    <Login title="Log into your account"/>
   </div>
 </template>
 
