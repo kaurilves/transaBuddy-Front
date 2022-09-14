@@ -41,6 +41,7 @@
 
 
 import AlertError from "@/components/alerts/AlertError";
+import HomeView from "@/views/HomeView";
 
 export default {
   name: "Login",
@@ -74,29 +75,46 @@ export default {
   },
   methods: {
     logIn: function () {
+
       this.$http.post("/login", this.loginRequest
       ).then(response => {
-        console.log()
         this.contactInfo = response.data
         this.roles = this.contactInfo.roleNames
-        console.log(this.roles)
-        if (this.roles.length > 1) {
-          this.divLoginInputForm = false
-          this.divChooseRole = true
-          console.log(this.divChooseRole)
-        } else {
-          if (this.roles[0] == admin) {
-            this.navigateToRoleHomeView('adminRoute')
-          } else if (this.roles[0] == customer) {
-            this.navigateToRoleHomeView('customerRoute')
+
+          if (this.roles.length > 1) {
+            this.divLoginInputForm = false
+            this.divChooseRole = true
+            console.log(this.divChooseRole)
           } else {
-            this.navigateToRoleHomeView('courierRoute')
+            if (this.roles[0] == "admin") {
+              this.navigateToRoleHomeView('adminRoute')
+            } else if (this.roles[0] == "customer") {
+              this.navigateToRoleHomeView('customerRoute')
+            } else {
+              this.navigateToRoleHomeView('courierRoute')
+            }
           }
-        }
+
+
       }).catch(error => {
         this.alertError = 'Invalid username or password';
       })
     },
+
+
+    checkUserIsActive: function () {
+      this.$http.get("/user/status/check", {
+            params: {
+              userId: this.contactInfo.userId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
     LoginWithRole() {
       if (this.roleSelected == 'admin') {
         this.navigateToRoleHomeView('adminRoute')
@@ -106,11 +124,15 @@ export default {
         this.navigateToRoleHomeView('courierRoute')
       }
     },
+
     navigateToRoleHomeView(roleHomeRoute) {
       sessionStorage.setItem('firstName', this.contactInfo.firstName)
       sessionStorage.setItem('lastName', this.contactInfo.firstName)
       this.$router.push({name: roleHomeRoute, query: {userId: this.contactInfo.userId}})
     },
+
+
+
   }
 }
 </script>

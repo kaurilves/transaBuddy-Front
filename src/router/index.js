@@ -8,6 +8,7 @@ import AdminHomeView from "@/views/AdminHomeView";
 import CustomerHomeView from "@/views/CustomerHomeView";
 import CourierHomeView from "@/views/CourierHomeView";
 import RegisterUserView from "@/views/RegisterUserView";
+import UserIsNotActiveView from "@/views/UserIsNotActiveView";
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,11 @@ const routes = [
         path: '/register',
         name: 'registerRoute',
         component: RegisterUserView
+    },
+    {
+      path: '/user/inactive',
+      name: 'userInactiveRoute',
+      component: UserIsNotActiveView
     },
 
     {
