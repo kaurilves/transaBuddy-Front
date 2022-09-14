@@ -83,11 +83,10 @@ export default {
         if (this.roles.length > 1) {
           this.divLoginInputForm = false
           this.divChooseRole = true
-          console.log(this.divChooseRole)
         } else {
-          if (this.roles[0] == admin) {
+          if (this.roles[0] == 'admin') {
             this.navigateToRoleHomeView('adminRoute')
-          } else if (this.roles[0] == customer) {
+          } else if (this.roles[0] == 'sender') {
             this.navigateToRoleHomeView('customerRoute')
           } else {
             this.navigateToRoleHomeView('courierRoute')
@@ -100,7 +99,7 @@ export default {
     LoginWithRole() {
       if (this.roleSelected == 'admin') {
         this.navigateToRoleHomeView('adminRoute')
-      } else if (this.roleSelected == 'customer') {
+      } else if (this.roleSelected == 'sender') {
         this.navigateToRoleHomeView('customerRoute')
       } else {
         this.navigateToRoleHomeView('courierRoute')
