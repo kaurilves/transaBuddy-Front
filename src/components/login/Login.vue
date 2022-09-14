@@ -6,8 +6,9 @@
       <AlertError :errorMessage="alertError"/><br>
       <input type="text" placeholder="Username" v-model="loginRequest.username"> <br><br>
       <input type="password" placeholder="password" v-model="loginRequest.password"><br><br>
-      <button type="button" v-on:click="logIn">Log in</button>
+      <button type="button" v-on:click="logIn">Log in</button><br><br>
 
+      <router-link to="/register"> Register </router-link>
 
       <!--    todo register nupp-->
 
@@ -55,7 +56,7 @@ export default {
       divLoginInputForm: true,
       divChooseRole: false,
       divTest: false,
-      roleSelected: 'admin',
+      roleSelected: '',
       loginRequest: {
         username: '',
         password: '',
