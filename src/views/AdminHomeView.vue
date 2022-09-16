@@ -13,6 +13,11 @@
       <FindAllUsersTable :users="users" title="All users"/>
     </div>
 
+    <div v-if="divDisplayFindUsers">
+      <FindUsersByNameAndCode title="Find users" @usersResultSuccess="updateUsersFromResult"/>
+
+    </div>
+
 
   </div>
 
@@ -20,9 +25,10 @@
 
 <script>
 import FindAllUsersTable from "@/components/FindAllUsersTable";
+import FindUsersByNameAndCode from "@/components/FindUsersByNameAndCode";
 export default {
   name: "AdminView",
-  components: {FindAllUsersTable},
+  components: {FindUsersByNameAndCode, FindAllUsersTable},
   data: function () {
     return{
       user: {},
@@ -49,6 +55,9 @@ export default {
             console.log(reason)
           })
     },
+    updateUsersFromResult(usersResult){
+      this.users = usersResult
+    },
     hideAllDivs(){
       this.divDisplayAllUsers = false,
           this.divDisplayFindUsers = false,
@@ -63,7 +72,9 @@ export default {
       this.findAllUsers()
     },
     displayFindUsers(){
+      this.users = []
       this.hideAllDivs()
+      this.divDisplayFindUsers = true
 
     },
     displayAddCustomer(){
