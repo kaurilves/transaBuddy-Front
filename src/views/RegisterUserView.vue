@@ -13,7 +13,7 @@
       <input type="text" placeholder="Phone number" v-model="userRequest.phoneNumber"><br><br>
       <input type="text" placeholder="Email address" v-model="userRequest.email"><br><br>
       <input checked type="radio" id="optionOne" :value="1" v-model="userRequest.roleId"/>
-      <label for="optionOne">Customer</label><br>
+      <label for="optionOne">Sender</label><br>
       <input checked type="radio" id="optionTwo" :value="2" v-model="userRequest.roleId"/>
       <label for="optionTwo">Courier</label><br>
       <button type="button" v-on:click="registerNewUser()">Register</button>

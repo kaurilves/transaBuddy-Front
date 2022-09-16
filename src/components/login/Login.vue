@@ -87,7 +87,7 @@ export default {
           if (this.roles[0] == 'admin') {
             this.navigateToRoleHomeView('adminRoute')
           } else if (this.roles[0] == 'sender') {
-            this.navigateToRoleHomeView('customerRoute')
+            this.navigateToRoleHomeView('senderRoute')
           } else {
             this.navigateToRoleHomeView('courierRoute')
           }
@@ -100,7 +100,7 @@ export default {
       if (this.roleSelected == 'admin') {
         this.navigateToRoleHomeView('adminRoute')
       } else if (this.roleSelected == 'sender') {
-        this.navigateToRoleHomeView('customerRoute')
+        this.navigateToRoleHomeView('senderRoute')
       } else {
         this.navigateToRoleHomeView('courierRoute')
       }

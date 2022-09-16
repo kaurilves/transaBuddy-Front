@@ -2,13 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AdminView from "@/views/AdminHomeView";
-import CustomerView from "@/views/CustomerHomeView";
+import CustomerView from "@/views/SenderHomeView";
 import CourierView from "@/views/CourierHomeView";
 import AdminHomeView from "@/views/AdminHomeView";
-import CustomerHomeView from "@/views/CustomerHomeView";
+import CustomerHomeView from "@/views/SenderHomeView";
 import CourierHomeView from "@/views/CourierHomeView";
 import RegisterUserView from "@/views/RegisterUserView";
 import UserIsNotActiveView from "@/views/UserIsNotActiveView";
+import SenderHomeView from "@/views/SenderHomeView";
 
 Vue.use(VueRouter)
 
@@ -24,9 +25,9 @@ const routes = [
         component: AdminHomeView
     },
     {
-        path: '/customer',
-        name: 'customerRoute',
-        component: CustomerHomeView
+        path: '/sender',
+        name: 'senderRoute',
+        component: SenderHomeView,
     },
     {
         path: '/courier',

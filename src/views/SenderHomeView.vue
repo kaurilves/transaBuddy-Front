@@ -1,12 +1,12 @@
 <template>
   <div>
-    Hello customer
+    Hello sender
   </div>
 </template>
 
 <script>
 export default {
-  name: "CustomerView"
+  name: "SenderView"
 }
 </script>
 
