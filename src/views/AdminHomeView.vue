@@ -13,6 +13,7 @@
       <FindAllUsersTable :users="users" title="All users"/>
     </div>
 
+
   </div>
 
 </template>
@@ -32,6 +33,7 @@ export default {
       divDisplayAddNewOrder: false,
       divDisplayAdjustPricing: false,
       divDisplayViewProfile: false,
+      divDisplayUserProfile: false,
 
     }
   },

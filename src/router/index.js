@@ -10,7 +10,8 @@ import CourierHomeView from "@/views/CourierHomeView";
 import RegisterUserView from "@/views/RegisterUserView";
 import UserIsNotActiveView from "@/views/UserIsNotActiveView";
 import SenderHomeView from "@/views/SenderHomeView";
-import UserProfileView from "@/views/UserProfileView";
+import UserProfileView from "@/views/AdminUserProfileView";
+import AdminUserProfileView from "@/views/AdminUserProfileView";
 
 Vue.use(VueRouter)
 
@@ -41,14 +42,9 @@ const routes = [
         component: RegisterUserView
     },
     {
-        path: '/user/inactive',
-        name: 'userInactiveRoute',
-        component: UserIsNotActiveView
-    },
-    {
-        path: '/test',
-        name: 'userProfileViewRoute',
-        component: UserProfileView
+        path: '/admin/users/profile',
+        name: 'AdminUserProfileView',
+        component: AdminUserProfileView
     },
 
     {
