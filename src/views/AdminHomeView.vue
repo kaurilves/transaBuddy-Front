@@ -5,7 +5,11 @@
       <button v-on:click="displayAllUsers" >All users</button>
       <button v-on:click="displayFindUsers">Search users</button>
       <button v-on:click="displayAddCustomer">Add user </button>
-      
+      <button v-on:click="displayAddNewOrder">Add order</button>
+      <button v-on:click="displayAdjustPricing">Adjust pricing list</button>
+      <button v-on:click="displayViewProfile">Adjust pricing list</button>
+
+
     </div>
   </div>
 

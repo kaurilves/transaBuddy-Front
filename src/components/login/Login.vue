@@ -80,6 +80,7 @@ export default {
         this.contactInfo = response.data
         this.roles = this.contactInfo.roleNames
         console.log(this.roles)
+
         if (this.roles.length > 1) {
           this.divLoginInputForm = false
           this.divChooseRole = true
