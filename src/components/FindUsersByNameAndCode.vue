@@ -1,6 +1,8 @@
 <template>
-<AlertError/>
+
   <div>
+    <AlertError :error-message="errorMessage"/>
+    <AlertWarning :warning-message="warningMessage"/>
     <h2>{{ title }}</h2>
     <input type="text" style="margin: 5px" placeholder="First name" v-model="firstName">
     <input type="text" style="margin: 5px" placeholder="Last name" v-model="lastName">
@@ -45,7 +47,9 @@ export default {
                 lastName: this.lastName,
                 personalCode: this.personalCode
               }
+
             }
+
         ).then(response => {
           let usersResult = response.data
           if (usersResult.length === 0) {

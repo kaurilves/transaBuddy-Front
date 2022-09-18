@@ -4,10 +4,12 @@
     <div>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllUsers" >All users</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayFindUsers">Search users</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddCustomer">Add user </button>
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddUser">Add user </button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddNewOrder">Add order</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAdjustPricing">Adjust pricing list</button>
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAdjustPricing">Pricing list</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayViewProfile">View profile</button>
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="logOut">Logout</button>
+
     </div>
     <div v-if="divDisplayAllUsers">
       <FindAllUsersTable :users="users" title="All users"/>
@@ -15,6 +17,23 @@
 
     <div v-if="divDisplayFindUsers">
       <FindUsersByNameAndCode title="Find users" @usersResultSuccess="updateUsersFromResult"/>
+      <div v-if="users.length > 0">
+        <FindAllUsersTable :users="users" title="Found users"/>
+      </div>
+
+    </div>
+    <div v-if="divDisplayAddUser">
+      <RegisterUser/>
+    </div>
+
+    <div v-if="divDisplayAdjustPricing">
+      <div v-if="shipmentPriceInfos.length > 0">
+        <FindAllShipmentPrices :shipmentPriceInfos="shipmentPriceInfos" title="Current pricing list"/>
+      </div>
+      <div v-if="divDisplayUserProfile">
+        User profile
+        <ViewUserProfile/>
+      </div>
 
     </div>
 
@@ -26,21 +45,31 @@
 <script>
 import FindAllUsersTable from "@/components/FindAllUsersTable";
 import FindUsersByNameAndCode from "@/components/FindUsersByNameAndCode";
+import AddNewUser from "@/components/AddNewUser";
+import RegisterUser from "@/components/RegisterUser.vue";
+import FindAllShipmentPrices from "@/components/FindAllShipmentPrices";
+import Logout from "@/components/login/Logout";
+import ViewUserProfile from "@/components/ViewUserProfile";
+
+
 export default {
   name: "AdminView",
-  components: {FindUsersByNameAndCode, FindAllUsersTable},
+  components: {
+    ViewUserProfile,
+    Logout, FindAllShipmentPrices, RegisterUser, AddNewUser, FindUsersByNameAndCode, FindAllUsersTable,},
   data: function () {
     return{
       user: {},
       users: [],
+      shipmentPriceInfo: {},
+      shipmentPriceInfos: [],
       divDisplayAllUsers: false,
       divDisplayFindUsers: false,
-      divDisplayAddCustomer: false,
+      divDisplayAddUser: false,
       divDisplayAddNewOrder: false,
       divDisplayAdjustPricing: false,
       divDisplayViewProfile: false,
       divDisplayUserProfile: false,
-
     }
   },
   methods: {
@@ -58,10 +87,18 @@ export default {
     updateUsersFromResult(usersResult){
       this.users = usersResult
     },
+    findAllPrices: function () {
+      this.$http.get("/admin/prices")
+          .then(response => {
+        this.shipmentPriceInfos = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    },
     hideAllDivs(){
       this.divDisplayAllUsers = false,
           this.divDisplayFindUsers = false,
-          this.divDisplayAddCustomer = false,
+          this.divDisplayAddUser = false,
           this.divDisplayAddNewOrder = false,
           this.divDisplayAdjustPricing = false,
           this.divDisplayViewProfile = false
@@ -77,18 +114,33 @@ export default {
       this.divDisplayFindUsers = true
 
     },
-    displayAddCustomer(){
+    displayAddUser(){
       this.hideAllDivs()
+      this.divDisplayAddUser = true
     },
     displayAddNewOrder(){
       this.hideAllDivs()
     },
     displayAdjustPricing(){
       this.hideAllDivs()
+      this.shipmentPriceInfos = []
+      this.findAllPrices()
+      this.divDisplayAdjustPricing = true
     },
     displayViewProfile(){
 
+
     },
+    logOut(){
+      sessionStorage.clear()
+      localStorage.clear()
+      this.$confirm("Are you sure you want to log out?").then(() => {
+        this.$router.push( {name: 'home'})
+      });
+
+
+    }
+
 
   }
 }
