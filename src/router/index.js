@@ -12,6 +12,7 @@ import UserIsNotActiveView from "@/views/UserIsNotActiveView";
 import SenderHomeView from "@/views/SenderHomeView";
 import UserProfileView from "@/views/Admin/AdminUserProfileView";
 import AdminUserProfileView from "@/views/Admin/AdminUserProfileView";
+import AdminAdjustPricingView from "@/views/Admin/AdminAdjustPricingView";
 
 Vue.use(VueRouter)
 
@@ -47,6 +48,11 @@ const routes = [
         path: '/admin/users/profile',
         name: 'AdminUserProfileView',
         component: AdminUserProfileView
+    },
+    {
+      path: '/admin/prices',
+        name: 'AdminAdjustPricingView',
+        component: AdminAdjustPricingView
     },
 
     {
