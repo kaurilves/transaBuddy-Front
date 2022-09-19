@@ -13,7 +13,7 @@
                 <td>
                   <strong>
                     <span class="glyphicon glyphicon-asterisk text-primary"></span>
-                    Identificacion
+                    Identification code
                   </strong>
                 </td>
                 <td class="text-primary">
@@ -39,7 +39,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  lastName
+                  {{ lastName }}
                 </td>
               </tr>
 
@@ -47,7 +47,7 @@
                 <td>
                   <strong>
                     <span class="glyphicon glyphicon-eye-open text-primary"></span>
-                    Role
+                    User roles
                   </strong>
                 </td>
                 <td class="text-primary">
@@ -87,7 +87,7 @@
 
 <script>
 export default {
-  name: "ViewUserProfile",
+  name: "UserProfile",
   data: function () {
     return{
       firstName: sessionStorage.getItem('firstName'),

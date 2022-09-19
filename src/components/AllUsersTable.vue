@@ -31,13 +31,14 @@
 
 
 
-import ViewUserProfile from "@/components/ViewUserProfile";
+import ViewUserProfile from "@/components/UserProfile";
+import UserProfile from "@/components/UserProfile";
 
 
 
 export default {
-  name: "FindAllUsersTable",
-  components: {ViewUserProfile},
+  name: "AllUsersTable",
+  components: {UserProfile},
   props: {
     users: {},
     title: String,
