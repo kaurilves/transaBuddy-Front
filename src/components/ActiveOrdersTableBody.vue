@@ -25,7 +25,7 @@ export default {
   data: function () {
     return {
       userId: sessionStorage.getItem('userId'),
-      orderInfo: [
+      orderInfo:
         {
           orderId: 0,
           senderUserId: 0,
@@ -39,7 +39,7 @@ export default {
           status: '',
           shipmentId: 0
         }
-      ]
+
     }
   },
   methods: {
@@ -60,7 +60,7 @@ export default {
     },
     toOrderView:function (orderId) {
       sessionStorage.setItem('orderId', orderId)
-      this.$router.push({name: ''})
+      this.$router.push({name: 'SenderOrderView'})
     }
 
   },
