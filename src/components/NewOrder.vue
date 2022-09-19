@@ -1,10 +1,10 @@
 <template>
   <div>
     <form>
-      <div class="form-group row">
+      <div class="form-group row" >
         <label class="col-sm-2 col-form-label">Delivery start time</label>
         <div class="col-sm-2">
-          <select id="inputStartTime" class="form-control" v-model="this.orderRequest.fromHour">
+          <select id="inputStartTime" class="form-control" v-model="orderRequest.fromHour">
             <option disabled value="">Choose start time...</option>
             <option value="7">0700</option>
             <option value="8">0800</option>
@@ -22,10 +22,10 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="form-group row" >
         <label class="col-sm-2 col-form-label">Delivery end time</label>
         <div class="col-sm-2">
-          <select id="inputEndTime" class="form-control" v-model="this.orderRequest.toHour">
+          <select id="inputEndTime" class="form-control" v-model="orderRequest.toHour">
             <option disabled value="">Choose end time...</option>
             <option value="7">0700</option>
             <option value="8">0800</option>
@@ -46,7 +46,7 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Pickup district</label>
         <div class="col-sm-2">
-          <select id="inputPickupDistrict" class="form-control" v-model="this.orderRequest.pickUpDistrictId">
+          <select id="inputPickupDistrict" class="form-control" v-model="orderRequest.pickUpDistrictId">
             <option disabled value="">Choose pickup district...</option>
             <option value="1">Mustamäe</option>
             <option value="2">Lasnamäe</option>
@@ -63,14 +63,14 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Pickup address</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="this.orderRequest.pickUpAddress" placeholder="Enter pickup address">
+            <input class="form-control" v-model="orderRequest.pickUpAddress" placeholder="Enter pickup address">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Dropoff district</label>
           <div class="col-sm-2">
-            <select id="inputDropoffDistrict" class="form-control" v-model="this.orderRequest.pickUpDistrictId">
+            <select id="inputDropoffDistrict" class="form-control" v-model="orderRequest.dropOffDistrictId">
               <option disabled value="">Choose dropoff district...</option>
               <option value="1">Mustamäe</option>
               <option value="2">Lasnamäe</option>
@@ -86,27 +86,29 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Dropoff address</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="this.orderRequest.dropOffAddress" placeholder="Enter dropoff address">
+            <input class="form-control" v-model="orderRequest.dropOffAddress" placeholder="Enter dropoff address">
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Receiver name</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="this.orderRequest.receiverName" placeholder="Enter receiver name">
+            <input class="form-control" v-model="orderRequest.receiverName" placeholder="Enter receiver name">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Receiver phone number</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="this.orderRequest.receiverPhoneNumber" placeholder="Enter receiver phone number">
+            <input class="form-control" v-model="orderRequest.receiverPhoneNumber"
+                   placeholder="Enter receiver phone number">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Package amount</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="this.orderRequest.packageAmountInShipment" placeholder="Enter package amount">
+            <input class="form-control" v-model="orderRequest.packageAmountInShipment"
+                   placeholder="Enter package amount">
           </div>
 
         </div>
@@ -114,7 +116,7 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Package type</label>
         <div class="col-sm-2">
-          <select id="inputPackageType" class="form-control" v-model="this.orderRequest.shipmentPriceId">
+          <select id="inputPackageType" class="form-control" v-model="orderRequest.shipmentPriceId">
             <option disabled value="">Choose package size...</option>
             <option value="1">XS</option>
             <option value="2">S</option>
@@ -126,28 +128,34 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Shipment description</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="this.orderRequest.shipmentDescription" placeholder="Enter shipment description">
+            <input class="form-control" v-model="orderRequest.shipmentDescription"
+                   placeholder="Enter shipment description">
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Extra comments</label>
+          <div class="col-sm-2">
+            <input class="form-control" v-model="orderRequest.comment" placeholder="Enter comments">
           </div>
 
         </div>
 
-
-
       </div>
     </form>
-
-    <input type="text" placeholder="Shipment description" v-model="orderRequest.shipmentDescription"><br><br>
-    <input type="text" placeholder="Comment" v-model="orderRequest.comment"><br><br>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="addOrder">Add order</button>
   </div>
 </template>
 
 <script>
 export default {
   name: "NewOrder",
+
   data: function () {
     return {
       orderRequest: {
-        senderUserId: localStorage.getItem('userId'),
+        deliveryDate: '',
+        senderUserId: localStorage.getItem('userId') ,
         courierUserId: '',
         fromHour: '',
         toHour: '',
@@ -165,6 +173,18 @@ export default {
       }
     }
   },
+  methods:{
+    addOrder: function () {
+      this.orderRequest.senderUserId =
+      this.$http.post("/transabuddy/order", this.orderRequest
+      ).then(response => {
+        this.orderRequest = response.data
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+  }
 
 }
 
