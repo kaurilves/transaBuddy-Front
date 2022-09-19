@@ -11,6 +11,9 @@
     <div v-if="divDisplayAllAvailableOrders">
       <AllAvailableOrdersTable :orders="orders" title="All available orders"/>
     </div>
+    <div>
+
+    </div>
   </div>
 </template>
 
