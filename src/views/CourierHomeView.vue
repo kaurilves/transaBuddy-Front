@@ -28,8 +28,8 @@ export default {
       order: {},
       orders: [],
       divDisplayAllAvailableOrders: true,
-      pickUpDistrict: 0,
-      dropOffDistrict: 0,
+      pickUpDistrictId: '0',
+      dropOffDistrictId: '0',
       status: 'N'
     }
   },
@@ -37,8 +37,8 @@ export default {
     findOrderSByDistrictAndStatus: function () {
       this.$http.get('/transabuddy/orders/available', {
             params: {
-              pickUpDistrict: this.pickUpDistrict,
-              dropOffDistrict: this.dropOffDistrict,
+              pickUpDistrictId: this.pickUpDistrictId,
+              dropOffDistrictId: this.dropOffDistrictId,
               status: this.status,
 
             }
