@@ -1,5 +1,6 @@
 <template>
   <div>
+    <table class="table">
     <tbody>
     <tr v-for="order in orderInfo">
       <td>{{ order.id }}</td>
@@ -12,11 +13,12 @@
       <td>{{ order.comment }}</td>
       <td>
         <button type="button" style="margin: 5px" class="btn btn-outline-dark"
-                v-on:click="toOrderView(order.id)">View order
+                v-on:click="toOrderView(orderId)">View order
         </button>
       </td>
     </tr>
     </tbody>
+    </table>
   </div>
 </template>
 <script>
