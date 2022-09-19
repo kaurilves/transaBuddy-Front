@@ -1,10 +1,14 @@
 <template>
+  <div>
+    <H2>Add new order</H2>
+
+  </div>
 
 </template>
 
 <script>
 export default {
-  name: "AddNewOrder"
+  name: "NewOrderView"
 }
 </script>
 

@@ -13,6 +13,7 @@ import SenderHomeView from "@/views/SenderHomeView";
 import UserProfileView from "@/views/Admin/AdminUserProfileView";
 import AdminUserProfileView from "@/views/Admin/AdminUserProfileView";
 import AdminAdjustPricingView from "@/views/Admin/AdminAdjustPricingView";
+import NewOrderView from "@/views/NewOrderView";
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,12 @@ const routes = [
       path: '/admin/prices',
         name: 'AdminAdjustPricingView',
         component: AdminAdjustPricingView
+    },
+    {
+      path: '/order',
+      name: 'NewOrderView',
+        component: NewOrderView
+
     },
 
     {
