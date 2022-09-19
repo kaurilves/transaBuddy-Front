@@ -18,7 +18,7 @@
 import AlertError from "@/components/alerts/AlertError";
 import AlertWarning from "@/components/alerts/AlertWarning";
 export default {
-  name: "FindUsersByNameAndCode",
+  name: "UsersByNameAndCodeTable",
   components: {AlertError, AlertWarning},
   props: {
     title: String,

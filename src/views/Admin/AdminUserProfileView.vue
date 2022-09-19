@@ -14,14 +14,13 @@
 </template>
 
 <script>
-import ViewUserProfile from "@/components/ViewUserProfile";
+import ViewUserProfile from "@/components/UserProfile";
 export default {
   name: "AdminUserProfileView",
   components: {ViewUserProfile},
   methods:{
     backToAdminView(){
       this.$router.push({name: 'adminRoute'})
-
     }
   }
 }

@@ -12,13 +12,13 @@
 
     </div>
     <div v-if="divDisplayAllUsers">
-      <FindAllUsersTable :users="users" title="All users"/>
+      <AllUsersTable :users="users" title="All users"/>
     </div>
 
     <div v-if="divDisplayFindUsers">
-      <FindUsersByNameAndCode title="Find users" @usersResultSuccess="updateUsersFromResult"/>
+      <UsersByNameAndCodeTable title="Find users" @usersResultSuccess="updateUsersFromResult"/>
       <div v-if="users.length > 0">
-        <FindAllUsersTable :users="users" title="Found users"/>
+        <AllUsersTable :users="users" title="Found users"/>
       </div>
 
     </div>
@@ -28,11 +28,11 @@
 
     <div v-if="divDisplayAdjustPricing">
       <div v-if="shipmentPriceInfos.length > 0">
-        <FindAllShipmentPrices :shipmentPriceInfos="shipmentPriceInfos" title="Current pricing list"/>
+        <AllShipmentPrices :shipmentPriceInfos="shipmentPriceInfos" title="Current pricing list"/>
       </div>
       <div v-if="divDisplayUserProfile">
         User profile
-        <ViewUserProfile/>
+        <UserProfile/>
       </div>
 
     </div>
@@ -43,25 +43,31 @@
 </template>
 
 <script>
-import FindAllUsersTable from "@/components/FindAllUsersTable";
-import FindUsersByNameAndCode from "@/components/FindUsersByNameAndCode";
+import FindAllUsersTable from "@/components/AllUsersTable";
+import FindUsersByNameAndCode from "@/components/UsersByNameAndCodeTable";
 import AddNewUser from "@/components/AddNewUser";
 import RegisterUser from "@/components/RegisterUser.vue";
-import FindAllShipmentPrices from "@/components/FindAllShipmentPrices";
+import FindAllShipmentPrices from "@/components/AllShipmentPrices";
 import Logout from "@/components/login/Logout";
-import ViewUserProfile from "@/components/ViewUserProfile";
+
+import UserProfile from "@/components/UserProfile";
+import AllUsersTable from "@/components/AllUsersTable";
+import AllShipmentPrices from "@/components/AllShipmentPrices";
+import UsersByNameAndCodeTable from "@/components/UsersByNameAndCodeTable";
 
 
 export default {
   name: "AdminView",
   components: {
-    ViewUserProfile,
-    Logout, FindAllShipmentPrices, RegisterUser, AddNewUser, FindUsersByNameAndCode, FindAllUsersTable,},
+    UserProfile,
+    Logout, AllShipmentPrices, RegisterUser, AddNewUser, UsersByNameAndCodeTable, AllUsersTable,},
   data: function () {
     return{
       user: {},
       users: [],
-      shipmentPriceInfo: {},
+      shipmentPriceInfo: {
+        shipmentPriceId: ''
+      },
       shipmentPriceInfos: [],
       divDisplayAllUsers: false,
       divDisplayFindUsers: false,
