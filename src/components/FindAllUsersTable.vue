@@ -17,7 +17,7 @@
         <td>{{ user.lastName }}</td>
         <td>{{ user.personalCode }}</td>
         <td>
-          <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="toUserProfile">
+          <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="toUserProfile(user)">
             View user profile
           </button>
         </td>
@@ -31,17 +31,30 @@
 
 
 
+import ViewUserProfile from "@/components/ViewUserProfile";
+
+
+
 export default {
   name: "FindAllUsersTable",
-
+  components: {ViewUserProfile},
   props: {
     users: {},
     title: String,
 
   },
+
   methods: {
     toUserProfile(user){
-      this.$router.push({name: 'userProfileViewRoute', query:{userId: user.userId}})
+      sessionStorage.clear()
+      sessionStorage.setItem('firstName', user.firstName)
+      sessionStorage.setItem('lastName', user.lastName)
+      sessionStorage.setItem('personalCode', user.personalCode)
+      sessionStorage.setItem('email', user.email)
+      sessionStorage.setItem('phoneNumber', user.phoneNumber)
+      sessionStorage.setItem('roleNames', user.roleNames)
+      this.$router.push({name: 'AdminUserProfileView', query:{userId: user.userId}})
+
     }
   }
 }

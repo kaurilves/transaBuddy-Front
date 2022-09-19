@@ -1,18 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import AdminView from "@/views/AdminHomeView";
+import AdminView from "@/views/Admin/AdminHomeView";
 import CustomerView from "@/views/SenderHomeView";
 import CourierView from "@/views/CourierHomeView";
-import AdminHomeView from "@/views/AdminHomeView";
+import AdminHomeView from "@/views/Admin/AdminHomeView";
 import CustomerHomeView from "@/views/SenderHomeView";
 import CourierHomeView from "@/views/CourierHomeView";
 import RegisterUserView from "@/views/RegisterUserView";
 import UserIsNotActiveView from "@/views/UserIsNotActiveView";
 import SenderHomeView from "@/views/SenderHomeView";
-import UserProfileView from "@/views/UserProfileView";
+import UserProfileView from "@/views/Admin/AdminUserProfileView";
+import AdminUserProfileView from "@/views/Admin/AdminUserProfileView";
+import AdminAdjustPricingView from "@/views/Admin/AdminAdjustPricingView";
 
 Vue.use(VueRouter)
+
+
 
 const routes = [
     {
@@ -41,14 +45,14 @@ const routes = [
         component: RegisterUserView
     },
     {
-        path: '/user/inactive',
-        name: 'userInactiveRoute',
-        component: UserIsNotActiveView
+        path: '/admin/users/profile',
+        name: 'AdminUserProfileView',
+        component: AdminUserProfileView
     },
     {
-        path: '/test',
-        name: 'userProfileViewRoute',
-        component: UserProfileView
+      path: '/admin/prices',
+        name: 'AdminAdjustPricingView',
+        component: AdminAdjustPricingView
     },
 
     {
