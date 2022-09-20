@@ -152,6 +152,7 @@
         </div>
       </div>
     </div>
+
   </div>
 
 </template>
@@ -214,18 +215,17 @@ export default {
 
     },
     statusToString(status){
-      if(status === "A"){
-        return "Active"
+      if(status === "N"){
+        return "Order active"
       }
-
+      if(status === "A")
+        return "Accepted by courier"
       if(status === "P"){
-        return "Picked up"
+        return "Picked up by courier"
       }
-
       if(status === "D"){
         return "Delivered"
       }
-
       if(status === "C"){
         return "Cancelled"
       }
@@ -233,7 +233,7 @@ export default {
   },
   mounted() {
     this.getOrderByOrderId(this.orderId)
-
+    this.$forceUpdate();
   }
 
 }

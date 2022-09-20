@@ -114,6 +114,7 @@ export default {
       localStorage.setItem('email', this.contactInfo.email)
       localStorage.setItem('phoneNumber', this.contactInfo.phoneNumber)
       localStorage.setItem('roleNames', this.contactInfo.roleNames)
+      localStorage.setItem('roleSelected', this.roleSelected)
 
       this.$router.push({name: roleHomeRoute, query: {userId: this.contactInfo.userId}})
     },
