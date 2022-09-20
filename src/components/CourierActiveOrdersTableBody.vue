@@ -2,7 +2,7 @@
   <tbody>
   <tr v-for="order in orderInfo">
     <td>{{ order.deliveryDate }}</td>
-    <td>{{ order.fromHour }} - {{ order.toHour }}</td>
+    <td>{{order.timeFrame}}}</td>
     <td>{{ order.pickUpAddress }}</td>
     <td>{{ order.dropOffAddress }}</td>
     <td>{{ order.priceCategory }}</td>
@@ -24,8 +24,7 @@ export default {
       orderId: 0,
       orderInfo: {
         deliveryDate: '',
-        fromHour: 0,
-        toHour: 0,
+        timeFrame: '',
         pickUpAddress: '',
         dropOffAddress: '',
         priceCategory: '',

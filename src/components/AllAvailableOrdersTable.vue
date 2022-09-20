@@ -15,7 +15,7 @@
     <tbody>
     <tr v-for="order in orders">
       <td>{{order.deliveryDate}}</td>
-      <td>{{order.fromHour}} - {{order.toHour}}</td>
+      <td>{{order.timeFrame}}</td>
       <td>{{order.pickUpAddress}}</td>
       <td>{{order.dropOffAddress}}</td>
       <td>{{order.priceCategory}}</td>
