@@ -5,7 +5,7 @@
       <NewOrder/>
 
     </div>
-    <button type="button" v-on:click="backToAdminView">Back</button>
+    <button type="button" v-on:click="backToMainView">Back</button>
 
   </div>
 
@@ -23,8 +23,15 @@ export default {
     }
   },
   methods:{
-    backToAdminView(){
-      this.$router.push({name: 'adminRoute'})
+    backToMainView(){
+      const roleSelected = sessionStorage.getItem('roleSelected')
+      if (roleSelected == 'sender') {
+        this.$router.push({name: 'senderRoute'});
+      } else if (roleSelected == 'courier') {
+        this.$router.push({name: 'senderRoute'});
+      } else {
+        this.$router.push({name: 'senderRoute'});
+      }
     }
   }
 }

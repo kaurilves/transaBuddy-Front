@@ -163,7 +163,7 @@ export default {
   name: "OrderInfo",
   data: function () {
     return {
-      orderId: sessionStorage.getItem('orderId'),
+      orderId: this.$route.query.orderId,
       orderInfo: {
         deliveryDate: '',
         senderUserId: '',
