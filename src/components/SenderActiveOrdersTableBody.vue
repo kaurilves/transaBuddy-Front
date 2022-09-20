@@ -10,7 +10,7 @@
       <td>{{ order.status }}</td>
       <td>
         <button type="button" style="margin: 5px" class="btn btn-outline-dark"
-                v-on:click="toOrderView(orderId)">View order
+                v-on:click="toOrderView(order.orderId)">View order
         </button>
       </td>
     </tr>
@@ -51,8 +51,7 @@ export default {
       })
     },
     toOrderView:function (orderId) {
-      sessionStorage.setItem('orderId', orderId)
-      this.$router.push({name: 'SenderOrderView'})
+      this.$router.push({name: 'senderOrderView', query: {orderId: orderId}})
     }
 
   },

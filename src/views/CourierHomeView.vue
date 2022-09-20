@@ -5,16 +5,19 @@
       <button id="logOutButton" type="button" class="btn btn-outline-dark" v-on:click="logOut">Logout</button>
     </div>
     <div>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllAvailableOrders">Available jobs</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayActiveOrders" >Active jobs</button>-->
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayDeliveredOrders" >Delivered orders</button>-->
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllAvailableOrders">Available jobs
+      </button>
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayActiveOrders">Active jobs</button>
+      -->
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="">Delivered orders</button>
+      -->
       <!--      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllUsers" >All users</button>-->
     </div>
     <div v-if="divDisplayAllAvailableOrders">
       <AllAvailableOrdersTable :orders="orders" title="All available orders"/>
     </div>
     <div v-if="divDisplayActiveOrders">
-      <AllAvailableOrdersTable :orders="orders" title="All available orders"/>
+      <CourierActiveOrdersTable :orders="orders" title="Courier active orders"/>
     </div>
     <div>
 
@@ -24,14 +27,13 @@
 
 <script>
 import AllAvailableOrdersTable from "@/components/AllAvailableOrdersTable";
-import CourierActiveOrdersTable from "@/components/SenderActiveOrdersTable";
-
+import CourierActiveOrdersTable from "@/components/CourierActiveOrdersTable";
 
 
 export default {
   name: "CourierHomeView",
   components: {
-    AllAvailableOrdersTable
+    AllAvailableOrdersTable, CourierActiveOrdersTable
   },
   data: function () {
     return {
@@ -41,7 +43,7 @@ export default {
       divDisplayActiveOrders: true,
       pickUpDistrictId: '0',
       dropOffDistrictId: '0',
-      status: 'N'
+      status: 'N',
 
     }
   },
@@ -67,14 +69,14 @@ export default {
         console.log(this.orders)
       })
     },
-    displayAllAvailableOrders: function (){
+    displayAllAvailableOrders: function () {
       this.hideAllDivs()
+      this.divDisplayAllAvailableOrders = true;
       this.findOrderSByDistrictAndStatus()
     },
-    displayActiveOrders: function (){
+    displayActiveOrders: function () {
       this.hideAllDivs()
       this.divDisplayActiveOrders = true;
-      CourierActiveOrdersTable.findActiveOrdersByCourierUserId()
 
 
     },

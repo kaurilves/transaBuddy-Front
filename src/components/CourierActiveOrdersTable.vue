@@ -14,7 +14,7 @@ import CourierActiveOrdersTableHeader from "@/components/CourierActiveOrdersTabl
 import CourierActiveOrdersTableBody from "@/components/CourierActiveOrdersTableBody";
 
 export default {
-  name: "UserActiveOrdersTable",
+  name: "CourierActiveOrdersTable",
   components: {CourierActiveOrdersTableBody, CourierActiveOrdersTableHeader},
 }
 </script>

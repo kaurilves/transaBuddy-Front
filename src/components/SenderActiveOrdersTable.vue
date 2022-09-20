@@ -2,7 +2,7 @@
   <div>
     <br>
     <h1>Active orders</h1>
-    <table>
+    <table class="table table-hover">
       <SenderActiveOrdersTableHeader/>
       <SenderActiveOrdersTableBody/>
     </table>
@@ -13,7 +13,7 @@
 import SenderActiveOrdersTableHeader from "@/components/SenderActiveOrdersTableHeader";
 import SenderActiveOrdersTableBody from "@/components/SenderActiveOrdersTableBody";
 export default {
-  name: "UserActiveOrdersTable",
+  name: "SenderActiveOrdersTable",
   components: {SenderActiveOrdersTableBody, SenderActiveOrdersTableHeader},
 }
 </script>

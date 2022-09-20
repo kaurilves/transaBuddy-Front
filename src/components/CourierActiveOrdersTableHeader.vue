@@ -1,9 +1,9 @@
 <template>
   <div>
-    <table class="table">
+    <h2>Your active jobs</h2>
+    <table class="table table-hover">
       <thead>
       <tr>
-
         <th scope="col">Delivery date</th>
         <th scope="col">Time frame</th>
         <th scope="col">Pick-up address</th>

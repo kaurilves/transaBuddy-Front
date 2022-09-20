@@ -1,21 +1,21 @@
 <template>
   <div>
     <table class="table">
-    <tbody>
-    <tr v-for="order in orderInfo">
-      <td>{{ order.deliveryDate }}</td>
-      <td>{{ order.fromHour }} - {{order.toHour}}</td>
-      <td>{{ order.pickUpAddress }}</td>
-      <td>{{ order.dropOffAddress }}</td>
-      <td>{{ order.priceCategory }}</td>
-      <td>{{ order.status }}</td>
-      <td>
-        <button type="button" style="margin: 5px" class="btn btn-outline-dark"
-                v-on:click="toOrderView(orderId)">View order
-        </button>
-      </td>
-    </tr>
-    </tbody>
+      <tbody>
+      <tr v-for="order in orderInfo">
+        <td>{{ order.deliveryDate }}</td>
+        <td>{{ order.fromHour }} - {{ order.toHour }}</td>
+        <td>{{ order.pickUpAddress }}</td>
+        <td>{{ order.dropOffAddress }}</td>
+        <td>{{ order.priceCategory }}</td>
+        <td>{{ order.status }}</td>
+        <td>
+          <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+                  v-on:click="toOrderView(orderId)">View order
+          </button>
+        </td>
+      </tr>
+      </tbody>
     </table>
   </div>
 </template>
@@ -25,16 +25,15 @@ export default {
   data: function () {
     return {
       userId: sessionStorage.getItem('userId'),
-      orderInfo:
-        {
-          deliveryDate: '',
-          fromHour: 0,
-          toHour: 0,
-          pickUpAddress: '',
-          dropOffAddress: '',
-          priceCategory: '',
-          status: '',
-        }
+      order: {},
+      deliveryDate: '',
+      fromHour: 0,
+      toHour: 0,
+      pickUpAddress: '',
+      dropOffAddress: '',
+      priceCategory: '',
+      status: '',
+      orders: []
 
     }
   },
@@ -47,12 +46,12 @@ export default {
           }
       ).then(response => {
         console.log(response.data)
-        this.orderInfo = response.data
+        this.orders = response.data
       }).catch(error => {
         console.log(error)
       })
     },
-    toOrderView:function (orderId) {
+    toOrderView: function (orderId) {
       sessionStorage.setItem('orderId', orderId)
       this.$router.push({name: 'SenderOrderView'})
     }

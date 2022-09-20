@@ -1,9 +1,8 @@
 <template>
   <div>
-    <table class="table">
+    <table>
       <thead>
       <tr>
-
         <th scope="col">Delivery date</th>
         <th scope="col">Time frame</th>
         <th scope="col">Pick-up address</th>
@@ -17,6 +16,6 @@
 </template>
 <script>
 export default {
-  name: 'ActiveOrdersTableHeader'
+  name: 'SenderActiveOrdersTableHeader'
 }
 </script>
