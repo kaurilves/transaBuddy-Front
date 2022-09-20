@@ -2,7 +2,7 @@
   <tbody>
   <tr v-for="order in orderInfo">
     <td>{{ order.deliveryDate }}</td>
-    <td>{{ order.fromHour }} - {{ order.toHour }}</td>
+    <td>{{ order.timeFrame }} </td>
     <td>{{ order.pickUpAddress }}</td>
     <td>{{ order.dropOffAddress }}</td>
     <td>{{ order.status }}</td>
@@ -24,8 +24,7 @@ export default {
       orderInfo:
           {
             deliveryDate: '',
-            fromHour: 0,
-            toHour: 0,
+            timeFrame: 0,
             pickUpAddress: '',
             dropOffAddress: '',
             status: '',
@@ -50,7 +49,7 @@ export default {
     },
     toOrderView: function (orderId) {
 
-      this.$router.push({name: 'senderOrderView', query: {orderId: orderId}})
+      this.$router.push({name: 'orderView', query: {orderId: orderId}})
 
     }
 

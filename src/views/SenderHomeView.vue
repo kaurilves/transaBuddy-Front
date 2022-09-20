@@ -5,7 +5,7 @@
     </div>
 
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToAddOrder">Add new order</button>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="">Search orders</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToSearchSenderOrders">Search orders</button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToViewProfile">View profile</button>
     <SenderActiveOrdersTable/>
   </div>
@@ -38,6 +38,9 @@ export default {
     },
     navigateToViewProfile: function () {
       this.$router.push({name: 'senderUserProfileView'})
+    },
+    navigateToSearchSenderOrders: function () {
+      this.$router.push({name:'senderSearchOrders'})
     },
   }
 }
