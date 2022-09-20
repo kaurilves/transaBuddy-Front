@@ -57,7 +57,7 @@ import UsersByNameAndCodeTable from "@/components/UsersByNameAndCodeTable";
 
 
 export default {
-  name: "AdminView",
+  name: "AdminHomeView",
   components: {
     UserProfile, Logout, AllShipmentPrices, RegisterUser, AddNewUser, UsersByNameAndCodeTable, AllUsersTable,},
   data: function () {
@@ -125,7 +125,7 @@ export default {
     },
     displayAddNewOrder(){
       this.hideAllDivs()
-      this.$router.push({name: 'NewOrderView'})
+      this.$router.push({name: 'newOrderView'})
     },
     displayAdjustPricing(){
       this.hideAllDivs()

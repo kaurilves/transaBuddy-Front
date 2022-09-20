@@ -29,7 +29,7 @@ import CourierActiveOrdersTable from "@/components/SenderActiveOrdersTable";
 
 
 export default {
-  name: "CourierView",
+  name: "CourierHomeView",
   components: {
     AllAvailableOrdersTable
   },

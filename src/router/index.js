@@ -43,29 +43,29 @@ const routes = [
     },
     {
         path: '/admin/users/profile',
-        name: 'AdminUserProfileView',
+        name: 'adminUserProfileView',
         component: AdminUserProfileView
     },
     {
         path: '/admin/prices',
-        name: 'AdminAdjustPricingView',
+        name: 'adminAdjustPricingView',
         component: AdminAdjustPricingView
     },
     {
         path: '/sender/order',
-        name: 'SenderOrderView',
+        name: 'senderOrderView',
         component: SenderOrderView
     },
     {
 
         path: '/new-order',
-        name: 'NewOrderView',
+        name: 'newOrderView',
         component: NewOrderView
 
     },
     {
         path: '/order',
-        name: 'OrderView',
+        name: 'orderView',
         component: OrderView
     },
 
