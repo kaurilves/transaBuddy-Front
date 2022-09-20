@@ -6,9 +6,9 @@
     <h2>{{ title }}</h2>
     <input type="text" style="margin: 5px" placeholder="First name" v-model="firstName">
     <input type="text" style="margin: 5px" placeholder="Last name" v-model="lastName">
-    <input type="text" style="margin: 5px" placeholder="Last name" v-model="personalCode">
+    <input type="text" style="margin: 5px" placeholder="Personal code" v-model="personalCode">
 
-    <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="findCustomersByName">Find</button>
+    <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="findCustomersByNameAndCode">Find</button>
 
   </div>
 
@@ -34,7 +34,7 @@ export default {
 
   },
   methods: {
-    findCustomersByName(){
+    findCustomersByNameAndCode(){
       this.errorMessage = ''
       this.warningMessage = ''
 
