@@ -184,14 +184,14 @@ export default {
     addNewOrder() {
       this.addOrder()
 
-      this.$router.push({name: 'OrderView', query:{orderId: localStorage.getItem('orderId')}})
+
     },
     addOrder: function () {
 
       this.$http.post("/transabuddy/order", this.orderRequest
       ).then(response => {
         this.orderRequest = response.data
-
+        this.$router.push({name: 'OrderView', query:{orderId: localStorage.getItem('orderId')}})
         localStorage.setItem('orderId', response.data.orderId)
         this.successMessage = "New order added"
         console.log(response.data)
