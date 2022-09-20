@@ -2,7 +2,7 @@
   <tbody>
   <tr v-for="order in orderInfo">
     <td>{{ order.deliveryDate }}</td>
-    <td>{{order.timeFrame}}}</td>
+    <td>{{order.timeFrame}}</td>
     <td>{{ order.pickUpAddress }}</td>
     <td>{{ order.dropOffAddress }}</td>
     <td>{{ order.priceCategory }}</td>
