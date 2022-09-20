@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import SenderActiveOrdersTable from "@/components/SenderActiveOrdersTable";
 import UserProfile from "@/components/UserProfile";
 import SenderUserProfileView from "@/views/SenderUserProfileView";
+import SenderActiveOrdersTable from "@/components/SenderActiveOrdersTable";
 
 export default {
   name: "SenderHomeView",
@@ -33,7 +33,6 @@ export default {
         this.$router.push({name: 'home'})
       });
     },
-
     navigateToAddOrder: function () {
       this.$router.push({name: 'newOrderView'})
     },

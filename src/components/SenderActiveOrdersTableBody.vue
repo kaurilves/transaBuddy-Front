@@ -1,17 +1,17 @@
 <template>
+  <div>
+    <table class="table">
     <tbody>
     <tr v-for="order in orderInfo">
-      <td>{{ order.orderId }}</td>
-      <td>{{ order.status }}</td>
-      <td>{{ order.receiverName }}</td>
-      <td>{{ order.receiverPhoneNumber }}</td>
       <td>{{ order.deliveryDate }}</td>
-      <td>{{ order.fromHour }}</td>
-      <td>{{ order.toHour }}</td>
-      <td>{{ order.comment }}</td>
+      <td>{{ order.fromHour }} - {{order.toHour}}</td>
+      <td>{{ order.pickUpAddress }}</td>
+      <td>{{ order.dropOffAddress }}</td>
+      <td>{{ order.status }}</td>
       <td>
         <button type="button" style="margin: 5px" class="btn btn-outline-dark"
                 v-on:click="toOrderView(order.orderId )">View order
+
         </button>
       </td>
     </tr>
@@ -26,22 +26,18 @@ export default {
       orderId: 0,
       orderInfo:
         {
-          orderId: 0,
-          senderUserId: 0,
-          receiverName: '',
-          receiverPhoneNumber: '',
-          courierUserId: 0,
           deliveryDate: '',
           fromHour: 0,
           toHour: 0,
-          comment: '',
+          pickUpAddress: '',
+          dropOffAddress: '',
           status: '',
-          shipmentId: 0
         }
 
     }
   },
   methods: {
+
 
 
     findActiveOrdersBySenderUserId: function () {
@@ -58,6 +54,7 @@ export default {
       })
     },
     toOrderView:function (orderId) {
+
       this.$router.push({name: 'senderOrderView', query: {orderId: orderId}})
 
     }
