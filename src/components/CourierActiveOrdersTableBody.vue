@@ -3,14 +3,12 @@
     <table class="table">
     <tbody>
     <tr v-for="order in orderInfo">
-      <td>{{ order.id }}</td>
-      <td>{{ order.status }}</td>
-      <td>{{ order.receiverName }}</td>
-      <td>{{ order.receiverPhoneNumber }}</td>
       <td>{{ order.deliveryDate }}</td>
-      <td>{{ order.fromHour }}</td>
-      <td>{{ order.toHour }}</td>
-      <td>{{ order.comment }}</td>
+      <td>{{ order.fromHour }} - {{order.toHour}}</td>
+      <td>{{ order.pickUpAddress }}</td>
+      <td>{{ order.dropOffAddress }}</td>
+      <td>{{ order.priceCategory }}</td>
+      <td>{{ order.status }}</td>
       <td>
         <button type="button" style="margin: 5px" class="btn btn-outline-dark"
                 v-on:click="toOrderView(orderId)">View order
@@ -23,32 +21,26 @@
 </template>
 <script>
 export default {
-  name: 'ActiveOrdersTableBody',
+  name: 'CourierActiveOrdersTableBody',
   data: function () {
     return {
       userId: sessionStorage.getItem('userId'),
       orderInfo:
         {
-          orderId: 0,
-          senderUserId: 0,
-          receiverName: '',
-          receiverPhoneNumber: '',
-          courierUserId: 0,
           deliveryDate: '',
           fromHour: 0,
           toHour: 0,
-          comment: '',
+          pickUpAddress: '',
+          dropOffAddress: '',
+          priceCategory: '',
           status: '',
-          shipmentId: 0
         }
 
     }
   },
   methods: {
-
-
-    findActiveOrdersBySenderId: function () {
-      this.$http.get("/transabuddy/user/active-orders", {
+    findActiveOrdersByCourierUserId: function () {
+      this.$http.get("/transabuddy/user/courier-active-orders", {
             params: {
               userId: this.userId
             }
@@ -64,10 +56,9 @@ export default {
       sessionStorage.setItem('orderId', orderId)
       this.$router.push({name: 'SenderOrderView'})
     }
-
   },
   mounted() {
-    this.findActiveOrdersBySenderId()
+    this.findActiveOrdersByCourierUserId()
   }
 }
 </script>

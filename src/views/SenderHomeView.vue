@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import UserActiveOrdersTable from "@/components/UserActiveOrdersTable";
+import UserActiveOrdersTable from "@/components/SenderActiveOrdersTable";
 import UserProfile from "@/components/UserProfile";
 import SenderUserProfileView from "@/views/SenderUserProfileView";
 

@@ -8,6 +8,7 @@
       <th scope="col">Time frame</th>
       <th scope="col">Pick up address</th>
       <th scope="col">Drop off address</th>
+      <th scope="col">Price category</th>
       <th scope="col"></th>
     </tr>
     </thead>
@@ -17,6 +18,7 @@
       <td>{{order.fromHour}} - {{order.toHour}}</td>
       <td>{{order.pickUpAddress}}</td>
       <td>{{order.dropOffAddress}}</td>
+      <td>{{order.priceCategory}}</td>
       <td>
         <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="toOrderInfo(order)">
         View order info
