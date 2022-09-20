@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <table class="table">
       <thead>
       <tr>
         <th scope="col">Order ID</th>
@@ -14,11 +12,9 @@
         <th scope="col">View order</th>
       </tr>
       </thead>
-    </table>
-  </div>
 </template>
 <script>
 export default {
-  name: 'ActiveOrdersTableHeader'
+  name: 'SenderActiveOrdersTableHeader'
 }
 </script>
