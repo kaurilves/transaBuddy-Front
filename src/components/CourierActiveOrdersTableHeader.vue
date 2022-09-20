@@ -1,5 +1,4 @@
 <template>
-    <h2>Your active jobs</h2>
       <thead>
       <tr>
         <th scope="col">Delivery date</th>
