@@ -26,7 +26,7 @@ import UserProfile from "@/components/UserProfile";
 import SenderUserProfileView from "@/views/SenderUserProfileView";
 
 export default {
-  name: "SenderView",
+  name: "SenderHomeView",
   components: {
     UserActiveOrdersTable, UserProfile, SenderUserProfileView
   },

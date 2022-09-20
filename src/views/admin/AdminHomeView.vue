@@ -57,7 +57,7 @@ import UsersByNameAndCodeTable from "@/components/UsersByNameAndCodeTable";
 
 
 export default {
-  name: "adminView",
+  name: "AdminHomeView",
   components: {
     UserProfile, Logout, AllShipmentPrices, RegisterUser, AddNewUser, UsersByNameAndCodeTable, AllUsersTable,},
   data: function () {

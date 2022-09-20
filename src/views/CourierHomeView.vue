@@ -22,7 +22,7 @@ import AllAvailableOrdersTable from "@/components/login/AllAvailableOrdersTable"
 
 
 export default {
-  name: "CourierView",
+  name: "CourierHomeView",
   components: {
     AllAvailableOrdersTable
   },
