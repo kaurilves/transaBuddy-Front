@@ -6,8 +6,7 @@
       <td>{{ order.receiverName }}</td>
       <td>{{ order.receiverPhoneNumber }}</td>
       <td>{{ order.deliveryDate }}</td>
-      <td>{{ order.fromHour }}</td>
-      <td>{{ order.toHour }}</td>
+      <td>{{ order.timeFrame }}</td>
       <td>{{ order.comment }}</td>
       <td>
         <button type="button" style="margin: 5px" class="btn btn-outline-dark"
@@ -32,8 +31,7 @@ export default {
           receiverPhoneNumber: '',
           courierUserId: 0,
           deliveryDate: '',
-          fromHour: 0,
-          toHour: 0,
+          timeFrame: '',
           comment: '',
           status: '',
           shipmentId: 0
@@ -58,7 +56,7 @@ export default {
       })
     },
     toOrderView:function (orderId) {
-      this.$router.push({name: 'senderOrderView', query: {orderId: orderId}})
+      this.$router.push({name: 'orderView', query: {orderId: orderId}})
 
     }
 

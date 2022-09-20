@@ -6,8 +6,7 @@
         <th scope="col">Receiver Name</th>
         <th scope="col">Receiver phone number</th>
         <th scope="col">Delivery date</th>
-        <th scope="col">From hour</th>
-        <th scope="col">To hour</th>
+        <th scope="col">Time frame</th>
         <th scope="col">Comment</th>
         <th scope="col">View order</th>
       </tr>
