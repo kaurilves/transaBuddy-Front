@@ -183,7 +183,8 @@ export default {
   methods:{
     addNewOrder() {
       this.addOrder()
-      this.$router.push({name: 'orderView'})
+      this.$router.push({name: 'orderView', query:{orderId: this.orderId}})
+      this.$forceUpdate();
     },
     addOrder: function () {
 

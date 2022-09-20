@@ -4,7 +4,6 @@
     <table class="table table-hover">
       <thead>
       <tr>
-        <!--        <th scope="col">Username</th>-->
         <th scope="col">First name</th>
         <th scope="col">Last name</th>
         <th scope="col">Personal code</th>
