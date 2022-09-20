@@ -4,7 +4,7 @@
     <div>
       <ViewUserProfile/>
 
-      <button type="button" v-on:click="backToSenderView">Back</button>
+      <button type="button" v-on:click="backToMainView">Back</button>
     </div>
 
   </div>
@@ -17,7 +17,7 @@ export default {
   name: "SenderUserProfileView",
   components: {ViewUserProfile},
   methods: {
-    backToSenderView() {
+    backToMainView() {
 
       const roleSelected = sessionStorage.getItem('roleSelected')
       if (roleSelected == 'sender') {
