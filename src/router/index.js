@@ -1,15 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import AdminView from "@/views/Admin/AdminHomeView";
+import CustomerView from "@/views/SenderHomeView";
+import CourierView from "@/views/CourierHomeView";
 import AdminHomeView from "@/views/Admin/AdminHomeView";
-import SenderHomeView from "@/views/SenderHomeView";
+import CustomerHomeView from "@/views/SenderHomeView";
 import CourierHomeView from "@/views/CourierHomeView";
 import RegisterUserView from "@/views/RegisterUserView";
+import UserIsNotActiveView from "@/views/UserIsNotActiveView";
+import SenderHomeView from "@/views/SenderHomeView";
+import UserProfileView from "@/views/Admin/AdminUserProfileView";
 import AdminUserProfileView from "@/views/Admin/AdminUserProfileView";
 import AdminAdjustPricingView from "@/views/Admin/AdminAdjustPricingView";
+import NewOrderView from "@/views/NewOrderView";
 import SenderOrderView from "@/views/SenderOrderView";
+import OrderView from "@/views/OrderView";
 
 Vue.use(VueRouter)
+
 
 
 const routes = [
@@ -52,6 +61,19 @@ const routes = [
         path: '/sender/order',
         name: 'SenderOrderView',
         component: SenderOrderView
+    },
+    {
+      path: '/order',
+      name: 'NewOrderView',
+        path: '/new-order',
+        name: 'NewOrderView',
+        component: NewOrderView
+
+    },
+    {
+        path: '/order',
+        name: 'OrderView',
+        component: OrderView
     },
 
     {
