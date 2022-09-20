@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <table class="table">
-    <tbody>
-    <tr v-for="order in orderInfo">
-      <td>{{ order.deliveryDate }}</td>
-      <td>{{ order.fromHour }} - {{order.toHour}}</td>
-      <td>{{ order.pickUpAddress }}</td>
-      <td>{{ order.dropOffAddress }}</td>
-      <td>{{ order.status }}</td>
-      <td>
-        <button type="button" style="margin: 5px" class="btn btn-outline-dark"
-                v-on:click="toOrderView(order.orderId )">View order
+  <tbody>
+  <tr v-for="order in orderInfo">
+    <td>{{ order.deliveryDate }}</td>
+    <td>{{ order.fromHour }} - {{ order.toHour }}</td>
+    <td>{{ order.pickUpAddress }}</td>
+    <td>{{ order.dropOffAddress }}</td>
+    <td>{{ order.status }}</td>
+    <td>
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="toOrderView(order.orderId )">View order
 
-        </button>
-      </td>
-    </tr>
-    </tbody>
+      </button>
+    </td>
+  </tr>
+  </tbody>
 </template>
 <script>
 export default {
@@ -25,19 +23,18 @@ export default {
       userId: sessionStorage.getItem('userId'),
       orderId: 0,
       orderInfo:
-        {
-          deliveryDate: '',
-          fromHour: 0,
-          toHour: 0,
-          pickUpAddress: '',
-          dropOffAddress: '',
-          status: '',
-        }
+          {
+            deliveryDate: '',
+            fromHour: 0,
+            toHour: 0,
+            pickUpAddress: '',
+            dropOffAddress: '',
+            status: '',
+          }
 
     }
   },
   methods: {
-
 
 
     findActiveOrdersBySenderUserId: function () {
@@ -53,7 +50,7 @@ export default {
         console.log(error)
       })
     },
-    toOrderView:function (orderId) {
+    toOrderView: function (orderId) {
 
       this.$router.push({name: 'senderOrderView', query: {orderId: orderId}})
 

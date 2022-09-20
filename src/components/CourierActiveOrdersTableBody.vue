@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <table class="table">
       <tbody>
       <tr v-for="order in orderInfo">
         <td>{{ order.deliveryDate }}</td>
@@ -16,8 +14,6 @@
         </td>
       </tr>
       </tbody>
-    </table>
-  </div>
 </template>
 <script>
 export default {

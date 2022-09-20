@@ -1,7 +1,5 @@
 <template>
-  <div>
     <h2>Your active jobs</h2>
-    <table class="table table-hover">
       <thead>
       <tr>
         <th scope="col">Delivery date</th>
@@ -13,8 +11,6 @@
         <th scope="col"></th>
       </tr>
       </thead>
-    </table>
-  </div>
 </template>
 <script>
 export default {
