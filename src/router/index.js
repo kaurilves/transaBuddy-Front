@@ -14,9 +14,9 @@ import UserProfileView from "@/views/Admin/AdminUserProfileView";
 import AdminUserProfileView from "@/views/Admin/AdminUserProfileView";
 import AdminAdjustPricingView from "@/views/Admin/AdminAdjustPricingView";
 import NewOrderView from "@/views/NewOrderView";
+import OrderView from "@/views/OrderView";
 
 Vue.use(VueRouter)
-
 
 
 const routes = [
@@ -51,15 +51,20 @@ const routes = [
         component: AdminUserProfileView
     },
     {
-      path: '/admin/prices',
+        path: '/admin/prices',
         name: 'AdminAdjustPricingView',
         component: AdminAdjustPricingView
     },
     {
-      path: '/order',
-      name: 'NewOrderView',
+        path: '/new-order',
+        name: 'NewOrderView',
         component: NewOrderView
 
+    },
+    {
+        path: '/order',
+        name: 'OrderView',
+        component: OrderView
     },
 
     {
