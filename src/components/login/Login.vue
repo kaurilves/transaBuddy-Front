@@ -87,10 +87,16 @@ export default {
           this.divChooseRole = true
         } else {
           if (this.roles[0] == 'admin') {
+            this.roleSelected = "admin"
+            localStorage.setItem('roleSelected', this.roleSelected )
             this.navigateToRoleHomeView('adminRoute')
           } else if (this.roles[0] == 'sender') {
+            this.roleSelected = "sender"
+            localStorage.setItem('roleSelected', this.roleSelected )
             this.navigateToRoleHomeView('senderRoute')
           } else {
+            this.roleSelected = "courier"
+            localStorage.setItem('roleSelected', this.roleSelected )
             this.navigateToRoleHomeView('courierRoute')
           }
         }
@@ -100,10 +106,16 @@ export default {
     },
     LoginWithRole() {
       if (this.roleSelected == 'admin') {
+        this.roleSelected = "admin"
+        localStorage.setItem('roleSelected', this.roleSelected )
         this.navigateToRoleHomeView('adminRoute')
       } else if (this.roleSelected == 'sender') {
+        this.roleSelected = "sender"
+        localStorage.setItem('roleSelected', this.roleSelected )
         this.navigateToRoleHomeView('senderRoute')
       } else {
+        this.roleSelected = "courier"
+        localStorage.setItem('roleSelected', this.roleSelected )
         this.navigateToRoleHomeView('courierRoute')
       }
     },

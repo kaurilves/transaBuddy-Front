@@ -27,10 +27,10 @@ export default {
       const roleSelected = sessionStorage.getItem('roleSelected')
       if (roleSelected == 'sender') {
         this.$router.push({name: 'senderRoute'});
-      } else if (roleSelected == 'courier') {
-        this.$router.push({name: 'senderRoute'});
+      } else if (roleSelected == 'admin') {
+        this.$router.push({name: 'adminRoute'});
       } else {
-        this.$router.push({name: 'senderRoute'});
+        this.$router.push({name: 'courierRoute'});
       }
     }
   }
