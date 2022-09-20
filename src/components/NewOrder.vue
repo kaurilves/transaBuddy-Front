@@ -183,7 +183,7 @@ export default {
   methods:{
     addNewOrder() {
       this.addOrder()
-      this.$router.push({name: 'OrderView'})
+      this.$router.push({name: 'orderView'})
     },
     addOrder: function () {
 

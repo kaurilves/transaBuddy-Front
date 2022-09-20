@@ -54,7 +54,7 @@ export default {
       sessionStorage.setItem('email', user.email)
       sessionStorage.setItem('phoneNumber', user.phoneNumber)
       sessionStorage.setItem('roleNames', user.roleNames)
-      this.$router.push({name: 'AdminUserProfileView', query:{userId: user.userId}})
+      this.$router.push({name: 'adminUserProfileView', query:{userId: user.userId}})
 
     }
   }

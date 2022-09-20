@@ -125,7 +125,7 @@ export default {
     },
     displayAddNewOrder(){
       this.hideAllDivs()
-      this.$router.push({name: 'NewOrderView'})
+      this.$router.push({name: 'newOrderView'})
     },
     displayAdjustPricing(){
       this.hideAllDivs()
