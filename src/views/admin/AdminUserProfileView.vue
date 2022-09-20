@@ -3,7 +3,7 @@
   <div>
 
     <div>
-      <ViewUserProfile/>
+      <UserProfile/>
 
       <button type="button" v-on:click="backToAdminView">Back</button>
     </div>
@@ -14,10 +14,11 @@
 </template>
 
 <script>
-import ViewUserProfile from "@/components/UserProfile";
+
+import UserProfile from "@/components/UserProfile";
 export default {
   name: "AdminUserProfileView",
-  components: {ViewUserProfile},
+  components: {UserProfile},
   methods:{
     backToAdminView(){
       this.$router.push({name: 'adminRoute'})

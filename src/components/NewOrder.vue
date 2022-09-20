@@ -153,7 +153,7 @@
 import AlertError from "@/components/alerts/AlertError";
 import AlertSuccess from "@/components/alerts/AlertSuccess";
 export default {
-  name: "NewOrder",
+  name: "newOrder",
   components: {AlertError, AlertSuccess},
   data: function () {
     return {
@@ -183,7 +183,6 @@ export default {
   methods:{
     addNewOrder() {
       this.addOrder()
-
       this.$router.push({name: 'OrderView'})
     },
     addOrder: function () {
