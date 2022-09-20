@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/home/HomeView.vue'
 import AdminHomeView from "@/views/admin/AdminHomeView";
-import SenderHomeView from "@/views/SenderHomeView";
-import CourierHomeView from "@/views/CourierHomeView";
-import RegisterUserView from "@/views/RegisterUserView";
+import SenderHomeView from "@/views/sender/SenderHomeView";
+import CourierHomeView from "@/views/courier/CourierHomeView";
+import RegisterUserView from "@/views/home/RegisterUserView";
 import AdminUserProfileView from "@/views/admin/AdminUserProfileView";
 import AdminAdjustPricingView from "@/views/admin/AdminAdjustPricingView";
-import NewOrderView from "@/views/NewOrderView";
-import OrderView from "@/views/OrderView";
-import SenderUserProfileView from "@/views/SenderUserProfileView";
-import SenderSearchOrdersView from "@/views/SenderSearchOrdersView";
+import NewOrderView from "@/views/order/NewOrderView";
+import OrderView from "@/views/order/OrderView";
+import SenderUserProfileView from "@/views/sender/SenderUserProfileView";
+import SenderSearchOrdersView from "@/views/sender/SenderSearchOrdersView";
 
 Vue.use(VueRouter)
 
@@ -88,7 +88,7 @@ const routes = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: function () {
-            return import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+            return import(/* webpackChunkName: "about" */ '../views/home/AboutView.vue')
         }
     }
 ];

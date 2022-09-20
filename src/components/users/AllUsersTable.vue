@@ -30,8 +30,8 @@
 
 
 
-import ViewUserProfile from "@/components/UserProfile";
-import UserProfile from "@/components/UserProfile";
+
+import UserProfile from "@/components/users/UserProfile";
 
 
 
@@ -46,13 +46,6 @@ export default {
 
   methods: {
     toUserProfile(user){
-      sessionStorage.clear()
-      sessionStorage.setItem('firstName', user.firstName)
-      sessionStorage.setItem('lastName', user.lastName)
-      sessionStorage.setItem('personalCode', user.personalCode)
-      sessionStorage.setItem('email', user.email)
-      sessionStorage.setItem('phoneNumber', user.phoneNumber)
-      sessionStorage.setItem('roleNames', user.roleNames)
       this.$router.push({name: 'adminUserProfileView', query:{userId: user.userId}})
 
     }

@@ -33,7 +33,7 @@
 
 <script>
 
-import OrderInfo from "@/components/OrderInfo";
+import OrderInfo from "@/components/order/OrderInfo";
 export default {
   name: "AllAvailableOrdersTable",
   components: {OrderInfo},

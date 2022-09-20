@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import ViewUserProfile from "@/components/UserProfile";
+import ViewUserProfile from "@/components/users/UserProfile";
 export default {
   name: "AdminUserProfileView",
   components: {ViewUserProfile},

@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import SenderActiveOrdersTableHeader from "@/components/SenderActiveOrdersTableHeader";
-import SenderActiveOrdersTableBody from "@/components/SenderActiveOrdersTableBody";
+import SenderActiveOrdersTableHeader from "@/components/sender/SenderActiveOrdersTableHeader";
+import SenderActiveOrdersTableBody from "@/components/sender/SenderActiveOrdersTableBody";
 
 export default {
   name: "SenderActiveOrdersTable",

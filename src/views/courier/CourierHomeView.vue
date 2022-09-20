@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import AllAvailableOrdersTable from "@/components/AllAvailableOrdersTable";
-import CourierActiveOrdersTable from "@/components/CourierActiveOrdersTable";
+import AllAvailableOrdersTable from "@/components/courier/AllAvailableOrdersTable";
+import CourierActiveOrdersTable from "@/components/courier/CourierActiveOrdersTable";
 
 
 export default {

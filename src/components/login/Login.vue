@@ -108,15 +108,7 @@ export default {
       }
     },
     navigateToRoleHomeView(roleHomeRoute) {
-      sessionStorage.setItem('userId', this.contactInfo.userId)
-      sessionStorage.setItem('firstName', this.contactInfo.firstName)
-      sessionStorage.setItem('lastName', this.contactInfo.lastName)
-      sessionStorage.setItem('personalCode', this.contactInfo.personalCode)
-      sessionStorage.setItem('email', this.contactInfo.email)
-      sessionStorage.setItem('phoneNumber', this.contactInfo.phoneNumber)
-      sessionStorage.setItem('roleNames', this.contactInfo.roleNames)
-      sessionStorage.setItem('roleSelected', this.roleSelected)
-
+      localStorage.setItem('userId', this.contactInfo.userId)
       this.$router.push({name: roleHomeRoute, query: {userId: this.contactInfo.userId}})
     },
   }

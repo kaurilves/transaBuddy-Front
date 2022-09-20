@@ -7,7 +7,7 @@
 
 <script>
 
-import RegisterUser from "@/components/RegisterUser";
+import RegisterUser from "@/components/login/RegisterUser";
 export default {
   name: "RegisterUserView",
   components: {RegisterUser},

@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import CourierActiveOrdersTableHeader from "@/components/CourierActiveOrdersTableHeader";
-import CourierActiveOrdersTableBody from "@/components/CourierActiveOrdersTableBody";
+import CourierActiveOrdersTableHeader from "@/components/courier/CourierActiveOrdersTableHeader";
+import CourierActiveOrdersTableBody from "@/components/courier/CourierActiveOrdersTableBody";
 
 export default {
   name: "CourierActiveOrdersTable",

@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import UserProfile from "@/components/UserProfile";
-import SenderUserProfileView from "@/views/SenderUserProfileView";
-import SenderActiveOrdersTable from "@/components/SenderActiveOrdersTable";
+import UserProfile from "@/components/users/UserProfile";
+import SenderUserProfileView from "@/views/sender/SenderUserProfileView";
+import SenderActiveOrdersTable from "@/components/sender/SenderActiveOrdersTable";
 
 export default {
   name: "SenderHomeView",
@@ -23,6 +23,7 @@ export default {
   },
   data: function (){
     return  {
+      userId: localStorage.getItem('userId')
     }
   },
   methods: {
@@ -34,13 +35,13 @@ export default {
       });
     },
     navigateToAddOrder: function () {
-      this.$router.push({name: 'newOrderView'})
+      this.$router.push({name: 'newOrderView', query:{userId: this.userId}})
     },
     navigateToViewProfile: function () {
-      this.$router.push({name: 'senderUserProfileView'})
+      this.$router.push({name: 'senderUserProfileView', query:{userId: this.userId}})
     },
     navigateToSearchSenderOrders: function () {
-      this.$router.push({name:'senderSearchOrders'})
+      this.$router.push({name:'senderSearchOrders', query:{userId: this.userId}})
     },
   }
 }

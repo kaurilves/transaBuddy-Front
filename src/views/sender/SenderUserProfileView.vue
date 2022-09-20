@@ -1,29 +1,24 @@
 <template>
   <div>
-    <H2>Add new order</H2>
-    <div>
-      <NewOrder/>
 
+    <div>
+      <ViewUserProfile/>
+
+      <button type="button" v-on:click="backToMainView">Back</button>
     </div>
-    <button type="button" v-on:click="backToMainView">Back</button>
 
   </div>
-
 </template>
 
 <script>
-import NewOrder from "@/components/NewOrder";
+import ViewUserProfile from "@/components/users/UserProfile";
+
 export default {
-  name: "NewOrderView",
+  name: "SenderUserProfileView",
+  components: {ViewUserProfile},
+  methods: {
+    backToMainView() {
 
-  components: {NewOrder},
-  data: function () {
-    return{
-
-    }
-  },
-  methods:{
-    backToMainView(){
       const roleSelected = sessionStorage.getItem('roleSelected')
       if (roleSelected == 'sender') {
         this.$router.push({name: 'senderRoute'});
@@ -32,6 +27,7 @@ export default {
       } else {
         this.$router.push({name: 'senderRoute'});
       }
+
     }
   }
 }

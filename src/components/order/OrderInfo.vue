@@ -173,7 +173,7 @@
 
 
 <script>
-import ImageInput from "@/components/ImageInput";
+import ImageInput from "@/components/image/ImageInput";
 export default {
   name: "OrderInfo",
   components: {ImageInput},

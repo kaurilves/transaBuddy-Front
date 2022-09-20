@@ -17,7 +17,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ personalCode }}
+                  {{ contactInfo.personalCode }}
                 </td>
               </tr>
               <tr>
@@ -28,7 +28,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ firstName }}
+                  {{ contactInfo.firstName }}
                 </td>
               </tr>
               <tr>
@@ -39,7 +39,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ lastName }}
+                  {{ contactInfo.lastName }}
                 </td>
               </tr>
 
@@ -51,7 +51,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ roleNames }}
+                  {{ contactInfo.roleNames }}
                 </td>
               </tr>
               <tr>
@@ -62,7 +62,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{email}}
+                  {{contactInfo.email}}
                 </td>
               </tr>
               <tr>
@@ -73,7 +73,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ phoneNumber }}
+                  {{ contactInfo.phoneNumber }}
                 </td>
               </tr>
               </tbody>
@@ -90,13 +90,28 @@ export default {
   name: "UserProfile",
   data: function () {
     return{
-      firstName: localStorage.getItem('firstName'),
-      personalCode: localStorage.getItem('personalCode'),
-      lastName: localStorage.getItem('lastName'),
-      email: localStorage.getItem('email'),
-      phoneNumber: localStorage.getItem('phoneNumber'),
-      roleNames: localStorage.getItem('roleNames'),
+      userId: this.$route.query.userId,
+      contactInfo: {}
+
     }
+  },
+  methods: {
+    getContactInfoByUserId() {
+      this.$http.get("/admin/user/contacts", {
+            params: {
+              userId: this.userId
+            }
+          }
+      ).then(response => {
+        this.contactInfo = response.data
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+  },
+  mounted() {
+  this.getContactInfoByUserId()
   }
 }
 </script>

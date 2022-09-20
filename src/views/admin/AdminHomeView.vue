@@ -7,8 +7,8 @@
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddUser">Add user </button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddNewOrder">Add order</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAdjustPricing">Pricing list</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayViewProfile">View profile</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="logOut">Logout</button>
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToProfileView">View profile</button>
+      <button id="logOutButton" style="margin: 5px" class="btn btn-outline-dark" v-on:click="logOut">Logout</button>
 
     </div>
     <div v-if="divDisplayAllUsers">
@@ -43,25 +43,21 @@
 </template>
 
 <script>
-import FindAllUsersTable from "@/components/AllUsersTable";
-import FindUsersByNameAndCode from "@/components/UsersByNameAndCodeTable";
-import AddNewUser from "@/components/AddNewUser";
-import RegisterUser from "@/components/RegisterUser.vue";
-import FindAllShipmentPrices from "@/components/AllShipmentPrices";
+import RegisterUser from "@/components/login/RegisterUser.vue";
 import Logout from "@/components/login/Logout";
-
-import UserProfile from "@/components/UserProfile";
-import AllUsersTable from "@/components/AllUsersTable";
-import AllShipmentPrices from "@/components/AllShipmentPrices";
-import UsersByNameAndCodeTable from "@/components/UsersByNameAndCodeTable";
+import UserProfile from "@/components/users/UserProfile";
+import AllUsersTable from "@/components/users/AllUsersTable";
+import AllShipmentPrices from "@/components/order/AllShipmentPrices";
+import UsersByNameAndCodeTable from "@/components/users/UsersByNameAndCodeTable";
 
 
 export default {
   name: "AdminHomeView",
   components: {
-    UserProfile, Logout, AllShipmentPrices, RegisterUser, AddNewUser, UsersByNameAndCodeTable, AllUsersTable,},
+    UserProfile, Logout, AllShipmentPrices, RegisterUser, UsersByNameAndCodeTable, AllUsersTable,},
   data: function () {
     return{
+      userId: localStorage.getItem('userId'),
       user: {},
       users: [],
       shipmentPriceInfo: {
@@ -133,8 +129,8 @@ export default {
       this.findAllPrices()
       this.divDisplayAdjustPricing = true
     },
-    displayViewProfile(){
-
+    navigateToProfileView(){
+      this.$router.push({name: 'adminUserProfileView', query:{userId: this.userId}})
 
     },
     logOut(){
@@ -154,5 +150,10 @@ export default {
 
 
 <style scoped>
-
+#logOutButton {
+  position: relative;
+  top: -50px;
+  right: -600px;
+  margin: 5px;
+}
 </style>
