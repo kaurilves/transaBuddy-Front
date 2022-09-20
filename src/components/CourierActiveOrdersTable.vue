@@ -2,9 +2,9 @@
   <div>
     <br>
     <h1>Active orders</h1>
-    <table>
-      <ActiveOrdersTableHeader/>
-      <ActiveOrdersTableBody/>
+    <table class="table table-hover">
+      <CourierActiveOrdersTableHeader/>
+      <CourierActiveOrdersTableBody/>
     </table>
   </div>
 </template>
