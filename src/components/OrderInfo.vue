@@ -119,7 +119,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{}}
+                  {{orderInfo.packageAmount}}
                 </td>
               </tr>
 
@@ -152,6 +152,20 @@
         </div>
       </div>
     </div>
+    <div>
+      Pictures from sender
+      <ImageInput @imageInputSuccess="getImageDataFromFile"/><br>
+      <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend">
+        Upload image
+      </button><br><br><br><br>
+
+      <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="findImageById">Find sender picture
+      </button>
+      <img :src="imageResponse.base64" alt="placeholder"><br><br><br><br><br>
+    </div>
+
+
+
 
   </div>
 
@@ -159,11 +173,23 @@
 
 
 <script>
+import ImageInput from "@/components/ImageInput";
 export default {
   name: "OrderInfo",
+  components: {ImageInput},
   data: function () {
     return {
+      imageUploadRequest:{
+        orderId: sessionStorage.getItem('orderId'),
+        base64: '',
+        type: 'S'
+      },
+      imageResponse:{
+        base64: String,
+      },
+      type: 'S',
       orderId: this.$route.query.orderId,
+
       orderInfo: {
         deliveryDate: '',
         senderUserId: '',
@@ -185,13 +211,39 @@ export default {
         senderPhoneNumber: "",
         shipmentId: '',
         senderName: '',
-
+        packageAmount: ''
 
       }
     }
 
   },
   methods: {
+    findImageById: function () {
+      this.$http.get("/transabuddy/image", {
+            params: {
+              orderId: this.orderId,
+              type: this.type
+
+            }
+          }
+      ).then(response => {
+        this.imageResponse = response.data
+        console.log(this.imageResponse)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    getImageDataFromFile(base64) {
+      this.imageUploadRequest.base64 = base64
+    },
+    sendImageDataToBackend () {
+      this.$http.post("/transabuddy/image", this.imageUploadRequest
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
     getOrderByOrderId: function (orderId) {
       this.$http.get("/transabuddy/order", {
             params: {
