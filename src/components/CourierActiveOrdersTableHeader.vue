@@ -1,5 +1,6 @@
 <template>
     <h2>Your active jobs</h2>
+    <table>
       <thead>
       <tr>
         <th scope="col">Delivery date</th>
@@ -11,6 +12,8 @@
         <th scope="col"></th>
       </tr>
       </thead>
+    </table>
+
 </template>
 <script>
 export default {

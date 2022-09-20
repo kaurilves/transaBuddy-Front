@@ -3,8 +3,8 @@
     <br>
     <h1>Active orders</h1>
     <table>
-      <ActiveOrdersTableHeader/>
-      <ActiveOrdersTableBody/>
+      <CourierActiveOrdersTableHeader/>
+      <CourierActiveOrdersTableBody/>
     </table>
   </div>
 </template>
