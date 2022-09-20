@@ -2,9 +2,9 @@
   <div>
     <h2>Admin view</h2>
     <div>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllUsers" >All users</button>
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllUsers">All users</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayFindUsers">Search users</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddUser">Add user </button>
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddUser">Add user</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddNewOrder">Add order</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAdjustPricing">Pricing list</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayViewProfile">View profile</button>
@@ -60,9 +60,10 @@ export default {
   name: "AdminView",
   components: {
     UserProfile,
-    Logout, AllShipmentPrices, RegisterUser, AddNewUser, UsersByNameAndCodeTable, AllUsersTable,},
+    Logout, AllShipmentPrices, RegisterUser, AddNewUser, UsersByNameAndCodeTable, AllUsersTable,
+  },
   data: function () {
-    return{
+    return {
       user: {},
       users: [],
       shipmentPriceInfo: {
@@ -79,7 +80,7 @@ export default {
     }
   },
   methods: {
-    findAllUsers(){
+    findAllUsers() {
       this.$http.get('/admin/users')
           .then(response => {
 
@@ -90,18 +91,18 @@ export default {
             console.log(reason)
           })
     },
-    updateUsersFromResult(usersResult){
+    updateUsersFromResult(usersResult) {
       this.users = usersResult
     },
     findAllPrices: function () {
       this.$http.get("/admin/prices")
           .then(response => {
-        this.shipmentPriceInfos = response.data
-      }).catch(error => {
+            this.shipmentPriceInfos = response.data
+          }).catch(error => {
         console.log(error)
       })
     },
-    hideAllDivs(){
+    hideAllDivs() {
       this.divDisplayAllUsers = false,
           this.divDisplayFindUsers = false,
           this.divDisplayAddUser = false,
@@ -114,37 +115,34 @@ export default {
       this.divDisplayAllUsers = true
       this.findAllUsers()
     },
-    displayFindUsers(){
+    displayFindUsers() {
       this.users = []
       this.hideAllDivs()
       this.divDisplayFindUsers = true
 
     },
-    displayAddUser(){
+    displayAddUser() {
       this.hideAllDivs()
       this.divDisplayAddUser = true
     },
-    displayAddNewOrder(){
+    displayAddNewOrder() {
       this.hideAllDivs()
     },
-    displayAdjustPricing(){
+    displayAdjustPricing() {
       this.hideAllDivs()
       this.shipmentPriceInfos = []
       this.findAllPrices()
       this.divDisplayAdjustPricing = true
     },
-    displayViewProfile(){
+    displayViewProfile() {
 
 
     },
-    logOut(){
+    logOut() {
       sessionStorage.clear()
       localStorage.clear()
       this.$confirm("Are you sure you want to log out?").then(() => {
-        this.$router.push( {name: 'home'})
-      });
-
-
+        this.$router.push({name: 'home'})});
     }
 
 
