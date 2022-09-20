@@ -145,7 +145,8 @@
 
       </div>
     </form>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="addNewOrder">Add order</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="toOrderView(orderId)">To order view</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="addNewOrder(orderId)">Save</button>
   </div>
 </template>
 
@@ -181,17 +182,20 @@ export default {
     }
   },
   methods:{
+    toOrderView(orderId){
+      this.$router.push({name: 'orderView', query:{orderId: orderId}})
+      this.$forceUpdate();
+    },
     addNewOrder() {
       this.addOrder()
-      this.$router.push({name: 'orderView', query:{orderId: this.orderId}})
-      this.$forceUpdate();
+
     },
     addOrder: function () {
 
       this.$http.post("/transabuddy/order", this.orderRequest
       ).then(response => {
         this.orderRequest = response.data
-        sessionStorage.setItem('orderId', response.data.orderId)
+        this.orderId = response.data.orderId
         this.successMessage = "New order added"
         console.log(response.data)
       }).catch(error => {

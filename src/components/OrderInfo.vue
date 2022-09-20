@@ -1,6 +1,5 @@
 <template>
 
-
   <div class="container bootstrap snippets bootdey">
     <h2>Order information</h2>
     <div class="panel-body inf-content" >
@@ -187,9 +186,8 @@ export default {
       imageResponse:{
         base64: String,
       },
-
       type: 'S',
-      orderId: sessionStorage.getItem('orderId'),
+      orderId: this.$route.query.orderId,
 
       orderInfo: {
         deliveryDate: '',
