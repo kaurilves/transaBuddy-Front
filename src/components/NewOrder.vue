@@ -1,5 +1,7 @@
 <template>
   <div>
+    <AlertSuccess :successMessage="successMessage"/>
+    <AlertError :errorMessage="errorMessage"/>
     <form>
       <div class="form-group row" >
         <label class="col-sm-2 col-form-label">Delivery start time</label>
@@ -143,18 +145,23 @@
 
       </div>
     </form>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="addOrder">Add order</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="addNewOrder">Add order</button>
   </div>
 </template>
 
 <script>
+import AlertError from "@/components/alerts/AlertError";
+import AlertSuccess from "@/components/alerts/AlertSuccess";
 export default {
   name: "NewOrder",
-
+  components: {AlertError, AlertSuccess},
   data: function () {
     return {
+      orderId: '',
+      errorMessage: '',
+      successMessage: '',
       orderRequest: {
-        deliveryDate: '',
+        deliveryDate: '2022-09-20',
         senderUserId: localStorage.getItem('userId') ,
         courierUserId: '',
         fromHour: '',
@@ -174,13 +181,22 @@ export default {
     }
   },
   methods:{
+    addNewOrder() {
+      this.addOrder()
+
+
+    },
     addOrder: function () {
-      this.orderRequest.senderUserId =
+
       this.$http.post("/transabuddy/order", this.orderRequest
       ).then(response => {
         this.orderRequest = response.data
+        this.$router.push({name: 'OrderView', query:{orderId: localStorage.getItem('orderId')}})
+        localStorage.setItem('orderId', response.data.orderId)
+        this.successMessage = "New order added"
         console.log(response.data)
       }).catch(error => {
+        this.errorMessage = 'Something went wrong'
         console.log(error)
       })
     }

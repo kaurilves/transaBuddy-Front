@@ -5,7 +5,7 @@ import AdminView from "@/views/Admin/AdminHomeView";
 import CustomerView from "@/views/SenderHomeView";
 import CourierView from "@/views/CourierHomeView";
 import AdminHomeView from "@/views/Admin/AdminHomeView";
-import SenderHomeView from "@/views/SenderHomeView";
+import CustomerHomeView from "@/views/SenderHomeView";
 import CourierHomeView from "@/views/CourierHomeView";
 import RegisterUserView from "@/views/RegisterUserView";
 import UserIsNotActiveView from "@/views/UserIsNotActiveView";
@@ -15,6 +15,7 @@ import AdminUserProfileView from "@/views/Admin/AdminUserProfileView";
 import AdminAdjustPricingView from "@/views/Admin/AdminAdjustPricingView";
 import NewOrderView from "@/views/NewOrderView";
 import SenderOrderView from "@/views/SenderOrderView";
+import OrderView from "@/views/OrderView";
 
 Vue.use(VueRouter)
 
@@ -64,8 +65,15 @@ const routes = [
     {
       path: '/order',
       name: 'NewOrderView',
+        path: '/new-order',
+        name: 'NewOrderView',
         component: NewOrderView
 
+    },
+    {
+        path: '/order',
+        name: 'OrderView',
+        component: OrderView
     },
 
     {
