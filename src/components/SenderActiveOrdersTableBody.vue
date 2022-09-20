@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <table class="table">
     <tbody>
     <tr v-for="order in orderInfo">
-      <td>{{ order.id }}</td>
+      <td>{{ order.orderId }}</td>
       <td>{{ order.status }}</td>
       <td>{{ order.receiverName }}</td>
       <td>{{ order.receiverPhoneNumber }}</td>
@@ -13,20 +11,19 @@
       <td>{{ order.comment }}</td>
       <td>
         <button type="button" style="margin: 5px" class="btn btn-outline-dark"
-                v-on:click="toOrderView(orderId)">View order
+                v-on:click="toOrderView(order.orderId )">View order
         </button>
       </td>
     </tr>
     </tbody>
-    </table>
-  </div>
 </template>
 <script>
 export default {
-  name: 'ActiveOrdersTableBody',
+  name: 'SenderActiveOrdersTableBody',
   data: function () {
     return {
       userId: sessionStorage.getItem('userId'),
+      orderId: 0,
       orderInfo:
         {
           orderId: 0,
@@ -47,8 +44,8 @@ export default {
   methods: {
 
 
-    findActiveOrdersBySenderId: function () {
-      this.$http.get("/transabuddy/user/active-orders", {
+    findActiveOrdersBySenderUserId: function () {
+      this.$http.get("/transabuddy/user/sender-active-orders", {
             params: {
               userId: this.userId
             }
@@ -61,13 +58,13 @@ export default {
       })
     },
     toOrderView:function (orderId) {
-      sessionStorage.setItem('orderId', orderId)
-      this.$router.push({name: 'SenderOrderView'})
+      this.$router.push({name: 'senderOrderView', query: {orderId: orderId}})
+
     }
 
   },
   mounted() {
-    this.findActiveOrdersBySenderId()
+    this.findActiveOrdersBySenderUserId()
   }
 }
 </script>

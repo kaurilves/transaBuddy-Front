@@ -90,12 +90,12 @@ export default {
   name: "UserProfile",
   data: function () {
     return{
-      firstName: sessionStorage.getItem('firstName'),
-      personalCode: sessionStorage.getItem('personalCode'),
-      lastName: sessionStorage.getItem('lastName'),
-      email: sessionStorage.getItem('email'),
-      phoneNumber: sessionStorage.getItem('phoneNumber'),
-      roleNames: sessionStorage.getItem('roleNames'),
+      firstName: localStorage.getItem('firstName'),
+      personalCode: localStorage.getItem('personalCode'),
+      lastName: localStorage.getItem('lastName'),
+      email: localStorage.getItem('email'),
+      phoneNumber: localStorage.getItem('phoneNumber'),
+      roleNames: localStorage.getItem('roleNames'),
     }
   }
 }

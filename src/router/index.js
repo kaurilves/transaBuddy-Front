@@ -10,6 +10,7 @@ import AdminAdjustPricingView from "@/views/admin/AdminAdjustPricingView";
 import NewOrderView from "@/views/NewOrderView";
 import SenderOrderView from "@/views/SenderOrderView";
 import OrderView from "@/views/OrderView";
+import SenderUserProfileView from "@/views/SenderUserProfileView";
 
 Vue.use(VueRouter)
 
@@ -67,6 +68,11 @@ const routes = [
         path: '/order',
         name: 'orderView',
         component: OrderView
+    },
+    {
+        path: '/sender/users/profile',
+        name: 'senderUserProfileView',
+        component: SenderUserProfileView
     },
 
     {

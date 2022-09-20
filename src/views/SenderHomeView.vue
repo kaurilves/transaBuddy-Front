@@ -4,36 +4,25 @@
       <button id="logOutButton" type="button" class="btn btn-outline-dark" v-on:click="logOut">Logout</button>
     </div>
 
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddOrder">Add new order</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToAddOrder">Add new order</button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="">Search orders</button>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayViewProfile">View profile</button>
-
-    <div v-if="divDisplayActiveOrders">
-    <UserActiveOrdersTable/>
-    </div>
-
-    <div v-if="divDisplayUserProfile">
-      User profile
-      <UserProfile/>
-    </div>
-
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToViewProfile">View profile</button>
+    <SenderActiveOrdersTable/>
   </div>
 </template>
 
 <script>
-import UserActiveOrdersTable from "@/components/UserActiveOrdersTable";
+import SenderActiveOrdersTable from "@/components/SenderActiveOrdersTable";
 import UserProfile from "@/components/UserProfile";
 import SenderUserProfileView from "@/views/SenderUserProfileView";
 
 export default {
   name: "SenderHomeView",
   components: {
-    UserActiveOrdersTable, UserProfile, SenderUserProfileView
+    SenderActiveOrdersTable, UserProfile, SenderUserProfileView
   },
   data: function (){
     return  {
-      divDisplayActiveOrders: true,
-      divDisplayUserProfile: false
     }
   },
   methods: {
@@ -44,17 +33,12 @@ export default {
         this.$router.push({name: 'home'})
       });
     },
-    hideAllDivs: function () {
-      this.divDisplayActiveOrders = false
 
+    navigateToAddOrder: function () {
+      this.$router.push({name: 'newOrderView'})
     },
-    displayAddOrder: function () {
-      this.hideAllDivs()
-      this.$router.push({name: 'NewOrderView'})
-    },
-    displayViewProfile: function () {
-      this.hideAllDivs();
-      this.$router.push({name: 'SenderUserProfileView'})
+    navigateToViewProfile: function () {
+      this.$router.push({name: 'senderUserProfileView'})
     },
   }
 }

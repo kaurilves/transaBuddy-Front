@@ -50,6 +50,7 @@ export default {
   },
   data: function () {
     return {
+      roleHomeRoute: '',
       alertError: '',
       roles: [],
       divLogin: true,
@@ -107,14 +108,14 @@ export default {
       }
     },
     navigateToRoleHomeView(roleHomeRoute) {
-      localStorage.setItem('userId', this.contactInfo.userId)
-      localStorage.setItem('firstName', this.contactInfo.firstName)
-      localStorage.setItem('lastName', this.contactInfo.firstName)
-      localStorage.setItem('personalCode', this.contactInfo.personalCode)
-      localStorage.setItem('email', this.contactInfo.email)
-      localStorage.setItem('phoneNumber', this.contactInfo.phoneNumber)
-      localStorage.setItem('roleNames', this.contactInfo.roleNames)
-      localStorage.setItem('roleSelected', this.roleSelected)
+      sessionStorage.setItem('userId', this.contactInfo.userId)
+      sessionStorage.setItem('firstName', this.contactInfo.firstName)
+      sessionStorage.setItem('lastName', this.contactInfo.lastName)
+      sessionStorage.setItem('personalCode', this.contactInfo.personalCode)
+      sessionStorage.setItem('email', this.contactInfo.email)
+      sessionStorage.setItem('phoneNumber', this.contactInfo.phoneNumber)
+      sessionStorage.setItem('roleNames', this.contactInfo.roleNames)
+      sessionStorage.setItem('roleSelected', this.roleSelected)
 
       this.$router.push({name: roleHomeRoute, query: {userId: this.contactInfo.userId}})
     },

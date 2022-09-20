@@ -15,6 +15,7 @@
 import NewOrder from "@/components/NewOrder";
 export default {
   name: "NewOrderView",
+
   components: {NewOrder},
   data: function () {
     return{

@@ -12,10 +12,6 @@
         <input type="text" readonly class="form-control-plaintext" id="staticEmail" :value=orderInfo.status>
       </div>
 
-      <label for="staticEmail" class="col-sm-2 col-form-label">Order date</label>
-      <div class="col-sm-10">
-        <input type="text" readonly class="form-control-plaintext" id="staticEmail" :value=Date>
-      </div>
 
       <label for="staticEmail" class="col-sm-2 col-form-label">Collection address</label>
       <div class="col-sm-10">
@@ -57,7 +53,7 @@ export default {
   name: "SenderOrderView",
   data: function () {
     return {
-      orderId: sessionStorage.getItem('orderId'),
+      orderId: this.$route.query.orderId,
       orderInfo: [
         {
           orderId: 0,

@@ -12,12 +12,22 @@
 
 <script>
 import ViewUserProfile from "@/components/UserProfile";
+
 export default {
   name: "SenderUserProfileView",
   components: {ViewUserProfile},
-  methods:{
-    backToSenderView(){
-      this.$router.push({name: 'senderRoute'})
+  methods: {
+    backToSenderView() {
+
+      const roleSelected = sessionStorage.getItem('roleSelected')
+      if (roleSelected == 'sender') {
+        this.$router.push({name: 'senderRoute'});
+      } else if (roleSelected == 'courier') {
+        this.$router.push({name: 'senderRoute'});
+      } else {
+        this.$router.push({name: 'senderRoute'});
+      }
+
     }
   }
 }
