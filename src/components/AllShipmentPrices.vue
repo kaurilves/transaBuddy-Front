@@ -48,7 +48,7 @@ export default {
       sessionStorage.setItem('weight', shipmentPriceInfo.weight)
       sessionStorage.setItem('price', shipmentPriceInfo.price)
       sessionStorage.setItem('type', shipmentPriceInfo.type)
-      this.$router.push({name: 'AdminAdjustPricingView', query: {shipmentPriceInfo: shipmentPriceInfo.shipmentPriceId}})
+      this.$router.push({name: 'adminAdjustPricingView', query: {shipmentPriceInfo: shipmentPriceInfo.shipmentPriceId}})
     }
   }
 }
