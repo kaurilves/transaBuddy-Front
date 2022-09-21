@@ -23,11 +23,10 @@ export default {
       if (roleSelected == 'sender') {
         this.$router.push({name: 'senderRoute'});
       } else if (roleSelected == 'courier') {
-        this.$router.push({name: 'senderRoute'});
+        this.$router.push({name: 'courierRoute'});
       } else {
-        this.$router.push({name: 'senderRoute'});
+        this.$router.push({name: 'adminRoute'});
       }
-
     }
   }
 }
