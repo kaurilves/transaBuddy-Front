@@ -6,7 +6,6 @@
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayFindUsers">Search users</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddUser">Add user</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddNewOrder">Add order</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayActiveOrder">Active orders</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllOrders">All orders</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAdjustPricing">Pricing list</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToProfileView">View profile</button>
@@ -32,16 +31,17 @@
       <div v-if="shipmentPriceInfos.length > 0">
         <AllShipmentPrices :shipmentPriceInfos="shipmentPriceInfos" title="Current pricing list"/>
       </div>
-      <div v-if="divDisplayUserProfile">
-        User profile
-        <UserProfile/>
-      </div>
-      <div v-if="divDisplayActiveOrders">
-        <SenderActiveOrdersTableBody/>
-      </div>
 
     </div>
 
+    <div v-if="divDisplayUserProfile">
+      User profile
+      <UserProfile/>
+    </div>
+
+    <div v-if="divDisplayAllOrders">
+      <AllOrdersTable :orders="orders" title="All orders"/>
+    </div>
 
   </div>
 
@@ -56,11 +56,13 @@ import AllShipmentPrices from "@/components/order/AllShipmentPrices";
 import UsersByNameAndCodeTable from "@/components/users/UsersByNameAndCodeTable";
 import SenderActiveOrdersTable from "@/components/sender/SenderActiveOrdersTable";
 import SenderActiveOrdersTableBody from "@/components/sender/SenderActiveOrdersTableBody";
+import AllOrdersTable from "@/components/order/AllOrdersTable";
 
 
 export default {
   name: "AdminHomeView",
   components: {
+    AllOrdersTable,
     SenderActiveOrdersTableBody,
     SenderActiveOrdersTable,
     UserProfile, Logout, AllShipmentPrices, RegisterUser, UsersByNameAndCodeTable, AllUsersTable,
@@ -70,11 +72,12 @@ export default {
       userId: sessionStorage.getItem('userId'),
       user: {},
       users: [],
+      orders: [],
       shipmentPriceInfo: {
         shipmentPriceId: ''
       },
       shipmentPriceInfos: [],
-      divDisplayActiveOrders: false,
+      divDisplayAllOrders: false,
       divDisplayAllUsers: false,
       divDisplayFindUsers: false,
       divDisplayAddUser: false,
@@ -85,6 +88,16 @@ export default {
     }
   },
   methods: {
+
+    finaAllOrders() {
+      this.$http.get("/transabuddy/active-orders"
+      ).then(response => {
+        this.orders = response.data
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
     findAllUsers() {
       this.$http.get('/admin/users')
           .then(response => {
@@ -114,7 +127,7 @@ export default {
           this.divDisplayAddNewOrder = false,
           this.divDisplayAdjustPricing = false,
           this.divDisplayViewProfile = false
-          this.divDisplayActiveOrders = false
+      this.divDisplayAllOrders = false
     },
     displayAllUsers() {
       this.hideAllDivs()
@@ -141,12 +154,11 @@ export default {
       this.findAllPrices()
       this.divDisplayAdjustPricing = true
     },
-    displayActiveOrder() {
-      this.hideAllDivs()
-      this.divDisplayActiveOrders = true
-    },
-    displayAllOrders() {
 
+    displayAllOrders() {
+      this.hideAllDivs()
+      this.divDisplayAllOrders = true
+      this.finaAllOrders()
     },
     navigateToProfileView() {
       this.$router.push({name: 'adminUserProfileView', query: {userId: this.userId}})
