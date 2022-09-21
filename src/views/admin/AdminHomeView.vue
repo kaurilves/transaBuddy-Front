@@ -57,7 +57,7 @@ export default {
     UserProfile, Logout, AllShipmentPrices, RegisterUser, UsersByNameAndCodeTable, AllUsersTable,},
   data: function () {
     return{
-      userId: localStorage.getItem('userId'),
+      userId: sessionStorage.getItem('userId'),
       user: {},
       users: [],
       shipmentPriceInfo: {
