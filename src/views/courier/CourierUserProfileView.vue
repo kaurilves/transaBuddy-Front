@@ -14,17 +14,18 @@
 import ViewUserProfile from "@/components/users/UserProfile";
 
 export default {
-  name: "SenderUserProfileView",
+  name: "CourierUserProfileView",
   components: {ViewUserProfile},
   methods: {
     backToMainView() {
+
       const roleSelected = sessionStorage.getItem('roleSelected')
-      if (roleSelected == 'sender') {
-        this.$router.push({name: 'senderRoute'});
-      } else if (roleSelected == 'courier') {
+      if (roleSelected == 'courier') {
         this.$router.push({name: 'courierRoute'});
+      } else if (roleSelected == 'sender') {
+        this.$router.push({name: 'senderRoute'});
       } else {
-        this.$router.push({name: 'adminRoute'});
+        this.$router.push({name: 'senderRoute'});
       }
     }
   }
