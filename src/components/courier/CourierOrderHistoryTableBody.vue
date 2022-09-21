@@ -2,11 +2,9 @@
   <tbody>
   <tr v-for="order in orderInfo">
     <td>{{ order.deliveryDate }}</td>
-    <td>{{order.timeFrame}}</td>
     <td>{{ order.pickUpAddress }}</td>
     <td>{{ order.dropOffAddress }}</td>
     <td>{{ order.priceCategory }}</td>
-    <td>{{ order.status }}</td>
     <td>
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="toOrderView(order.orderId)">View order
@@ -17,24 +15,22 @@
 </template>
 <script>
 export default {
-  name: 'CourierActiveOrdersTableBody',
+  name: 'CourierOrderHistoryTableBody',
   data: function () {
     return {
       userId: localStorage.getItem('userId'),
       orderId: 0,
       orderInfo: {
         deliveryDate: '',
-        timeFrame: '',
         pickUpAddress: '',
         dropOffAddress: '',
         priceCategory: '',
-        status: '',
       }
     }
   },
   methods: {
-    findActiveOrdersByCourierUserId: function () {
-      this.$http.get("/transabuddy/user/courier-active-orders", {
+    findCompletedOrdersByCourierUserId: function () {
+      this.$http.get("/transabuddy/orders/courier-completed-orders", {
             params: {
               userId: this.userId
             }
@@ -50,8 +46,5 @@ export default {
       this.$router.push({name: 'orderView', query: {orderId: orderId}})
     }
   },
-  mounted() {
-    this.findActiveOrdersByCourierUserId()
-  }
 }
 </script>

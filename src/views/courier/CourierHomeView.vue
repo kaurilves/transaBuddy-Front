@@ -4,30 +4,36 @@
     <div>
       <button id="logOutButton" type="button" class="btn btn-outline-dark" v-on:click="logOut">Logout</button>
     </div>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllAvailableOrders">Available jobs</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayActiveOrders">Active jobs</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="">Delivered orders</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllAvailableOrders">Available jobs
+    </button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayActiveOrders">Active jobs</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayOrderHistory">Delivered orders</button>
 
     <div v-if="divDisplayActiveOrders">
-    <CourierActiveOrdersTable/>
+      <CourierActiveOrdersTable/>
     </div>
 
     <div v-if="divDisplayAllAvailableOrders">
       <AllAvailableOrdersTable :orders="orders" title="All available orders"/>
     </div>
 
+    <div v-if="divDisplayOrderHistory">
+      <CourierOrderHistoryTable/>
     </div>
+
+  </div>
 </template>
 
 <script>
 import AllAvailableOrdersTable from "@/components/courier/AllAvailableOrdersTable";
 import CourierActiveOrdersTable from "@/components/courier/CourierActiveOrdersTable";
+import CourierOrderHistoryTable from "@/components/courier/CourierActiveOrdersTable";
 
 
 export default {
   name: "CourierHomeView",
   components: {
-    AllAvailableOrdersTable, CourierActiveOrdersTable
+    AllAvailableOrdersTable, CourierActiveOrdersTable, CourierOrderHistoryTable,
   },
   data: function () {
     return {
@@ -35,6 +41,7 @@ export default {
       orders: [],
       divDisplayAllAvailableOrders: false,
       divDisplayActiveOrders: true,
+      divDisplayOrderHistory: false,
       pickUpDistrictId: '0',
       dropOffDistrictId: '0',
       status: 'N',
@@ -49,7 +56,7 @@ export default {
         this.$router.push({name: 'home'})
       });
     },
-    findOrderSByDistrictAndStatus: function () {
+    findOrdersByDistrictAndStatus: function () {
       this.$http.get('/transabuddy/orders/available', {
             params: {
               pickUpDistrictId: this.pickUpDistrictId,
@@ -66,22 +73,25 @@ export default {
     displayAllAvailableOrders: function () {
       this.hideAllDivs()
       this.divDisplayAllAvailableOrders = true;
-      this.findOrderSByDistrictAndStatus()
+      this.findOrdersByDistrictAndStatus()
     },
     displayActiveOrders: function () {
       this.hideAllDivs()
       this.divDisplayActiveOrders = true;
-
+    },
+    displayOrderHistory: function () {
+      this.hideAllDivs()
+      this.divDisplayOrderHistory = true;
 
     },
     hideAllDivs: function () {
       this.divDisplayAllAvailableOrders = false
       this.divDisplayActiveOrders = false
-    },
-
-
+      this.divDisplayOrderHistory = false
+    }
   }
 }
+
 </script>
 
 <style scoped>
