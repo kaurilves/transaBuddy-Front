@@ -163,7 +163,7 @@ export default {
       successMessage: '',
       orderRequest: {
         deliveryDate: '2022-09-20',
-        senderUserId: localStorage.getItem('userId') ,
+        senderUserId: sessionStorage.getItem('userId') ,
         courierUserId: '',
         fromHour: '',
         toHour: '',
