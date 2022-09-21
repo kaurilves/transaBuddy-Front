@@ -20,12 +20,12 @@ export default {
     return {
       userId: sessionStorage.getItem('userId'),
       orderId: 0,
-      orderInfo: {
+      orderInfo: [{
         deliveryDate: '',
         pickUpAddress: '',
         dropOffAddress: '',
         priceCategory: '',
-      },
+      }],
     }
   },
   methods: {
