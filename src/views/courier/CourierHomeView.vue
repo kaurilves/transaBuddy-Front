@@ -8,7 +8,6 @@
     </button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayActiveOrders">Active orders</button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayOrderHistory">Delivered orders</button>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToViewProfile">Profile</button>
 
     <div v-if="divDisplayActiveOrders">
       <CourierActiveOrdersTable/>
@@ -29,7 +28,6 @@
 import AllAvailableOrdersTable from "@/components/courier/AllAvailableOrdersTable";
 import CourierActiveOrdersTable from "@/components/courier/CourierActiveOrdersTable";
 import CourierOrderHistoryTable from "@/components/courier/CourierOrderHistoryTable";
-import CourierUserProfileView from "@/views/courier/CourierUserProfileView";
 import UserProfile from "@/components/users/UserProfile";
 
 
@@ -38,7 +36,6 @@ export default {
   components: {
     AllAvailableOrdersTable,
     CourierActiveOrdersTable, CourierOrderHistoryTable,
-    CourierUserProfileView,
     UserProfile
   },
   data: function () {
@@ -93,9 +90,6 @@ export default {
       this.divDisplayAllAvailableOrders = false
       this.divDisplayActiveOrders = false
       this.divDisplayOrderHistory = false
-    },
-    navigateToViewProfile: function () {
-      this.$router.push({name: 'courierUserProfileView', query:{userId: this.userId}})
     },
   }
 }
