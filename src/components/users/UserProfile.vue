@@ -1,7 +1,7 @@
 <template>
 
   <div class="container bootstrap snippets bootdey">
-    <h2>{{firstName}} {{lastName}}</h2>
+    <h2>{{contactInfo.firstName}} {{contactInfo.lastName}}</h2>
     <div class="panel-body inf-content">
       <div class="row">
         <div class="col-md-6">

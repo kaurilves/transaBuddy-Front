@@ -119,7 +119,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{orderInfo.packageAmount}}
+                  {{ orderInfo.packageAmount }}
                 </td>
               </tr>
 
@@ -142,7 +142,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ statusToString(orderInfo.status)}}
+                  {{ statusToString(orderInfo.status) }}
                 </td>
               </tr>
 
@@ -153,33 +153,75 @@
       </div>
     </div>
     <div>
-      Pictures from sender
-      <ImageInput @imageInputSuccess="getImageDataFromFile"/><br>
 
-      <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend">
-        Upload image
-      </button><br><br><br><br>
-
-      <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="findImageByOrderIdAndType">Find sender picture
-      </button>
-
-      <div class="" >
-
-
+      <div class="left-img">
+        Pictures from sender
+        <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+        <br>
+        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend(typeS)">
+          Upload image
+        </button>
+        <br><br><br><br>
+        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="findImageByOrderIdAndType(typeS)">
+          Find sender picture
+        </button>
+        <div class="container">
+          <div class="row" v-for="image in imageResponseS">
+            <div class="col-sm">
+              <img class="my-style" :src="image.base64"><br><br><br><br><br>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="container">
-        <div class="row" v-for="image in imageResponse">
-          <div class="col-sm">
-            <img class="my-style" :src="image.base64"><br><br><br><br><br>
+
+      <div class="center-img">
+        Images from courier on pickup
+        <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+        <br>
+        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend(typeP)">
+          Upload image
+        </button>
+        <br><br><br><br>
+        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="findImageByOrderIdAndType(typeP)">
+          Find courier pickup images
+        </button>
+
+        <div class="container">
+          <div class="row" v-for="image in imageResponseP">
+            <div class="col-sm">
+              <img class="my-style" :src="image.base64"><br><br><br><br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-img">
+        Images from courier on dropoff
+        <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+        <br>
+        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend(typeD)">
+          Upload image
+        </button>
+        <br><br><br><br>
+        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="findImageByOrderIdAndType(typeD)">
+          Find courier dropoff images
+        </button>
+        <div class="container">
+          <div class="row" v-for="image in imageResponseD">
+            <div class="col-sm">
+              <img class="my-style" :src="image.base64"><br><br><br><br><br>
+            </div>
           </div>
         </div>
       </div>
 
 
 
+
+
+
+
     </div>
-
-
 
 
   </div>
@@ -189,22 +231,35 @@
 
 <script>
 import ImageInput from "@/components/image/ImageInput";
+
 export default {
   name: "OrderInfo",
   components: {ImageInput},
   data: function () {
     return {
-      imageUploadRequest:{
+      imageUploadRequest: {
         orderId: this.$route.query.orderId,
         base64: '',
-        type: 'S'
+        type: ''
       },
-      imageResponse:[
+      imageResponseS: [
         {
           base64: ''
         }
       ],
-      type: 'S',
+      imageResponseP: [
+        {
+          base64: ''
+        }
+      ],
+      imageResponseD: [
+        {
+          base64: ''
+        }
+      ],
+      typeS: 'S',
+      typeP: 'P',
+      typeD: 'D',
       orderId: this.$route.query.orderId,
 
       orderInfo: {
@@ -235,16 +290,25 @@ export default {
 
   },
   methods: {
-    findImageByOrderIdAndType: function () {
+    findImageByOrderIdAndType: function (type) {
       this.$http.get("/transabuddy/image", {
             params: {
               orderId: this.orderId,
-              type: this.type
+              type: type
 
             }
           }
       ).then(response => {
-        this.imageResponse = response.data
+        if(type === "S"){
+          this.imageResponseS = response.data
+        }
+        if(type === "P"){
+          this.imageResponseP = response.data
+        }
+        if(type === "D"){
+          this.imageResponseD = response.data
+        }
+
         console.log(this.imageResponse)
       }).catch(error => {
         console.log(error)
@@ -253,7 +317,8 @@ export default {
     getImageDataFromFile(base64) {
       this.imageUploadRequest.base64 = base64
     },
-    sendImageDataToBackend () {
+    sendImageDataToBackend(type) {
+      this.imageUploadRequest.type = type
       this.$http.post("/transabuddy/image", this.imageUploadRequest
       ).then(response => {
         console.log(response.data)
@@ -283,19 +348,19 @@ export default {
       }
 
     },
-    statusToString(status){
-      if(status === "N"){
+    statusToString(status) {
+      if (status === "N") {
         return "Order active"
       }
-      if(status === "A")
+      if (status === "A")
         return "Accepted by courier"
-      if(status === "P"){
+      if (status === "P") {
         return "Picked up by courier"
       }
-      if(status === "D"){
+      if (status === "D") {
         return "Delivered"
       }
-      if(status === "C"){
+      if (status === "C") {
         return "Cancelled"
       }
     }
