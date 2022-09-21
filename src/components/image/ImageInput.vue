@@ -9,7 +9,7 @@ export default {
   name: 'ImageInput',
   data: function () {
     return {
-        base64: String,
+        imageDataBase64: String,
 
     }
   },
@@ -22,8 +22,8 @@ export default {
     createBase64Image: function (fileObject) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.base64 = reader.result;
-        this.$emit('imageInputSuccess', this.base64)
+        this.imageDataBase64 = reader.result;
+        this.$emit('imageInputSuccess', this.imageDataBase64)
       };
       reader.onerror = function (error) {
         alert(error);
