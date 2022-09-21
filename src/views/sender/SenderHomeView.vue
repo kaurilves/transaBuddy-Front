@@ -7,6 +7,7 @@
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToAddOrder">Add new order</button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToSearchSenderOrders">Search orders</button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToViewProfile">View profile</button>
+
     <SenderActiveOrdersTable/>
   </div>
 </template>
@@ -23,7 +24,7 @@ export default {
   },
   data: function (){
     return  {
-      userId: localStorage.getItem('userId')
+      userId: sessionStorage.getItem('userId')
     }
   },
   methods: {

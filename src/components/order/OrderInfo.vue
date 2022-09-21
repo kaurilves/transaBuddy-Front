@@ -155,13 +155,28 @@
     <div>
       Pictures from sender
       <ImageInput @imageInputSuccess="getImageDataFromFile"/><br>
+
       <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend">
         Upload image
       </button><br><br><br><br>
 
-      <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="findImageById">Find sender picture
+      <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="findImageByOrderIdAndType">Find sender picture
       </button>
-      <img :src="imageResponse.base64" alt="placeholder"><br><br><br><br><br>
+
+      <div class="" >
+
+
+      </div>
+      <div class="container">
+        <div class="row" v-for="image in imageResponse">
+          <div class="col-sm">
+            <img class="my-style" :src="image.base64"><br><br><br><br><br>
+          </div>
+        </div>
+      </div>
+
+
+
     </div>
 
 
@@ -180,13 +195,15 @@ export default {
   data: function () {
     return {
       imageUploadRequest:{
-        orderId: sessionStorage.getItem('orderId'),
+        orderId: this.$route.query.orderId,
         base64: '',
         type: 'S'
       },
-      imageResponse:{
-        base64: String,
-      },
+      imageResponse:[
+        {
+          base64: ''
+        }
+      ],
       type: 'S',
       orderId: this.$route.query.orderId,
 
@@ -218,7 +235,7 @@ export default {
 
   },
   methods: {
-    findImageById: function () {
+    findImageByOrderIdAndType: function () {
       this.$http.get("/transabuddy/image", {
             params: {
               orderId: this.orderId,

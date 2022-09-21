@@ -19,7 +19,7 @@ export default {
   name: 'SenderActiveOrdersTableBody',
   data: function () {
     return {
-      userId: localStorage.getItem('userId'),
+      userId: sessionStorage.getItem('userId'),
       orderId: 0,
       orderInfo:
           {

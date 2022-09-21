@@ -146,7 +146,7 @@
       </div>
     </form>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="toOrderView(orderId)">To order view</button>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="addNewOrder(orderId)">Save</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="addNewOrder()">Save</button>
   </div>
 </template>
 
@@ -163,7 +163,7 @@ export default {
       successMessage: '',
       orderRequest: {
         deliveryDate: '2022-09-20',
-        senderUserId: sessionStorage.getItem('userId') ,
+        senderUserId: this.$route.query.userId,
         courierUserId: '',
         fromHour: '',
         toHour: '',
@@ -184,7 +184,7 @@ export default {
   methods:{
     toOrderView(orderId){
       this.$router.push({name: 'orderView', query:{orderId: orderId}})
-      this.$forceUpdate();
+
     },
     addNewOrder() {
       this.addOrder()

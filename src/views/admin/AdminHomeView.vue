@@ -2,10 +2,12 @@
   <div>
     <h2>Admin view</h2>
     <div>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllUsers" >All users</button>
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllUsers">All users</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayFindUsers">Search users</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddUser">Add user </button>
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddUser">Add user</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddNewOrder">Add order</button>
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayActiveOrder">Active orders</button>
+      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllOrders">All orders</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAdjustPricing">Pricing list</button>
       <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToProfileView">View profile</button>
       <button id="logOutButton" style="margin: 5px" class="btn btn-outline-dark" v-on:click="logOut">Logout</button>
@@ -34,6 +36,9 @@
         User profile
         <UserProfile/>
       </div>
+      <div v-if="divDisplayActiveOrders">
+        <SenderActiveOrdersTableBody/>
+      </div>
 
     </div>
 
@@ -49,14 +54,19 @@ import UserProfile from "@/components/users/UserProfile";
 import AllUsersTable from "@/components/users/AllUsersTable";
 import AllShipmentPrices from "@/components/order/AllShipmentPrices";
 import UsersByNameAndCodeTable from "@/components/users/UsersByNameAndCodeTable";
+import SenderActiveOrdersTable from "@/components/sender/SenderActiveOrdersTable";
+import SenderActiveOrdersTableBody from "@/components/sender/SenderActiveOrdersTableBody";
 
 
 export default {
   name: "AdminHomeView",
   components: {
-    UserProfile, Logout, AllShipmentPrices, RegisterUser, UsersByNameAndCodeTable, AllUsersTable,},
+    SenderActiveOrdersTableBody,
+    SenderActiveOrdersTable,
+    UserProfile, Logout, AllShipmentPrices, RegisterUser, UsersByNameAndCodeTable, AllUsersTable,
+  },
   data: function () {
-    return{
+    return {
       userId: sessionStorage.getItem('userId'),
       user: {},
       users: [],
@@ -64,6 +74,7 @@ export default {
         shipmentPriceId: ''
       },
       shipmentPriceInfos: [],
+      divDisplayActiveOrders: false,
       divDisplayAllUsers: false,
       divDisplayFindUsers: false,
       divDisplayAddUser: false,
@@ -74,7 +85,7 @@ export default {
     }
   },
   methods: {
-    findAllUsers(){
+    findAllUsers() {
       this.$http.get('/admin/users')
           .then(response => {
 
@@ -85,61 +96,68 @@ export default {
             console.log(reason)
           })
     },
-    updateUsersFromResult(usersResult){
+    updateUsersFromResult(usersResult) {
       this.users = usersResult
     },
     findAllPrices: function () {
       this.$http.get("/admin/prices")
           .then(response => {
-        this.shipmentPriceInfos = response.data
-      }).catch(error => {
+            this.shipmentPriceInfos = response.data
+          }).catch(error => {
         console.log(error)
       })
     },
-    hideAllDivs(){
+    hideAllDivs() {
       this.divDisplayAllUsers = false,
           this.divDisplayFindUsers = false,
           this.divDisplayAddUser = false,
           this.divDisplayAddNewOrder = false,
           this.divDisplayAdjustPricing = false,
           this.divDisplayViewProfile = false
+          this.divDisplayActiveOrders = false
     },
     displayAllUsers() {
       this.hideAllDivs()
       this.divDisplayAllUsers = true
       this.findAllUsers()
     },
-    displayFindUsers(){
+    displayFindUsers() {
       this.users = []
       this.hideAllDivs()
       this.divDisplayFindUsers = true
 
     },
-    displayAddUser(){
+    displayAddUser() {
       this.hideAllDivs()
       this.divDisplayAddUser = true
     },
-    displayAddNewOrder(){
+    displayAddNewOrder() {
       this.hideAllDivs()
-      this.$router.push({name: 'newOrderView'})
+      this.$router.push({name: 'newOrderView', query: {userId: this.userId}})
     },
-    displayAdjustPricing(){
+    displayAdjustPricing() {
       this.hideAllDivs()
       this.shipmentPriceInfos = []
       this.findAllPrices()
       this.divDisplayAdjustPricing = true
     },
-    navigateToProfileView(){
-      this.$router.push({name: 'adminUserProfileView', query:{userId: this.userId}})
+    displayActiveOrder() {
+      this.hideAllDivs()
+      this.divDisplayActiveOrders = true
+    },
+    displayAllOrders() {
 
     },
-    logOut(){
+    navigateToProfileView() {
+      this.$router.push({name: 'adminUserProfileView', query: {userId: this.userId}})
+
+    },
+    logOut() {
       sessionStorage.clear()
       localStorage.clear()
       this.$confirm("Are you sure you want to log out?").then(() => {
-        this.$router.push( {name: 'home'})
+        this.$router.push({name: 'home'})
       });
-
 
     }
 
