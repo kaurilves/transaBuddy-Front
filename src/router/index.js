@@ -11,6 +11,7 @@ import NewOrderView from "@/views/order/NewOrderView";
 import OrderView from "@/views/order/OrderView";
 import SenderUserProfileView from "@/views/sender/SenderUserProfileView";
 import SenderSearchOrdersView from "@/views/sender/SenderSearchOrdersView";
+import CourierUserProfileView from "@/views/courier/CourierUserProfileView";
 
 
 Vue.use(VueRouter)
@@ -39,6 +40,11 @@ const routes = [
         component: CourierHomeView
     },
     {
+        path: '/courier/users/profile',
+        name: 'courierUserProfileView',
+        component: CourierUserProfileView
+    },
+    {
         path: '/register',
         name: 'registerRoute',
         component: RegisterUserView
@@ -53,13 +59,10 @@ const routes = [
         name: 'adminAdjustPricingView',
         component: AdminAdjustPricingView
     },
-
     {
-
         path: '/new-order',
         name: 'newOrderView',
         component: NewOrderView
-
     },
     {
         path: '/order',

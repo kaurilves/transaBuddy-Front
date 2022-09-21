@@ -18,7 +18,7 @@ export default {
   name: 'CourierOrderHistoryTableBody',
   data: function () {
     return {
-      userId: localStorage.getItem('userId'),
+      userId: sessionStorage.getItem('userId'),
       orderId: 0,
       orderInfo: {
         deliveryDate: '',

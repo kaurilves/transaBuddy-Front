@@ -25,7 +25,7 @@ export default {
   name: 'CourierActiveOrdersTableBody',
   data: function () {
     return {
-      userId: localStorage.getItem('userId'),
+      userId: sessionStorage.getItem('userId'),
       orderId: 0,
       deliveryButtonName: 'Picked Up',
       orderInfos: [
