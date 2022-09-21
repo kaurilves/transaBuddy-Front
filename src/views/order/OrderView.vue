@@ -1,13 +1,13 @@
 <template>
   <div>
     <h2>View Order</h2>
-
+    <button type="button" v-on:click="backToMainView">Back</button>
     <div>
       <OrderInfo/>
     </div>
 
     <div>
-      <button type="button" v-on:click="backToMainView">Back</button>
+
     </div>
   </div>
 </template>

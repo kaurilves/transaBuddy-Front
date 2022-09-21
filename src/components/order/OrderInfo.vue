@@ -1,7 +1,7 @@
 <template>
-
-
   <div class="container bootstrap snippets bootdey">
+    <AlertSuccess :successMessage="successMessage"/>
+    <AlertError :errorMessage="errorMessage"/>
     <h2>Order information</h2>
     <div class="panel-body inf-content">
       <div class="row">
@@ -155,16 +155,8 @@
     <div>
 
       <div class="left-img">
-        Pictures from sender
-        <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-        <br>
-        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend(typeS)">
-          Upload image
-        </button>
-        <br><br><br><br>
-        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="findImageByOrderIdAndType(typeS)">
-          Find sender picture
-        </button>
+
+        <h2>Pictures from sender</h2>
         <div class="container">
           <div class="row" v-for="image in imageResponseS">
             <div class="col-sm">
@@ -172,40 +164,41 @@
             </div>
           </div>
         </div>
+        <div v-if="divDisplaySenderPicture">
+
+          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+          <br>
+          <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="uploadImage(typeS)">
+            Upload image
+          </button>
+        </div>
+
+
       </div>
 
       <div class="center-img">
-        Images from courier on pickup
-        <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-        <br>
-        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend(typeP)">
-          Upload image
-        </button>
-        <br><br><br><br>
-        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="findImageByOrderIdAndType(typeP)">
-          Find courier pickup images
-        </button>
-
+        <h2>Images from courier on pickup</h2>
         <div class="container">
           <div class="row" v-for="image in imageResponseP">
             <div class="col-sm">
-              <img class="my-style" :src="image.base64"><br><br><br><br><br>
+              <img class="my-style" :src="image.base64"/>
             </div>
           </div>
+        <div v-if="divDisplayPickupPicture">
+          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+          <br>
+          <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend(typeP)">
+            Upload image
+          </button>
         </div>
+
+        </div>
+
+
       </div>
 
       <div class="right-img">
-        Images from courier on dropoff
-        <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-        <br>
-        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend(typeD)">
-          Upload image
-        </button>
-        <br><br><br><br>
-        <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="findImageByOrderIdAndType(typeD)">
-          Find courier dropoff images
-        </button>
+        <h2>Images from courier on dropoff</h2>
         <div class="container">
           <div class="row" v-for="image in imageResponseD">
             <div class="col-sm">
@@ -213,12 +206,17 @@
             </div>
           </div>
         </div>
+        <div v-if="divDisplayPickupPicture">
+          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+          <br>
+          <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend(typeD)">
+            Upload image
+          </button>
+        </div>
+
+
+
       </div>
-
-
-
-
-
 
 
     </div>
@@ -231,37 +229,32 @@
 
 <script>
 import ImageInput from "@/components/image/ImageInput";
+import AlertError from "@/components/alerts/AlertError";
+import AlertSuccess from "@/components/alerts/AlertSuccess";
 
 export default {
   name: "OrderInfo",
-  components: {ImageInput},
+  components: {ImageInput, AlertError, AlertSuccess},
   data: function () {
     return {
+      successMessage: '',
+      errorMessage: '',
       imageUploadRequest: {
         orderId: this.$route.query.orderId,
         base64: '',
         type: ''
       },
-      imageResponseS: [
-        {
-          base64: ''
-        }
-      ],
-      imageResponseP: [
-        {
-          base64: ''
-        }
-      ],
-      imageResponseD: [
-        {
-          base64: ''
-        }
-      ],
+      imageResponseS: [{base64: ''}],
+      imageResponseP: [{base64: ''}],
+      imageResponseD: [{base64: ''}],
       typeS: 'S',
       typeP: 'P',
       typeD: 'D',
       orderId: this.$route.query.orderId,
-
+      roleSelected: sessionStorage.getItem('roleSelected'),
+      divDisplaySenderPicture: true,
+      divDisplayDropOffPicture: true,
+      divDisplayPickupPicture: true,
       orderInfo: {
         deliveryDate: '',
         senderUserId: '',
@@ -290,6 +283,16 @@ export default {
 
   },
   methods: {
+
+    hideImageUpload(){
+      if(this.roleSelected == "sender"){
+        this.divDisplayDropOffPicture = false
+        this.divDisplayPickupPicture = false
+      }
+      if(this.roleSelected === "courier"){
+        this.divDisplaySenderPicture = false
+      }
+    },
     findImageByOrderIdAndType: function (type) {
       this.$http.get("/transabuddy/image", {
             params: {
@@ -309,7 +312,6 @@ export default {
           this.imageResponseD = response.data
         }
 
-        console.log(this.imageResponse)
       }).catch(error => {
         console.log(error)
       })
@@ -317,14 +319,21 @@ export default {
     getImageDataFromFile(base64) {
       this.imageUploadRequest.base64 = base64
     },
+    uploadImage(type){
+      this.sendImageDataToBackend(type)
+      this.$forceUpdate()
+    },
     sendImageDataToBackend(type) {
       this.imageUploadRequest.type = type
       this.$http.post("/transabuddy/image", this.imageUploadRequest
       ).then(response => {
+        this.successMessage = "Image successfully uploaded"
         console.log(response.data)
       }).catch(error => {
+        this.errorMessage = "Image upload failed"
         console.log(error)
       })
+
     },
     getOrderByOrderId: function (orderId) {
       this.$http.get("/transabuddy/order", {
@@ -335,6 +344,7 @@ export default {
       ).then(response => {
         this.orderInfo = response.data
         console.log(this.orderInfo)
+
 
       }).catch(error => {
         console.log(error)
@@ -368,6 +378,10 @@ export default {
   mounted() {
     this.getOrderByOrderId(this.orderId)
     this.$forceUpdate();
+    this.hideImageUpload()
+    this.findImageByOrderIdAndType(this.typeS)
+    this.findImageByOrderIdAndType(this.typeP)
+    this.findImageByOrderIdAndType(this.typeD)
   }
 
 }
