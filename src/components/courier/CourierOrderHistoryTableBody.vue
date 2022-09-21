@@ -25,12 +25,12 @@ export default {
         pickUpAddress: '',
         dropOffAddress: '',
         priceCategory: '',
-      }
+      },
     }
   },
   methods: {
     findCompletedOrdersByCourierUserId: function () {
-      this.$http.get("/transabuddy/orders/courier-completed-orders", {
+      this.$http.get("transabuddy/orders/courier-completed-orders", {
             params: {
               userId: this.userId
             }
@@ -46,5 +46,8 @@ export default {
       this.$router.push({name: 'orderView', query: {orderId: orderId}})
     }
   },
+  mounted(){
+    this.findCompletedOrdersByCourierUserId()
+  }
 }
 </script>

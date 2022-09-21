@@ -4,9 +4,9 @@
     <div>
       <button id="logOutButton" type="button" class="btn btn-outline-dark" v-on:click="logOut">Logout</button>
     </div>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllAvailableOrders">Available jobs
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllAvailableOrders">Available orders
     </button>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayActiveOrders">Active jobs</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayActiveOrders">Active orders</button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayOrderHistory">Delivered orders</button>
 
     <div v-if="divDisplayActiveOrders">
@@ -27,7 +27,7 @@
 <script>
 import AllAvailableOrdersTable from "@/components/courier/AllAvailableOrdersTable";
 import CourierActiveOrdersTable from "@/components/courier/CourierActiveOrdersTable";
-import CourierOrderHistoryTable from "@/components/courier/CourierActiveOrdersTable";
+import CourierOrderHistoryTable from "@/components/courier/CourierOrderHistoryTable";
 
 
 export default {
@@ -82,7 +82,6 @@ export default {
     displayOrderHistory: function () {
       this.hideAllDivs()
       this.divDisplayOrderHistory = true;
-
     },
     hideAllDivs: function () {
       this.divDisplayAllAvailableOrders = false

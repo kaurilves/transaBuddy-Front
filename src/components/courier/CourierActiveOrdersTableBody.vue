@@ -36,7 +36,7 @@ export default {
     findActiveOrdersByCourierUserId: function () {
       this.$http.get("/transabuddy/user/courier-active-orders", {
             params: {
-              userId: this.userId
+              courierUserId: this.userId
             }
           }
       ).then(response => {
