@@ -2,6 +2,7 @@
   <div>
     <br>
     <h1>Available orders</h1>
+
     <table class="table table-hover">
       <AvailableOrdersTableHeader/>
       <AvailableOrdersTableBody/>

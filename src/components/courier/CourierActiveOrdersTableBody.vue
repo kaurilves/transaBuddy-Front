@@ -11,8 +11,6 @@
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="orderPickedUp(order.orderId)">{{ order.deliveryButtonName }}
       </button>
-    </td>
-    <td>
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="toOrderView(order.orderId)">View order
       </button>

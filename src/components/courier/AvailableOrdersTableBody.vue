@@ -7,6 +7,9 @@
     <td>{{order.dropOffAddress}}</td>
     <td>{{order.priceCategory}}</td>
     <td>
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="acceptOrder(order.orderId)">Accept
+      </button>
       <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="toOrderView(order)">
         View order info
       </button>
@@ -19,6 +22,7 @@ export default {
   name: 'AvailableOrdersTableBody',
   data: function () {
     return {
+      userId: sessionStorage.getItem('userId'),
       orderId: 0,
       orderInfo: [{}],
       pickUpDistrictId: '0',
@@ -39,6 +43,20 @@ export default {
       ).then(response => {
         this.orderInfo = response.data
         console.log(this.orders)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    acceptOrder: function (orderId) {
+      this.$http.patch("/transabuddy/order/accepted", null, {
+            params: {
+              orderId: orderId,
+              courierId: this.userId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        this.findOrdersByDistrictAndStatus()
       }).catch(error => {
         console.log(error)
       })
