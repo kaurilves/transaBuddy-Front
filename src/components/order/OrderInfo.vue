@@ -157,10 +157,11 @@
       <div class="left-img">
 
         <h2>Pictures from sender</h2>
-        <div class="container">
-          <div class="row" v-for="image in imageResponseS">
+
+        <div class="column">
+          <div class="flex-column" v-for="image in imageResponseS">
             <div class="col-sm">
-              <img class="my-style" :src="image.base64"><br><br><br><br><br>
+              <img class="my-style" :src="image.base64">
             </div>
           </div>
         </div>
@@ -180,17 +181,18 @@
         <h2>Images from courier on pickup</h2>
         <div class="container">
           <div class="row" v-for="image in imageResponseP">
-            <div class="col-sm">
+            <div class="row">
               <img class="my-style" :src="image.base64"/>
             </div>
           </div>
-        <div v-if="divDisplayPickupPicture">
-          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-          <br>
-          <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend(typeP)">
-            Upload image
-          </button>
-        </div>
+          <div v-if="divDisplayPickupPicture">
+            <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+            <br>
+            <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                    v-on:click="sendImageDataToBackend(typeP)">
+              Upload image
+            </button>
+          </div>
 
         </div>
 
@@ -209,21 +211,14 @@
         <div v-if="divDisplayPickupPicture">
           <ImageInput @imageInputSuccess="getImageDataFromFile"/>
           <br>
-          <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend(typeD)">
+          <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                  v-on:click="sendImageDataToBackend(typeD)">
             Upload image
           </button>
         </div>
-
-
-
       </div>
-
-
     </div>
-
-
   </div>
-
 </template>
 
 
@@ -284,12 +279,12 @@ export default {
   },
   methods: {
 
-    hideImageUpload(){
-      if(this.roleSelected == "sender"){
+    hideImageUpload() {
+      if (this.roleSelected == "sender") {
         this.divDisplayDropOffPicture = false
         this.divDisplayPickupPicture = false
       }
-      if(this.roleSelected === "courier"){
+      if (this.roleSelected === "courier") {
         this.divDisplaySenderPicture = false
       }
     },
@@ -302,13 +297,13 @@ export default {
             }
           }
       ).then(response => {
-        if(type === "S"){
+        if (type === "S") {
           this.imageResponseS = response.data
         }
-        if(type === "P"){
+        if (type === "P") {
           this.imageResponseP = response.data
         }
-        if(type === "D"){
+        if (type === "D") {
           this.imageResponseD = response.data
         }
 
@@ -319,7 +314,7 @@ export default {
     getImageDataFromFile(base64) {
       this.imageUploadRequest.base64 = base64
     },
-    uploadImage(type){
+    uploadImage(type) {
       this.sendImageDataToBackend(type)
       this.$forceUpdate()
     },
