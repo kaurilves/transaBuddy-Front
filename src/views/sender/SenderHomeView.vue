@@ -5,7 +5,7 @@
     </div>
 
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToAddOrder">Add new order</button>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToSearchSenderOrders">Search orders</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToAllSenderOrders">All orders</button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToViewProfile">View profile</button>
     <SenderActiveOrdersTable/>
   </div>
@@ -23,7 +23,7 @@ export default {
   },
   data: function (){
     return  {
-      userId: localStorage.getItem('userId')
+      userId: sessionStorage.getItem('userId')
     }
   },
   methods: {
@@ -40,8 +40,8 @@ export default {
     navigateToViewProfile: function () {
       this.$router.push({name: 'senderUserProfileView', query:{userId: this.userId}})
     },
-    navigateToSearchSenderOrders: function () {
-      this.$router.push({name:'senderSearchOrders', query:{userId: this.userId}})
+    navigateToAllSenderOrders: function () {
+      this.$router.push({name:'senderAllOrders', query:{userId: this.userId}})
     },
   }
 }

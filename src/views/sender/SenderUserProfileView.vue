@@ -14,7 +14,7 @@
 import ViewUserProfile from "@/components/users/UserProfile";
 
 export default {
-  name: "SenderUserProfileView",
+  name: "SenderUserProfi  leView",
   components: {ViewUserProfile},
   methods: {
     backToMainView() {

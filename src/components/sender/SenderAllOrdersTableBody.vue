@@ -1,8 +1,9 @@
 <template>
+
   <tbody>
   <tr v-for="order in orderInfo">
     <td>{{ order.deliveryDate }}</td>
-    <td>{{ order.timeFrame }} </td>
+    <td>{{ order.timeFrame }}</td>
     <td>{{ order.pickUpAddress }}</td>
     <td>{{ order.dropOffAddress }}</td>
     <td>{{ order.status }}</td>
@@ -15,11 +16,14 @@
   </tbody>
 </template>
 <script>
+
+
 export default {
-  name: 'SenderActiveOrdersTableBody',
+  name: 'SenderAllOrdersTableBody',
   data: function () {
     return {
-      userId: sessionStorage.getItem('userId'),
+
+      userId: this.$route.query.userId,
       orderId: 0,
       orderInfo:
           {
@@ -27,17 +31,16 @@ export default {
             timeFrame: 0,
             pickUpAddress: '',
             dropOffAddress: '',
-            status: '',
+            status: ''
           }
     }
   },
   methods: {
-
-
-    findActiveOrdersBySenderUserId: function () {
-      this.$http.get("/transabuddy/user/sender-active-orders", {
+    findOrdersBySenderUserId: function () {
+      this.$http.get("/transabuddy/user/sender/all-orders", {
             params: {
-              userId: this.userId
+              userId: this.userId,
+              status: ' '
             }
           }
       ).then(response => {
@@ -48,14 +51,11 @@ export default {
       })
     },
     toOrderView: function (orderId) {
-
       this.$router.push({name: 'orderView', query: {orderId: orderId}})
-
-    }
-
+    },
   },
   mounted() {
-    this.findActiveOrdersBySenderUserId()
+    this.findOrdersBySenderUserId()
   }
 }
 </script>
