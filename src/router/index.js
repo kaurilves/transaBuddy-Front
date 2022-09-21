@@ -12,6 +12,7 @@ import OrderView from "@/views/order/OrderView";
 import SenderUserProfileView from "@/views/sender/SenderUserProfileView";
 import SenderSearchOrdersView from "@/views/sender/SenderSearchOrdersView";
 
+
 Vue.use(VueRouter)
 
 

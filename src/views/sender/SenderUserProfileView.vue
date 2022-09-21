@@ -18,7 +18,6 @@ export default {
   components: {ViewUserProfile},
   methods: {
     backToMainView() {
-
       const roleSelected = sessionStorage.getItem('roleSelected')
       if (roleSelected == 'sender') {
         this.$router.push({name: 'senderRoute'});
