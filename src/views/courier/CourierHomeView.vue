@@ -8,6 +8,7 @@
     </button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayActiveOrders">Active orders</button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayOrderHistory">Delivered orders</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToViewProfile">Delivered orders</button>
 
     <div v-if="divDisplayActiveOrders">
       <CourierActiveOrdersTable/>

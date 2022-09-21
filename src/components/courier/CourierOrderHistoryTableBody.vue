@@ -32,7 +32,7 @@ export default {
     findCompletedOrdersByCourierUserId: function () {
       this.$http.get("transabuddy/orders/courier-completed-orders", {
             params: {
-              userId: this.userId
+              courierUserId: this.userId
             }
           }
       ).then(response => {
