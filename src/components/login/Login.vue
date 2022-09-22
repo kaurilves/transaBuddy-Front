@@ -5,6 +5,7 @@
         <div class="col-md-9 col-lg-6 col-xl-5">
           <img src="https://superawesomevectors.com/wp-content/uploads/2016/02/truck-icon-800x566.jpg"
                class="img-fluid" alt="Sample image">
+          <h1>Transport - made simple</h1>
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
           <form>
