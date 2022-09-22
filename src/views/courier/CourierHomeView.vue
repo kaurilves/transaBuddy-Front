@@ -88,7 +88,7 @@ export default {
 #logOutButton {
   position: relative;
   top: -50px;
-  right: -700px;
+  right: -500px;
   margin: 5px;
 }
 </style>

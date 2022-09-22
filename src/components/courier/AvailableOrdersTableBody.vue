@@ -10,8 +10,8 @@
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="acceptOrder(order.orderId)">Accept
       </button>
-      <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="toOrderView(order)">
-        View order info
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="toOrderView(order.orderId)">
+        View order
       </button>
     </td>
   </tr>

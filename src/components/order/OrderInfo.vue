@@ -93,29 +93,18 @@
                 <td>
                   <strong>
                     <span class="glyphicon glyphicon-calendar text-primary"></span>
-                    Delivery starting from:
+                    Delivery time frame:
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ hourToString(orderInfo.fromHour) }}
+                  {{ orderInfo.timeFrame }}
                 </td>
               </tr>
               <tr>
                 <td>
                   <strong>
                     <span class="glyphicon glyphicon-calendar text-primary"></span>
-                    Delivery end:
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ hourToString(orderInfo.toHour) }}
-                </td>
-
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-calendar text-primary"></span>
-                    Shipment amount
+                    Package amount
                   </strong>
                 </td>
                 <td class="text-primary">
@@ -145,7 +134,6 @@
                   {{ statusToString(orderInfo.status) }}
                 </td>
               </tr>
-
               </tbody>
             </table>
           </div>
@@ -254,8 +242,7 @@ export default {
         deliveryDate: '',
         senderUserId: '',
         courierUserId: '',
-        fromHour: '',
-        toHour: '',
+        timeFrame: '',
         pickUpDistrictId: '',
         pickUpAddress: '',
         dropOffDistrictId: '',
@@ -344,14 +331,6 @@ export default {
       }).catch(error => {
         console.log(error)
       })
-    },
-    hourToString(hour) {
-      if (hour < 10) {
-        return "0" + hour + ':00'
-      } else {
-        return hour + ':00'
-      }
-
     },
     statusToString(status) {
       if (status === "N") {
