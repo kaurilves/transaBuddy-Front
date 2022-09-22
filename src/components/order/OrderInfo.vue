@@ -1,7 +1,7 @@
 <template>
-
-
   <div class="container bootstrap snippets bootdey">
+    <AlertSuccess :successMessage="successMessage"/>
+    <AlertError :errorMessage="errorMessage"/>
     <h2>Order information</h2>
     <div class="panel-body inf-content">
       <div class="row">
@@ -14,7 +14,7 @@
                 <td>
                   <strong>
                     <span class="glyphicon glyphicon-asterisk text-primary"></span>
-                    Order added
+                    Delivery date
                   </strong>
                 </td>
                 <td class="text-primary">
@@ -93,33 +93,22 @@
                 <td>
                   <strong>
                     <span class="glyphicon glyphicon-calendar text-primary"></span>
-                    Delivery starting from:
+                    Delivery time frame:
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ hourToString(orderInfo.fromHour) }}
+                  {{ orderInfo.timeFrame }}
                 </td>
               </tr>
               <tr>
                 <td>
                   <strong>
                     <span class="glyphicon glyphicon-calendar text-primary"></span>
-                    Delivery end:
+                    Package amount
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ hourToString(orderInfo.toHour) }}
-                </td>
-
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-calendar text-primary"></span>
-                    Shipment amount
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{orderInfo.packageAmount}}
+                  {{ orderInfo.packageAmount }}
                 </td>
               </tr>
 
@@ -142,60 +131,143 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ statusToString(orderInfo.status)}}
+                  {{ orderInfo.status }}
                 </td>
               </tr>
-
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
-    <div>
-      Pictures from sender
-      <ImageInput @imageInputSuccess="getImageDataFromFile"/><br>
-      <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="sendImageDataToBackend">
-        Upload image
-      </button><br><br><br><br>
-
-      <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="findImageById">Find sender picture
+    <div v-if="orderInfo.status === 'Accepted' && roleSelected === 'courier'">
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="rejectAccept(orderInfo.orderId)">Cancel
       </button>
-      <img :src="imageResponse.base64" alt="placeholder"><br><br><br><br><br>
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="orderPickedUp(orderInfo.orderId)">Picked Up
+      </button>
     </div>
+    <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'courier'">
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="acceptOrder(orderInfo.orderId)">Accept
+      </button>
+    </div>
+    <div v-if="orderInfo.status === 'Picked Up' && roleSelected === 'courier'">
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="orderDelivery(orderInfo.orderId)">Delivered
+      </button>
+    </div>
+    <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'sender'">
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="deleteOrder(orderInfo.orderId)">Delete
+      </button>
+    </div>
+    <div>
+
+      <div class="left-img">
+
+        <h2>Pictures from sender</h2>
+
+        <div class="column">
+          <div class="flex-column" v-for="image in imageResponseS">
+            <div class="col-sm">
+              <img class="my-style" :src="image.base64">
+            </div>
+          </div>
+        </div>
+        <div v-if="divDisplaySenderPicture">
+
+          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+          <br>
+          <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="uploadImage(typeS)">
+            Upload image
+          </button>
+
+        </div>
 
 
+      </div>
+
+      <div class="center-img">
+        <h2>Images from courier on pickup</h2>
+        <div class="container">
+          <div class="row" v-for="image in imageResponseP">
+            <div class="row">
+              <img class="my-style" :src="image.base64"/>
+            </div>
+          </div>
+          <div v-if="divDisplayPickupPicture">
+            <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+            <br>
+            <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                    v-on:click="sendImageDataToBackend(typeP)">
+              Upload image
+            </button>
+          </div>
+
+        </div>
 
 
+      </div>
+
+      <div class="right-img">
+        <h2>Images from courier on dropoff</h2>
+        <div class="container">
+          <div class="row" v-for="image in imageResponseD">
+            <div class="col-sm">
+              <img class="my-style" :src="image.base64"><br><br><br><br><br>
+            </div>
+          </div>
+        </div>
+        <div v-if="divDisplayPickupPicture">
+          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+          <br>
+          <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                  v-on:click="sendImageDataToBackend(typeD)">
+            Upload image
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
-
 </template>
 
 
 <script>
 import ImageInput from "@/components/image/ImageInput";
+import AlertError from "@/components/alerts/AlertError";
+import AlertSuccess from "@/components/alerts/AlertSuccess";
+
 export default {
   name: "OrderInfo",
-  components: {ImageInput},
+  components: {ImageInput, AlertError, AlertSuccess},
   data: function () {
     return {
-      imageUploadRequest:{
-        orderId: sessionStorage.getItem('orderId'),
+      role: sessionStorage.getItem('roleSelected'),
+      successMessage: '',
+      errorMessage: '',
+      imageUploadRequest: {
+        orderId: this.$route.query.orderId,
         base64: '',
-        type: 'S'
+        type: ''
       },
-      imageResponse:{
-        base64: String,
-      },
-      type: 'S',
+      imageResponseS: [{base64: ''}],
+      imageResponseP: [{base64: ''}],
+      imageResponseD: [{base64: ''}],
+      typeS: 'S',
+      typeP: 'P',
+      typeD: 'D',
       orderId: this.$route.query.orderId,
-
+      roleSelected: sessionStorage.getItem('roleSelected'),
+      divDisplaySenderPicture: true,
+      divDisplayDropOffPicture: true,
+      divDisplayPickupPicture: true,
       orderInfo: {
         deliveryDate: '',
         senderUserId: '',
         courierUserId: '',
-        fromHour: '',
-        toHour: '',
+        timeFrame: '',
         pickUpDistrictId: '',
         pickUpAddress: '',
         dropOffDistrictId: '',
@@ -218,17 +290,35 @@ export default {
 
   },
   methods: {
-    findImageById: function () {
+
+    hideImageUpload() {
+      if (this.roleSelected == "sender") {
+        this.divDisplayDropOffPicture = false
+        this.divDisplayPickupPicture = false
+      }
+      if (this.roleSelected === "courier") {
+        this.divDisplaySenderPicture = false
+      }
+    },
+    findImageByOrderIdAndType: function (type) {
       this.$http.get("/transabuddy/image", {
             params: {
               orderId: this.orderId,
-              type: this.type
+              type: type
 
             }
           }
       ).then(response => {
-        this.imageResponse = response.data
-        console.log(this.imageResponse)
+        if (type === "S") {
+          this.imageResponseS = response.data
+        }
+        if (type === "P") {
+          this.imageResponseP = response.data
+        }
+        if (type === "D") {
+          this.imageResponseD = response.data
+        }
+
       }).catch(error => {
         console.log(error)
       })
@@ -236,13 +326,86 @@ export default {
     getImageDataFromFile(base64) {
       this.imageUploadRequest.base64 = base64
     },
-    sendImageDataToBackend () {
-      this.$http.post("/transabuddy/image", this.imageUploadRequest
+    uploadImage(type) {
+      this.sendImageDataToBackend(type)
+    },
+    rejectAccept: function (orderId) {
+      this.$http.patch("/transabuddy/order/rejected", null, {
+            params: {
+              orderId: orderId
+            }
+          }
       ).then(response => {
         console.log(response.data)
+        location.reload();
       }).catch(error => {
         console.log(error)
       })
+    },
+    acceptOrder: function (orderId) {
+      this.$http.patch("/transabuddy/order/accepted", null, {
+            params: {
+              orderId: orderId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        location.reload();
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    orderDelivery: function (orderId) {
+      this.$http.patch("/transabuddy/order/delivery", null, {
+            params: {
+              orderId: orderId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        location.reload();
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    deleteOrder: function (orderId) {
+      this.$http.patch("/transabuddy/order/delete", null, {
+            params: {
+              orderId: orderId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        location.reload();
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    orderPickedUp: function (orderId) {
+      this.$http.patch("/transabuddy/order/pickedup", null, {
+            params: {
+              orderId: orderId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        location.reload();
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    sendImageDataToBackend(type) {
+      this.imageUploadRequest.type = type
+      this.$http.post("/transabuddy/image", this.imageUploadRequest
+      ).then(response => {
+        this.successMessage = "Image successfully uploaded"
+        console.log(response.data)
+        location.reload();
+      }).catch(error => {
+        this.errorMessage = "Image upload failed"
+        console.log(error)
+      })
+
     },
     getOrderByOrderId: function (orderId) {
       this.$http.get("/transabuddy/order", {
@@ -252,40 +415,29 @@ export default {
           }
       ).then(response => {
         this.orderInfo = response.data
+        if (this.orderInfo.status === "N") {
+          this.orderInfo.status = "Waiting for acception"
+        } else if (this.orderInfo.status === "A") {
+          this.orderInfo.status = "Accepted"
+        } else if (this.orderInfo.status === "P") {
+          this.orderInfo.status = "Picked Up"
+        } else if (this.orderInfo.status === "D") {
+          this.orderInfo.status = "Deleted"
+        } else if (this.orderInfo.status === "C") {
+          this.orderInfo.status = "Delivered"
+        }
         console.log(this.orderInfo)
-
       }).catch(error => {
         console.log(error)
       })
     },
-    hourToString(hour) {
-      if (hour < 10) {
-        return "0" + hour + ':00'
-      } else {
-        return hour + ':00'
-      }
-
-    },
-    statusToString(status){
-      if(status === "N"){
-        return "Order active"
-      }
-      if(status === "A")
-        return "Accepted by courier"
-      if(status === "P"){
-        return "Picked up by courier"
-      }
-      if(status === "D"){
-        return "Delivered"
-      }
-      if(status === "C"){
-        return "Cancelled"
-      }
-    }
   },
   mounted() {
     this.getOrderByOrderId(this.orderId)
-    this.$forceUpdate();
+    this.hideImageUpload()
+    this.findImageByOrderIdAndType(this.typeS)
+    this.findImageByOrderIdAndType(this.typeP)
+    this.findImageByOrderIdAndType(this.typeD)
   }
 
 }

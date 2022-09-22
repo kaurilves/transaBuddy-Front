@@ -145,8 +145,7 @@
 
       </div>
     </form>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="toOrderView(orderId)">To order view</button>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="addNewOrder(orderId)">Save</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="addNewOrder()">Add order</button>
   </div>
 </template>
 
@@ -163,7 +162,7 @@ export default {
       successMessage: '',
       orderRequest: {
         deliveryDate: '2022-09-20',
-        senderUserId: sessionStorage.getItem('userId') ,
+        senderUserId: this.$route.query.userId,
         courierUserId: '',
         fromHour: '',
         toHour: '',
@@ -182,26 +181,24 @@ export default {
     }
   },
   methods:{
-    toOrderView(orderId){
-      this.$router.push({name: 'orderView', query:{orderId: orderId}})
-      this.$forceUpdate();
-    },
+
     addNewOrder() {
       this.addOrder()
 
     },
     addOrder: function () {
 
-      this.$http.post("/transabuddy/order", this.orderRequest
-      ).then(response => {
+      this.$http.post("/transabuddy/order", this.orderRequest).then(response => {
         this.orderRequest = response.data
         this.orderId = response.data.orderId
         this.successMessage = "New order added"
         console.log(response.data)
+        this.$router.push({name: 'orderView', query:{orderId: this.orderId}})
       }).catch(error => {
         this.errorMessage = 'Something went wrong'
         console.log(error)
       })
+
     }
   }
 

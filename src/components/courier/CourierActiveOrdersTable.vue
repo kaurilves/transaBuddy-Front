@@ -12,10 +12,9 @@
 <script>
 import CourierActiveOrdersTableHeader from "@/components/courier/CourierActiveOrdersTableHeader";
 import CourierActiveOrdersTableBody from "@/components/courier/CourierActiveOrdersTableBody";
-
 export default {
   name: "CourierActiveOrdersTable",
-  components: {CourierActiveOrdersTableBody, CourierActiveOrdersTableHeader},
+  components: {CourierActiveOrdersTableHeader, CourierActiveOrdersTableBody},
 }
 </script>
 

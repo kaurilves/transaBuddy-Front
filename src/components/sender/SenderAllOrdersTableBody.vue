@@ -13,6 +13,14 @@
       </button>
     </td>
   </tr>
+    <select class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" v-model="orderInfo.status" v-on:change="findOrdersBySenderUserIdAndStatus">
+      <option value=" "> All </option>
+      <option value="N"> New </option>
+      <option value="A"> Accepted </option>
+      <option value="P"> Picked up </option>
+      <option value="C"> Collected </option>
+    </select>
   </tbody>
 </template>
 <script>
@@ -36,7 +44,7 @@ export default {
     }
   },
   methods: {
-    findOrdersBySenderUserId: function () {
+    findOrdersBySenderUserIdAndStatus: function () {
       this.$http.get("/transabuddy/user/sender/all-orders", {
             params: {
               userId: this.userId,
@@ -55,7 +63,7 @@ export default {
     },
   },
   mounted() {
-    this.findOrdersBySenderUserId()
+    this.findOrdersBySenderUserIdAndStatus()
   }
 }
 </script>

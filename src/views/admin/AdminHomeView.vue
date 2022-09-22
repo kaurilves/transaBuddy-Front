@@ -1,44 +1,98 @@
 <template>
   <div>
-    <h2>Admin view</h2>
-    <div>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAllUsers" >All users</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayFindUsers">Search users</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddUser">Add user </button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAddNewOrder">Add order</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayAdjustPricing">Pricing list</button>
-      <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToProfileView">View profile</button>
-      <button id="logOutButton" style="margin: 5px" class="btn btn-outline-dark" v-on:click="logOut">Logout</button>
+    <head>
+      <title>Bootstrap Example</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
+    <body>
 
-    </div>
-    <div v-if="divDisplayAllUsers">
-      <AllUsersTable :users="users" title="All users"/>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-brand bg-dark" v-on:click="hideAllDivs">TransaBuddy</button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav btn-group btn-group-toggle" data-toggle="buttons">
+          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAllUsers">All users</button>
+          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayFindUsers">Search users</button>
+          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAddUser">Add user</button>
+          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAddNewOrder">Add order</button>
+          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAllOrders">All orders</button>
+          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAdjustPricing">Pricing list
+          </button>
+          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="navigateToProfileView">View profile
+          </button>
+          <button id="logOutButton" style="margin: 5px" class="btn btn-outline-light" v-on:click="logOut">Logout
+          </button>
 
-    <div v-if="divDisplayFindUsers">
-      <UsersByNameAndCodeTable title="Find users" @usersResultSuccess="updateUsersFromResult"/>
-      <div v-if="users.length > 0">
-        <AllUsersTable :users="users" title="Found users"/>
+        </div>
       </div>
+      </nav>
 
-    </div>
-    <div v-if="divDisplayAddUser">
-      <RegisterUser/>
-    </div>
+    <div class="container-fluid text-center">
+      <div class="row content">
 
-    <div v-if="divDisplayAdjustPricing">
-      <div v-if="shipmentPriceInfos.length > 0">
-        <AllShipmentPrices :shipmentPriceInfos="shipmentPriceInfos" title="Current pricing list"/>
+        <div class="col-sm-8 text-center" v-if="divDisplayAllUsers">
+          <h1>Users</h1>
+            <AllUsersTable :users="users" title="All users"/>
+          <hr>
+          <h3>Test</h3>
+          <p>Lorem ipsum...</p>
+        </div>
+
+        <div class="col-sm-8 text-center" v-if="divDisplayFindUsers">
+          <UsersByNameAndCodeTable title="Find users" @usersResultSuccess="updateUsersFromResult"/>
+          <div v-if="users.length > 0">
+            <AllUsersTable :users="users" title="Found users"/>
+          </div>
+        </div>
+
+        <div class="col-sm-8 text-center" v-if="divDisplayAddUser">
+          <RegisterUser/>
+        </div>
+
+        <div class="col-sm-8 text-center" v-if="divDisplayAdjustPricing">
+          <div v-if="shipmentPriceInfos.length > 0">
+            <AllShipmentPrices :shipmentPriceInfos="shipmentPriceInfos" title="Current pricing list"/>
+          </div>
+        </div>
+        <div class="col-sm-8 text-center" v-if="divDisplayUserProfile">
+          User profile
+          <UserProfile/>
+        </div>
+
+        <div class="col-sm-8 text-center" v-if="divDisplayAllOrders">
+          <AllOrdersTable :orders="orders" title="All orders"/>
+        </div>
+
+
+
+
       </div>
-      <div v-if="divDisplayUserProfile">
-        User profile
-        <UserProfile/>
-      </div>
-
     </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <footer class="container-fluid text-center">
+      <p>Footer Text</p>
+    </footer>
 
-
+    </body>
   </div>
+
+
+
 
 </template>
 
@@ -49,21 +103,30 @@ import UserProfile from "@/components/users/UserProfile";
 import AllUsersTable from "@/components/users/AllUsersTable";
 import AllShipmentPrices from "@/components/order/AllShipmentPrices";
 import UsersByNameAndCodeTable from "@/components/users/UsersByNameAndCodeTable";
+import SenderActiveOrdersTable from "@/components/sender/SenderActiveOrdersTable";
+import SenderActiveOrdersTableBody from "@/components/sender/SenderActiveOrdersTableBody";
+import AllOrdersTable from "@/components/order/AllOrdersTable";
 
 
 export default {
   name: "AdminHomeView",
   components: {
-    UserProfile, Logout, AllShipmentPrices, RegisterUser, UsersByNameAndCodeTable, AllUsersTable,},
+    AllOrdersTable,
+    SenderActiveOrdersTableBody,
+    SenderActiveOrdersTable,
+    UserProfile, Logout, AllShipmentPrices, RegisterUser, UsersByNameAndCodeTable, AllUsersTable,
+  },
   data: function () {
-    return{
+    return {
       userId: sessionStorage.getItem('userId'),
       user: {},
       users: [],
+      orders: [],
       shipmentPriceInfo: {
         shipmentPriceId: ''
       },
       shipmentPriceInfos: [],
+      divDisplayAllOrders: false,
       divDisplayAllUsers: false,
       divDisplayFindUsers: false,
       divDisplayAddUser: false,
@@ -74,7 +137,17 @@ export default {
     }
   },
   methods: {
-    findAllUsers(){
+
+    finaAllOrders() {
+      this.$http.get("/transabuddy/active-orders"
+      ).then(response => {
+        this.orders = response.data
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    findAllUsers() {
       this.$http.get('/admin/users')
           .then(response => {
 
@@ -85,75 +158,110 @@ export default {
             console.log(reason)
           })
     },
-    updateUsersFromResult(usersResult){
+    updateUsersFromResult(usersResult) {
       this.users = usersResult
     },
     findAllPrices: function () {
       this.$http.get("/admin/prices")
           .then(response => {
-        this.shipmentPriceInfos = response.data
-      }).catch(error => {
+            this.shipmentPriceInfos = response.data
+          }).catch(error => {
         console.log(error)
       })
     },
-    hideAllDivs(){
+    hideAllDivs() {
       this.divDisplayAllUsers = false,
           this.divDisplayFindUsers = false,
           this.divDisplayAddUser = false,
-          this.divDisplayAddNewOrder = false,
-          this.divDisplayAdjustPricing = false,
+          this.divDisplayAddNewOrder = false
+          this.divDisplayAdjustPricing = false
           this.divDisplayViewProfile = false
+      this.divDisplayAllOrders = false
     },
     displayAllUsers() {
       this.hideAllDivs()
       this.divDisplayAllUsers = true
       this.findAllUsers()
     },
-    displayFindUsers(){
+    displayFindUsers() {
       this.users = []
       this.hideAllDivs()
       this.divDisplayFindUsers = true
 
     },
-    displayAddUser(){
+    displayAddUser() {
       this.hideAllDivs()
       this.divDisplayAddUser = true
     },
-    displayAddNewOrder(){
+    displayAddNewOrder() {
       this.hideAllDivs()
-      this.$router.push({name: 'newOrderView'})
+      this.$router.push({name: 'newOrderView', query: {userId: this.userId}})
     },
-    displayAdjustPricing(){
+    displayAdjustPricing() {
       this.hideAllDivs()
       this.shipmentPriceInfos = []
       this.findAllPrices()
       this.divDisplayAdjustPricing = true
     },
-    navigateToProfileView(){
-      this.$router.push({name: 'adminUserProfileView', query:{userId: this.userId}})
+
+    displayAllOrders() {
+      this.hideAllDivs()
+      this.divDisplayAllOrders = true
+      this.finaAllOrders()
+    },
+    navigateToProfileView() {
+      this.$router.push({name: 'adminUserProfileView', query: {userId: this.userId}})
 
     },
-    logOut(){
+    logOut() {
       sessionStorage.clear()
       localStorage.clear()
       this.$confirm("Are you sure you want to log out?").then(() => {
-        this.$router.push( {name: 'home'})
+        this.$router.push({name: 'home'})
       });
 
-
-    }
+    },
 
 
   }
 }
+
+
 </script>
 
 
 <style scoped>
-#logOutButton {
-  position: relative;
-  top: -50px;
-  right: -600px;
-  margin: 5px;
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
 }
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  padding-top: 20px;
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height:auto;}
+}
+
+
 </style>

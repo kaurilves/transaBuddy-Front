@@ -18,7 +18,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ dimensions }}
+                  {{ shipment.dimensions }}
                 </td>
                 <td>
                   <input type="text" placeholder="New dimensions" v-model="shipmentPriceInfo.dimensions"><br><br>
@@ -33,7 +33,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ weight + ' kg' }}
+                  {{ shipment.weight + ' kg' }}
                 </td>
                 <td>
                   <input type="text" placeholder="New weight" v-model="shipmentPriceInfo.weight"><br><br>
@@ -47,7 +47,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ price + ' €' }}
+                  {{ shipment.price + ' €' }}
                 </td>
                 <td>
                   <input type="text" placeholder="New price" v-model="shipmentPriceInfo.price"><br><br>
@@ -62,7 +62,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ type }}
+                  {{ shipment.type }}
                 </td>
                 <td>
                   <input type="text" placeholder="New designation" v-model="shipmentPriceInfo.type"><br><br>
@@ -94,16 +94,13 @@ export default {
     return {
       successMessage: '',
       errorMessage: '',
-      dimensions: sessionStorage.getItem('dimensions'),
-      weight: sessionStorage.getItem('weight'),
-      price: sessionStorage.getItem('price'),
-      type: sessionStorage.getItem('type'),
+      shipment: this.$route.query.shipmentPriceInfo,
       shipmentPriceInfo: {
-        shipmentPriceId: sessionStorage.getItem('shipmentPriceId'),
-        dimensions: sessionStorage.getItem('dimensions'),
-        weight: sessionStorage.getItem('weight'),
-        price: sessionStorage.getItem('price'),
-        type: sessionStorage.getItem('type'),
+        shipmentPriceId: '',
+        dimensions: '',
+        weight: '',
+        price:'',
+        type: '',
       }
     }
   },
@@ -112,9 +109,9 @@ export default {
       this.$router.push({name: 'adminRoute'})
     },
     adjustShipmentPrice(){
+      this.shipmentPriceInfo.shipmentPriceId = this.shipment.shipmentPriceId
       this.successMessage = "Updated shipment info",
-      this.$http.patch("/admin/prices", this.shipmentPriceInfo
-
+      this.$http.patch("/admin/new-price-info", this.shipmentPriceInfo
       ).then(response => {
         console.log(response.data)
       }).catch(error => {
