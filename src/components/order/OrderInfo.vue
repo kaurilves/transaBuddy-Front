@@ -1,11 +1,10 @@
 <template>
-  <div class="container bootstrap snippets bootdey">
+  <div class="container">
     <AlertSuccess :successMessage="successMessage"/>
     <AlertError :errorMessage="errorMessage"/>
-    <h2>Order information</h2>
-    <div class="panel-body inf-content">
-      <div class="row">
-        <div class="col-md-6">
+    <div class="row">
+      <div class="col-sm">
+        <div>
           <strong>Order details</strong><br>
           <div class="table-responsive">
             <table class="table table-user-information">

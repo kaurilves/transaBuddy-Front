@@ -1,11 +1,12 @@
 <template>
   <div>
-    <H2>Add new order</H2>
     <div >
-      <NewOrder/>
+      <div>
+        <NewOrder/>
+      </div>
 
     </div>
-    <button type="button" v-on:click="backToMainView">Back</button>
+    <button type="button" class="btn btn-primary btn-lg" v-on:click="backToMainView">Back</button>
 
   </div>
 
