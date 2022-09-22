@@ -7,10 +7,17 @@
     <td>{{ order.dropOffAddress }}</td>
     <td>{{ order.priceCategory }}</td>
     <td>{{ order.status }}</td>
-    <td>
+    <td v-if="order.status === 'Accepted'">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="orderPickedUp(order.orderId)">{{ order.deliveryButtonName }}
       </button>
+    </td>
+    <td v-if="order.status === 'Picked Up'">
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="orderDelivery(order.orderId)">{{ order.deliveryButtonName }}
+      </button>
+    </td>
+    <td>
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="toOrderView(order.orderId)">View order
       </button>
@@ -77,6 +84,21 @@ export default {
         console.log(error)
       })
     },
+
+    orderDelivery: function (orderId) {
+      this.$http.patch("/transabuddy/order/delivery", null, {
+            params: {
+              orderId: orderId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        this.findActiveOrdersByCourierUserId()
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
     toOrderView: function (orderId) {
       this.$router.push({name: 'orderView', query: {orderId: orderId}})
     }
