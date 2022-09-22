@@ -1,5 +1,4 @@
 <template>
-  <div>
   <tbody>
   <tr v-for="order in orderInfo">
     <td>{{order.deliveryDate}}</td>
@@ -17,11 +16,13 @@
     </td>
   </tr>
   </tbody>
-  </div>
 </template>
 <script>
 export default {
   name: 'AvailableOrdersTableBody',
+  props:{
+    orderInfo: {}
+  },
   data: function () {
     return {
       userId: sessionStorage.getItem('userId'),
@@ -30,25 +31,9 @@ export default {
       pickUpDistrictId: '0',
       dropOffDistrictId: '0',
       status: 'N',
-
     }
   },
   methods: {
-    findOrdersByDistrictAndStatus: function () {
-      this.$http.get('/transabuddy/orders/available', {
-            params: {
-              pickUpDistrictId: this.pickUpDistrictId,
-              dropOffDistrictId: this.dropOffDistrictId,
-              status: this.status,
-            }
-          }
-      ).then(response => {
-        this.orderInfo = response.data
-        console.log(this.orders)
-      }).catch(error => {
-        console.log(error)
-      })
-    },
     acceptOrder: function (orderId) {
       this.$http.patch("/transabuddy/order/accepted", null, {
             params: {
@@ -58,7 +43,6 @@ export default {
           }
       ).then(response => {
         console.log(response.data)
-        this.findOrdersByDistrictAndStatus()
       }).catch(error => {
         console.log(error)
       })
@@ -67,8 +51,5 @@ export default {
       this.$router.push({name: 'orderView', query: {orderId: orderId}})
     }
   },
-  mounted(){
-    this.findOrdersByDistrictAndStatus();
-  }
 }
 </script>
