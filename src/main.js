@@ -5,7 +5,7 @@ import axios from "axios"
 import VueAxios from "vue-axios"
 import VueSimpleAlert from "vue-simple-alert";
 import "./assets/css/style.css"
-import "./assets/image/track.png"
+// import "./assets/image/track.png"
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/src/jquery.js'

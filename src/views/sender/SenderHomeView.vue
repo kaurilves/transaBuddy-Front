@@ -1,13 +1,13 @@
 <template>
   <div>
+
     <div>
       <button id="logOutButton" type="button" class="btn btn-outline-dark" v-on:click="logOut">Logout</button>
     </div>
 
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToAddOrder">Add new order</button>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToSearchSenderOrders">Search orders</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToAllSenderOrders">Search orders</button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToViewProfile">View profile</button>
-
     <SenderActiveOrdersTable/>
   </div>
 </template>
@@ -22,8 +22,8 @@ export default {
   components: {
     SenderActiveOrdersTable, UserProfile, SenderUserProfileView
   },
-  data: function (){
-    return  {
+  data: function () {
+    return {
       userId: sessionStorage.getItem('userId')
     }
   },
@@ -36,13 +36,13 @@ export default {
       });
     },
     navigateToAddOrder: function () {
-      this.$router.push({name: 'newOrderView', query:{userId: this.userId}})
+      this.$router.push({name: 'newOrderView', query: {userId: this.userId}})
     },
     navigateToViewProfile: function () {
-      this.$router.push({name: 'senderUserProfileView', query:{userId: this.userId}})
+      this.$router.push({name: 'senderUserProfileView', query: {userId: this.userId}})
     },
-    navigateToSearchSenderOrders: function () {
-      this.$router.push({name:'senderSearchOrders', query:{userId: this.userId}})
+    navigateToAllSenderOrders: function () {
+      this.$router.push({name: 'senderAllOrders', query: {userId: this.userId}})
     },
   }
 }
