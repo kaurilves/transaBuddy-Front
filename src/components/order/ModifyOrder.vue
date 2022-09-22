@@ -206,6 +206,11 @@ export default {
         }
         this.fromHour = parseInt(this.orderInfo.timeFrame.substring(0, 2).replace("0", ''));
         this.toHour = parseInt(this.orderInfo.timeFrame.substring(8, 10).replace("0", ''));
+        if (this.toHour == 1) {
+          this.toHour = 10
+        } else if (this.fromHour == 1) {
+          this.fromHour = 10
+        }
         console.log(this.orderInfo)
       }).catch(error => {
         console.log(error)
