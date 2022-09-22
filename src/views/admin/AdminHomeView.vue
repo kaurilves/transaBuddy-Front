@@ -8,7 +8,7 @@
     </head>
     <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-light ">"
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light ">
       <button class="navbar-brand btn btn-primary btn-lg" v-on:click="hideAllDivs">TransaBuddy</button>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
               aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
