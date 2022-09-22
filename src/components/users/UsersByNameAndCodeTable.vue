@@ -8,7 +8,7 @@
     <input type="text" style="margin: 5px" placeholder="Last name" v-model="lastName">
     <input type="text" style="margin: 5px" placeholder="Personal code" v-model="personalCode">
 
-    <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="findCustomersByNameAndCode">Find</button>
+    <button type="button" style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="findCustomersByNameAndCode">Find</button>
 
   </div>
 

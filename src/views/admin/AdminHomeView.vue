@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex justify-content-center">
     <head>
       <title>Bootstrap Example</title>
       <meta charset="utf-8">
@@ -8,63 +8,62 @@
     </head>
     <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button class="navbar-brand bg-dark" v-on:click="hideAllDivs">TransaBuddy</button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light ">"
+      <button class="navbar-brand btn btn-primary btn-lg" v-on:click="hideAllDivs">TransaBuddy</button>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
               aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav btn-group btn-group-toggle" data-toggle="buttons">
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAllUsers">All users</button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayFindUsers">Search users</button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAddUser">Add user</button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAddNewOrder">Add order</button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAllOrders">All orders</button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAdjustPricing">Pricing list
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayAllUsers">All users</button>
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayFindUsers">Search users</button>
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayAddUser">Add user</button>
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayAddNewOrder">Add order</button>
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayAllOrders">All orders</button>
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayAdjustPricing">Pricing list
           </button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="navigateToProfileView">View profile
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="navigateToProfileView">View profile
           </button>
-          <button id="logOutButton" style="margin: 5px" class="btn btn-outline-light" v-on:click="logOut">Logout
+          <button id="logOutButton" style="margin: 5px" class="btn btn-warning btn-lg" v-on:click="logOut">Logout
           </button>
 
         </div>
       </div>
       </nav>
 
-    <div class="container-fluid text-center">
+    <div class="container-fluid">
       <div class="row content">
 
-        <div class="col-sm-8 text-center" v-if="divDisplayAllUsers">
+        <div class="justify-content-center" v-if="divDisplayAllUsers">
           <h1>Users</h1>
             <AllUsersTable :users="users" title="All users"/>
           <hr>
-          <h3>Test</h3>
-          <p>Lorem ipsum...</p>
+
         </div>
 
-        <div class="col-sm-8 text-center" v-if="divDisplayFindUsers">
+        <div class="justify-content-center" v-if="divDisplayFindUsers">
           <UsersByNameAndCodeTable title="Find users" @usersResultSuccess="updateUsersFromResult"/>
           <div v-if="users.length > 0">
             <AllUsersTable :users="users" title="Found users"/>
           </div>
         </div>
 
-        <div class="col-sm-8 text-center" v-if="divDisplayAddUser">
+        <div class="justify-content-center" v-if="divDisplayAddUser">
           <RegisterUser/>
         </div>
 
-        <div class="col-sm-8 text-center" v-if="divDisplayAdjustPricing">
+        <div class="justify-content-center" v-if="divDisplayAdjustPricing">
           <div v-if="shipmentPriceInfos.length > 0">
             <AllShipmentPrices :shipmentPriceInfos="shipmentPriceInfos" title="Current pricing list"/>
           </div>
         </div>
-        <div class="col-sm-8 text-center" v-if="divDisplayUserProfile">
+        <div class="justify-content-center" v-if="divDisplayUserProfile">
           User profile
           <UserProfile/>
         </div>
 
-        <div class="col-sm-8 text-center" v-if="divDisplayAllOrders">
+        <div class="justify-content-center" v-if="divDisplayAllOrders">
           <AllOrdersTable :orders="orders" title="All orders"/>
         </div>
 
@@ -242,8 +241,9 @@ export default {
 
 /* Set gray background color and 100% height */
 .sidenav {
+
   padding-top: 20px;
-  background-color: #f1f1f1;
+  background-color: #F6F0E0;
   height: 100%;
 }
 
@@ -262,6 +262,16 @@ footer {
   }
   .row.content {height:auto;}
 }
+#wrapper{
+
+  width: 650px  ;
+  height: auto;
+  background-color: rgb(198, 241, 200);
+  margin: 0 auto;
+  margin-top: 200px;
+  border-radius: 10px;
+}
+
 
 
 </style>

@@ -18,14 +18,14 @@
           <td>{{ shipmentPriceInfo.price + " €" }}</td>
           <td>{{ shipmentPriceInfo.type }}</td>
           <td>
-            <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="adjustPricing(shipmentPriceInfo)">
+            <button type="button" style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="adjustPricing(shipmentPriceInfo)">
               Adjust pricing
             </button>
           </td>
         </tr>
         </tbody>
       </table>
-      <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="addNewPriceCategory">
+      <button type="button" style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="addNewPriceCategory">
         Add new price category
       </button>
     </div>
