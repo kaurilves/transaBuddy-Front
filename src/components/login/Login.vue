@@ -52,15 +52,12 @@
               <br>
 
               <h2>Choose role</h2>
-              <input checked type="radio" id="optionOne" :value="roles[0]" v-model="roleSelected"/>
-              <label for="optionOne">{{ roles[0] }}</label>
-              <br>
-              <input checked type="radio" id="optionTwo" :value="roles[1]" v-model="roleSelected"/>
-              <label for="optionTwo">{{ roles[1] }}</label>
-              <br>
-              <input checked type="radio" id="optionThree" :value="roles[2]" v-model="roleSelected"/>
-              <label for="optionThree">{{ roles[2] }}</label>
-              <br>
+              <div v-for="(role, index) in roles">
+
+                <input type="radio" v-model="roleSelected" :value="role">{{roles[index]}}
+
+              </div>
+
               <button type="button" v-on:click="LoginWithRole()">Sisene</button>
 
             </div>
