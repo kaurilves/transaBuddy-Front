@@ -47,7 +47,6 @@ export default {
     }
   },
   methods: {
-
     findActiveOrdersByCourierUserId: function () {
       this.$http.get("/transabuddy/user/courier-active-orders", {
             params: {
@@ -73,20 +72,6 @@ export default {
 
     orderPickedUp: function (orderId) {
       this.$http.patch("/transabuddy/order/pickedup", null, {
-            params: {
-              orderId: orderId
-            }
-          }
-      ).then(response => {
-        console.log(response.data)
-        this.findActiveOrdersByCourierUserId()
-      }).catch(error => {
-        console.log(error)
-      })
-    },
-
-    orderDelivery: function (orderId) {
-      this.$http.patch("/transabuddy/order/delivery", null, {
             params: {
               orderId: orderId
             }

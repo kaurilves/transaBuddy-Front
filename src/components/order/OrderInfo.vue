@@ -14,7 +14,7 @@
                 <td>
                   <strong>
                     <span class="glyphicon glyphicon-asterisk text-primary"></span>
-                    Order added
+                    Delivery date
                   </strong>
                 </td>
                 <td class="text-primary">
@@ -131,7 +131,7 @@
                   </strong>
                 </td>
                 <td class="text-primary">
-                  {{ statusToString(orderInfo.status) }}
+                  {{ orderInfo.status }}
                 </td>
               </tr>
               </tbody>
@@ -139,6 +139,29 @@
           </div>
         </div>
       </div>
+    </div>
+    <div v-if="orderInfo.status === 'Accepted' && roleSelected === 'courier'">
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="rejectAccept(orderInfo.orderId)">Cancel
+      </button>
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="orderPickedUp(orderInfo.orderId)">Picked Up
+      </button>
+    </div>
+    <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'courier'">
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="acceptOrder(orderInfo.orderId)">Accept
+      </button>
+    </div>
+    <div v-if="orderInfo.status === 'Picked Up' && roleSelected === 'courier'">
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="orderDelivery(orderInfo.orderId)">Delivered
+      </button>
+    </div>
+    <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'sender'">
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="deleteOrder(orderInfo.orderId)">Delete
+      </button>
     </div>
     <div>
 
@@ -160,6 +183,7 @@
           <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="uploadImage(typeS)">
             Upload image
           </button>
+
         </div>
 
 
@@ -220,6 +244,7 @@ export default {
   components: {ImageInput, AlertError, AlertSuccess},
   data: function () {
     return {
+      role: sessionStorage.getItem('roleSelected'),
       successMessage: '',
       errorMessage: '',
       imageUploadRequest: {
@@ -303,7 +328,71 @@ export default {
     },
     uploadImage(type) {
       this.sendImageDataToBackend(type)
-      this.$forceUpdate()
+    },
+    rejectAccept: function (orderId) {
+      this.$http.patch("/transabuddy/order/rejected", null, {
+            params: {
+              orderId: orderId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        location.reload();
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    acceptOrder: function (orderId) {
+      this.$http.patch("/transabuddy/order/accepted", null, {
+            params: {
+              orderId: orderId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        location.reload();
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    orderDelivery: function (orderId) {
+      this.$http.patch("/transabuddy/order/delivery", null, {
+            params: {
+              orderId: orderId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        location.reload();
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    deleteOrder: function (orderId) {
+      this.$http.patch("/transabuddy/order/delete", null, {
+            params: {
+              orderId: orderId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        location.reload();
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    orderPickedUp: function (orderId) {
+      this.$http.patch("/transabuddy/order/pickedup", null, {
+            params: {
+              orderId: orderId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        location.reload();
+      }).catch(error => {
+        console.log(error)
+      })
     },
     sendImageDataToBackend(type) {
       this.imageUploadRequest.type = type
@@ -311,6 +400,7 @@ export default {
       ).then(response => {
         this.successMessage = "Image successfully uploaded"
         console.log(response.data)
+        location.reload();
       }).catch(error => {
         this.errorMessage = "Image upload failed"
         console.log(error)
@@ -325,33 +415,25 @@ export default {
           }
       ).then(response => {
         this.orderInfo = response.data
+        if (this.orderInfo.status === "N") {
+          this.orderInfo.status = "Waiting for acception"
+        } else if (this.orderInfo.status === "A") {
+          this.orderInfo.status = "Accepted"
+        } else if (this.orderInfo.status === "P") {
+          this.orderInfo.status = "Picked Up"
+        } else if (this.orderInfo.status === "D") {
+          this.orderInfo.status = "Deleted"
+        } else if (this.orderInfo.status === "C") {
+          this.orderInfo.status = "Delivered"
+        }
         console.log(this.orderInfo)
-
-
       }).catch(error => {
         console.log(error)
       })
     },
-    statusToString(status) {
-      if (status === "N") {
-        return "Order active"
-      }
-      if (status === "A")
-        return "Accepted by courier"
-      if (status === "P") {
-        return "Picked up by courier"
-      }
-      if (status === "D") {
-        return "Deleted"
-      }
-      if (status === "C") {
-        return "Delivered"
-      }
-    }
   },
   mounted() {
     this.getOrderByOrderId(this.orderId)
-    this.$forceUpdate();
     this.hideImageUpload()
     this.findImageByOrderIdAndType(this.typeS)
     this.findImageByOrderIdAndType(this.typeP)
