@@ -16,7 +16,7 @@
         <td>{{ user.lastName }}</td>
         <td>{{ user.personalCode }}</td>
         <td>
-          <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="toUserProfile(user)">
+          <button type="button" style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="toUserProfile(user)">
             View user profile
           </button>
         </td>

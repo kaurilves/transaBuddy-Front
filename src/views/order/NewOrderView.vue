@@ -1,7 +1,7 @@
 <template>
   <div>
     <H2>Add new order</H2>
-    <div>
+    <div >
       <NewOrder/>
 
     </div>
