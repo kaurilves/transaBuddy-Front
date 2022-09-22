@@ -227,7 +227,7 @@
       </button>
     </div>
     <div
-        v-if="(orderInfo.status === 'Waiting for acception' || orderInfo.status === 'Accepted') && roleSelected === 'sender' && roleSelected === 'admin'">
+        v-if="(orderInfo.status === 'Waiting for acception' || orderInfo.status === 'Accepted') && (roleSelected === 'sender' && roleSelected === 'admin')">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="navigateToModifyOrderView(orderInfo.orderId)">Modify order
       </button>
