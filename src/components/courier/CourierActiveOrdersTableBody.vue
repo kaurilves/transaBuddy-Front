@@ -83,6 +83,19 @@ export default {
         console.log(error)
       })
     },
+    orderDelivery: function (orderId) {
+      this.$http.patch("/transabuddy/order/delivery", null, {
+            params: {
+              orderId: orderId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        this.findActiveOrdersByCourierUserId()
+      }).catch(error => {
+        console.log(error)
+      })
+    },
 
     toOrderView: function (orderId) {
       this.$router.push({name: 'orderView', query: {orderId: orderId}})

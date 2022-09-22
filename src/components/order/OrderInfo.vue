@@ -158,7 +158,10 @@
               v-on:click="orderDelivery(orderInfo.orderId)">Delivered
       </button>
     </div>
-    <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'sender'">
+    <div v-if="(orderInfo.status === 'Waiting for acception' || orderInfo.status === 'Accepted') && roleSelected === 'sender'">
+      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+              v-on:click="navigateToModifyOrderView(orderInfo.orderId)">Modify order
+      </button>
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="deleteOrder(orderInfo.orderId)">Delete
       </button>
@@ -354,6 +357,10 @@ export default {
       }).catch(error => {
         console.log(error)
       })
+    },
+    navigateToModifyOrderView: function (orderId) {
+        this.$router.push({name: 'modifyOrderView', query: {orderId: orderId}})
+
     },
     orderDelivery: function (orderId) {
       this.$http.patch("/transabuddy/order/delivery", null, {
