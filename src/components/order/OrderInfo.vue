@@ -1,11 +1,10 @@
 <template>
-  <div class="container bootstrap snippets bootdey">
+  <div class="container">
     <AlertSuccess :successMessage="successMessage"/>
     <AlertError :errorMessage="errorMessage"/>
-    <h2>Order information</h2>
-    <div class="panel-body inf-content">
-      <div class="row">
-        <div class="col-md-6">
+    <div class="row">
+      <div class="col-sm">
+        <div>
           <strong>Order details</strong><br>
           <div class="table-responsive">
             <table class="table table-user-information">
@@ -139,96 +138,88 @@
           </div>
         </div>
       </div>
-    </div>
-    <div v-if="orderInfo.status === 'Accepted' && roleSelected === 'courier'">
-      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
-              v-on:click="rejectAccept(orderInfo.orderId)">Cancel
-      </button>
-      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
-              v-on:click="orderPickedUp(orderInfo.orderId)">Picked Up
-      </button>
-    </div>
-    <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'courier'">
-      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
-              v-on:click="acceptOrder(orderInfo.orderId)">Accept
-      </button>
-    </div>
-    <div v-if="orderInfo.status === 'Picked Up' && roleSelected === 'courier'">
-      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
-              v-on:click="orderDelivery(orderInfo.orderId)">Delivered
-      </button>
-    </div>
-    <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'sender'">
-      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
-              v-on:click="deleteOrder(orderInfo.orderId)">Delete
-      </button>
-    </div>
-    <div>
 
-      <div class="left-img">
-
-        <h2>Pictures from sender</h2>
-
-        <div class="column">
-          <div class="flex-column" v-for="image in imageResponseS">
+      <div class="col-sm">
+        <div class="row">
+          <h2>Pictures from sender</h2>
+          <div v-for="image in imageResponseS">
             <div class="col-sm">
               <img class="my-style" :src="image.base64">
             </div>
           </div>
-        </div>
-        <div v-if="divDisplaySenderPicture">
-
-          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-          <br>
-          <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="uploadImage(typeS)">
-            Upload image
-          </button>
-
-        </div>
-
-
-      </div>
-
-      <div class="center-img">
-        <h2>Images from courier on pickup</h2>
-        <div class="container">
-          <div class="row" v-for="image in imageResponseP">
-            <div class="row">
-              <img class="my-style" :src="image.base64"/>
-            </div>
-          </div>
-          <div v-if="divDisplayPickupPicture">
+          <div v-if="divDisplaySenderPicture">
             <ImageInput @imageInputSuccess="getImageDataFromFile"/>
             <br>
-            <button type="button" style="margin: 5px" class="btn btn-outline-primary"
-                    v-on:click="sendImageDataToBackend(typeP)">
+            <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="uploadImage(typeS)">
               Upload image
             </button>
           </div>
-
         </div>
 
 
-      </div>
+        <div class="row">
+          <h2>Images from courier on pickup</h2>
+          <div>
+            <div v-for="image in imageResponseP">
+              <div class="col-sm">
+                <img class="my-style" :src="image.base64"/>
+              </div>
+            </div>
+            <div v-if="divDisplayPickupPicture">
+              <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+              <br>
+              <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                      v-on:click="sendImageDataToBackend(typeP)">
+                Upload image
+              </button>
+            </div>
 
-      <div class="right-img">
-        <h2>Images from courier on dropoff</h2>
-        <div class="container">
-          <div class="row" v-for="image in imageResponseD">
-            <div class="col-sm">
-              <img class="my-style" :src="image.base64"><br><br><br><br><br>
+            <div class="row">
+              <h2>Images from courier on dropoff</h2>
+              <div>
+                <div v-for="image in imageResponseD">
+                  <div class="col-sm">
+                    <img class="my-style" :src="image.base64"><br><br><br><br><br>
+                  </div>
+                </div>
+              </div>
+              <div v-if="divDisplayPickupPicture">
+                <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+                <br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                        v-on:click="sendImageDataToBackend(typeD)">
+                  Upload image
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <div v-if="divDisplayPickupPicture">
-          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-          <br>
-          <button type="button" style="margin: 5px" class="btn btn-outline-primary"
-                  v-on:click="sendImageDataToBackend(typeD)">
-            Upload image
-          </button>
-        </div>
       </div>
+
+      <div v-if="orderInfo.status === 'Accepted' && roleSelected === 'courier' && roleSelected === 'admin'">
+        <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+                v-on:click="rejectAccept(orderInfo.orderId)">Cancel
+        </button>
+        <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+                v-on:click="orderPickedUp(orderInfo.orderId)">Picked Up
+        </button>
+      </div>
+      <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'courier' && roleSelected === 'admin'">
+        <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+                v-on:click="acceptOrder(orderInfo.orderId)">Accept
+        </button>
+      </div>
+      <div v-if="orderInfo.status === 'Picked Up' && roleSelected === 'courier' && roleSelected === 'admin'">
+        <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+                v-on:click="orderDelivery(orderInfo.orderId)">Delivered
+        </button>
+      </div>
+      <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'sender' && roleSelected === 'admin'">
+        <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+                v-on:click="deleteOrder(orderInfo.orderId)">Delete
+        </button>
+      </div>
+
     </div>
   </div>
 </template>
