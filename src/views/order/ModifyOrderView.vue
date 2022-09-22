@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ModifyOrder from "@/components/order/NewOrder";
+import ModifyOrder from "@/components/order/ModifyOrder";
 export default {
   name: "ModifyOrderView",
 

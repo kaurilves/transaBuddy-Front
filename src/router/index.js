@@ -11,6 +11,7 @@ import NewOrderView from "@/views/order/NewOrderView";
 import OrderView from "@/views/order/OrderView";
 import SenderUserProfileView from "@/views/sender/SenderUserProfileView";
 import SenderAllOrdersView from "@/views/sender/SenderAllOrdersView";
+import ModifyOrderView from "@/views/order/ModifyOrderView";
 
 Vue.use(VueRouter)
 
@@ -64,6 +65,11 @@ const routes = [
         path: '/order',
         name: 'orderView',
         component: OrderView
+    },
+    {
+        path: '/order/modify-order',
+        name: 'modifyOrderView',
+        component: ModifyOrderView
     },
     {
         path: '/sender/users/profile',

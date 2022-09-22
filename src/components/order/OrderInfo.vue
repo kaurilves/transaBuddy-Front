@@ -280,7 +280,6 @@ export default {
         dropOffAddress: '',
         receiverName: '',
         receiverPhoneNumber: '',
-        packageAmountInShipment: '',
         shipmentPriceId: '',
         shipmentDescription: '',
         comment: '',
@@ -289,7 +288,7 @@ export default {
         senderPhoneNumber: "",
         shipmentId: '',
         senderName: '',
-        packageAmount: ''
+        packageAmount: 0
 
       }
     }

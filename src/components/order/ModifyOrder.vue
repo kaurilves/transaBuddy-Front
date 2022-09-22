@@ -6,21 +6,20 @@
       <div class="form-group row" >
         <label class="col-sm-2 col-form-label">Delivery start time</label>
         <div class="col-sm-2">
-          <select id="inputStartTime" class="form-control" v-model="this.fromHour">
+          <select id="inputStartTime" class="form-control" v-model="fromHour">
             <option disabled value="">Choose start time...</option>
-            <option value="7">0700</option>
-            <option value="7">0700</option>
-            <option value="8">0800</option>
-            <option value="9">0900</option>
-            <option value="10">1000</option>
-            <option value="11">1100</option>
-            <option value="12">1200</option>
-            <option value="13">1300</option>
-            <option value="14">1400</option>
-            <option value="15">1500</option>
-            <option value="16">1600</option>
-            <option value="17">1700</option>
-            <option value="18">1800</option>
+            <option value="7">07:00</option>
+            <option value="8">08:00</option>
+            <option value="9">09:00</option>
+            <option value="10">10:00</option>
+            <option value="11">11:00</option>
+            <option value="12">12:00</option>
+            <option value="13">13:00</option>
+            <option value="14">14:00</option>
+            <option value="15">15:00</option>
+            <option value="16">16:00</option>
+            <option value="17">17:00</option>
+            <option value="18">18:00</option>
           </select>
         </div>
       </div>
@@ -28,29 +27,29 @@
       <div class="form-group row" >
         <label class="col-sm-2 col-form-label">Delivery end time</label>
         <div class="col-sm-2">
-          <select id="inputEndTime" class="form-control" v-model="this.toHour">
+          <select id="inputEndTime" class="form-control" v-model="toHour">
             <option disabled value="">Choose end time...</option>
-            <option value="7">0700</option>
-            <option value="8">0800</option>
-            <option value="9">0900</option>
-            <option value="10">1000</option>
-            <option value="11">1100</option>
-            <option value="12">1200</option>
-            <option value="13">1300</option>
-            <option value="14">1400</option>
-            <option value="15">1500</option>
-            <option value="16">1600</option>
-            <option value="17">1700</option>
-            <option value="18">1800</option>
+            <option value="7">07:00</option>
+            <option value="8">08:00</option>
+            <option value="9">09:00</option>
+            <option value="10">10:00</option>
+            <option value="11">11:00</option>
+            <option value="12">12:00</option>
+            <option value="13">13:00</option>
+            <option value="14">14:00</option>
+            <option value="15">15:00</option>
+            <option value="16">16:00</option>
+            <option value="17">17:00</option>
+            <option value="18">18:00</option>
           </select>
         </div>
 
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Pickup district</label>
+        <label class="col-sm-2 col-form-label">Pick-up district</label>
         <div class="col-sm-2">
-          <select id="inputPickupDistrict" class="form-control" v-model="modifiedOrderInfo.pickUpDistrictId" placeholder = "orderInfo.pickUpdDistrictId">
-            <option disabled value="">Choose pickup district...</option>
+          <select id="inputPickupDistrict" class="form-control" v-model="modifiedOrderInfo.pickUpDistrictId">
+            <option disabled value="">Choose pick-up district...</option>
             <option value="1">Mustamäe</option>
             <option value="2">Lasnamäe</option>
             <option value="3">Haabersti</option>
@@ -64,17 +63,17 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Pickup address</label>
+          <label class="col-sm-2 col-form-label">Pick-up address</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.pickUpAddress" placeholder="orderInfo.pickUpAddress">
+            <input class="form-control" v-model="modifiedOrderInfo.pickUpAddress" >
           </div>
 
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Dropoff district</label>
+          <label class="col-sm-2 col-form-label">Drop-off district</label>
           <div class="col-sm-2">
-            <select id="inputDropoffDistrict" class="form-control"  v-model="modifiedOrderInfo.dropOffDistrictId" placeholder="orderInfo.dropOffDistrict">
-              <option disabled value="">Choose dropoff district...</option>
+            <select id="inputDropoffDistrict" class="form-control"  v-model="modifiedOrderInfo.dropOffDistrictId">
+              <option disabled value="">Choose drop-off district...</option>
               <option value="1">Mustamäe</option>
               <option value="2">Lasnamäe</option>
               <option value="3">Haabersti</option>
@@ -87,31 +86,29 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Dropoff address</label>
+          <label class="col-sm-2 col-form-label">Drop-off address</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.dropOffAddress" placeholder="orderInfo.dropOffAddress">
+            <input class="form-control" v-model="modifiedOrderInfo.dropOffAddress">
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Receiver name</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.receiverName" placeholder="orderInfo.receiverName">
+            <input class="form-control" v-model="modifiedOrderInfo.receiverName">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Receiver phone number</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.receiverPhoneNumber"
-                   placeholder="orderInfo.receiverPhoneNumber">
+            <input class="form-control" v-model="modifiedOrderInfo.receiverPhoneNumber">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Package amount</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.packageAmountInShipment"
-                   placeholder="orderInfo.packageAmountInShipment">
+            <input class="form-control" v-model=modifiedOrderInfo.packageAmount>
           </div>
 
         </div>
@@ -119,34 +116,33 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Package type</label>
         <div class="col-sm-2">
-          <select id="inputPackageType" class="form-control" v-model="modifiedOrderInfo.shipmentPriceId" placeholder="orderInfo.shipmentPriceId">
+          <select id="inputPackageType" class="form-control" v-model="modifiedOrderInfo.priceCategory">
             <option disabled value="">Choose package size...</option>
-            <option value="1">XS</option>
-            <option value="2">S</option>
-            <option value="3">M</option>
-            <option value="4">L</option>
-            <option value="5">XL</option>
+            <option>XS</option>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+            <option>XL</option>
           </select>
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Shipment description</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.shipmentDescription"
-                   placeholder="orderInfo.shipmentDescription">
+            <input class="form-control" v-model="modifiedOrderInfo.shipmentDescription">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Extra comments</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.comment" placeholder="this.orderInfo.comment">
+            <input class="form-control" v-model="modifiedOrderInfo.comment">
           </div>
 
         </div>
 
       </div>
     </form>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="modifyOrder()">Save</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="modifyOrder()">SAVE</button>
   </div>
 </template>
 
@@ -154,35 +150,28 @@
 import AlertError from "@/components/alerts/AlertError";
 import AlertSuccess from "@/components/alerts/AlertSuccess";
 
+
 export default {
-  name: "modifyOrder",
+  name: "ModifyOrder",
   components: {AlertError, AlertSuccess},
   data: function () {
     return {
-      UserId: sessionStorage.getItem(),
       orderId: this.$route.query.orderId,
       errorMessage: '',
       successMessage: '',
       fromHour: 0,
       toHour: 0,
       modifiedOrderInfo: {
-        senderUserId: this.orderInfo.senderUserId
       },
-      orderInfo:{
-
-      }
     }
   },
   methods:{
-    toOrderView(orderId){
-      this.$router.push({name: 'orderView', query:{orderId: orderId}})
-    },
     modifyOrder: function () {
-      this.$http.patch("/transabuddy/order/update", null,{
+      this.$http.patch( "/transabuddy/order/update",null ,{
           params: {
-            orderInfo: this.orderInfo,
+            orderInfo: this.modifiedOrderInfo,
             hourFrom: this.fromHour,
-            toHour: this.toHour
+            toHour: this.toHour,
           }
       }
       ).then(response => {
@@ -190,6 +179,7 @@ export default {
         this.orderId = response.data.orderId
         this.successMessage = "Order has been changed successfully"
         console.log(response.data)
+        this.$router.push({name: 'orderView', query:{orderId: this.orderId}})
       }).catch(error => {
         this.errorMessage = 'Something went wrong'
         console.log(error)
@@ -202,19 +192,21 @@ export default {
             }
           }
       ).then(response => {
-        this.orderInfo = response.data
-        if (this.orderInfo.status === "N") {
-          this.orderInfo.status = "Waiting for acception"
-        } else if (this.orderInfo.status === "A") {
-          this.orderInfo.status = "Accepted"
-        } else if (this.orderInfo.status === "P") {
-          this.orderInfo.status = "Picked Up"
-        } else if (this.orderInfo.status === "D") {
-          this.orderInfo.status = "Deleted"
-        } else if (this.orderInfo.status === "C") {
-          this.orderInfo.status = "Delivered"
+        this.modifiedOrderInfo = response.data
+        if (this.modifiedOrderInfo.status === "N") {
+          this.modifiedOrderInfo.status = "Waiting for acception"
+        } else if (this.modifiedOrderInfo.status === "A") {
+          this.modifiedOrderInfo.status = "Accepted"
+        } else if (this.modifiedOrderInfo.status === "P") {
+          this.modifiedOrderInfo.status = "Picked Up"
+        } else if (this.modifiedOrderInfo.status === "D") {
+          this.modifiedOrderInfo.status = "Deleted"
+        } else if (this.modifiedOrderInfo.status === "C") {
+          this.modifiedOrderInfo.status = "Delivered"
         }
-        console.log(this.orderInfo)
+        this.fromHour = parseInt(this.modifiedOrderInfo.timeFrame.substring(0, 2).replace("0", ''));
+        this.toHour = parseInt(this.modifiedOrderInfo.timeFrame.substring(8, 10).replace("0", ''));
+        console.log(this.modifiedOrderInfo)
       }).catch(error => {
         console.log(error)
       })
