@@ -2,13 +2,13 @@
   <div>
     <div>
       <h1>All orders</h1>
-<!--      <select v-on:change="findOrdersBySenderUserId">-->
-<!--        <option value=" " v-model="status">All </option>-->
-<!--        <option value="N" v-model="status">New</option>-->
-<!--        <option value="A" v-model="status">Accepted</option>-->
-<!--        <option value="P" v-model="status">Picked up</option>-->
-<!--        <option value="C" v-model="status">Completed</option>-->
-<!--      </select>-->
+      <!--      <select v-on:change="findOrdersBySenderUserId">-->
+      <!--        <option value=" " v-model="status">All </option>-->
+      <!--        <option value="N" v-model="status">New</option>-->
+      <!--        <option value="A" v-model="status">Accepted</option>-->
+      <!--        <option value="P" v-model="status">Picked up</option>-->
+      <!--        <option value="C" v-model="status">Completed</option>-->
+      <!--      </select>-->
       <table class="table table-hover">
         <SenderAllOrdersTableHeader/>
         <SenderAllOrdersTableBody/>
@@ -30,7 +30,7 @@ export default {
   components: {SenderAllOrdersTableBody, SenderAllOrdersTableHeader},
   data: function () {
     return {
-      status:''
+      status: ''
 
     }
   },
