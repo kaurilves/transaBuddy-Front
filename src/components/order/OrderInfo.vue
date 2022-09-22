@@ -2,142 +2,207 @@
   <div class="container">
     <AlertSuccess :successMessage="successMessage"/>
     <AlertError :errorMessage="errorMessage"/>
-    <div class="row">
-      <div class="col-sm">
-        <div>
-          <strong>Order details</strong><br>
-          <div class="table-responsive">
-            <table class="table table-user-information">
-              <tbody>
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-asterisk text-primary"></span>
-                    Delivery date
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ orderInfo.deliveryDate }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-user  text-primary"></span>
-                    Sender name
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ orderInfo.senderName }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-cloud text-primary"></span>
-                    Sender phone number
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ orderInfo.senderPhoneNumber }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-eye-open text-primary"></span>
-                    Pickup address
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ orderInfo.pickUpAddress }}
-                </td>
-              </tr>
+    <div class="col-sm">
+      <div>
+        <strong>Order details</strong><br>
+        <div class="table-responsive">
+          <table class="table table-user-information">
+            <tbody>
+            <tr>
+              <td>
+                <strong>
+                  <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                  Delivery date
+                </strong>
+              </td>
+              <td class="text-primary">
+                {{ orderInfo.deliveryDate }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  <span class="glyphicon glyphicon-user  text-primary"></span>
+                  Sender name
+                </strong>
+              </td>
+              <td class="text-primary">
+                {{ orderInfo.senderName }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  <span class="glyphicon glyphicon-cloud text-primary"></span>
+                  Sender phone number
+                </strong>
+              </td>
+              <td class="text-primary">
+                {{ orderInfo.senderPhoneNumber }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                  Pickup address
+                </strong>
+              </td>
+              <td class="text-primary">
+                {{ orderInfo.pickUpAddress }}
+              </td>
+            </tr>
 
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-eye-open text-primary"></span>
-                    Receiver Name
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ orderInfo.receiverName }}
-                </td>
-              </tr>
+            <tr>
+              <td>
+                <strong>
+                  <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                  Receiver Name
+                </strong>
+              </td>
+              <td class="text-primary">
+                {{ orderInfo.receiverName }}
+              </td>
+            </tr>
 
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-envelope text-primary"></span>
-                    Receiver phone number
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ orderInfo.receiverPhoneNumber }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-eye-open text-primary"></span>
-                    Reciever address
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ orderInfo.dropOffAddress }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-calendar text-primary"></span>
-                    Delivery time frame:
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ orderInfo.timeFrame }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-calendar text-primary"></span>
-                    Package amount
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ orderInfo.packageAmount }}
-                </td>
-              </tr>
+            <tr>
+              <td>
+                <strong>
+                  <span class="glyphicon glyphicon-envelope text-primary"></span>
+                  Receiver phone number
+                </strong>
+              </td>
+              <td class="text-primary">
+                {{ orderInfo.receiverPhoneNumber }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                  Reciever address
+                </strong>
+              </td>
+              <td class="text-primary">
+                {{ orderInfo.dropOffAddress }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  <span class="glyphicon glyphicon-calendar text-primary"></span>
+                  Delivery time frame:
+                </strong>
+              </td>
+              <td class="text-primary">
+                {{ orderInfo.timeFrame }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  <span class="glyphicon glyphicon-calendar text-primary"></span>
+                  Package amount
+                </strong>
+              </td>
+              <td class="text-primary">
+                {{ orderInfo.packageAmount }}
+              </td>
+            </tr>
 
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-calendar text-primary"></span>
-                    Shipment price category
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ orderInfo.priceCategory }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>
-                    <span class="glyphicon glyphicon-calendar text-primary"></span>
-                    Order status
-                  </strong>
-                </td>
-                <td class="text-primary">
-                  {{ orderInfo.status }}
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
+            <tr>
+              <td>
+                <strong>
+                  <span class="glyphicon glyphicon-calendar text-primary"></span>
+                  Shipment price category
+                </strong>
+              </td>
+              <td class="text-primary">
+                {{ orderInfo.priceCategory }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  <span class="glyphicon glyphicon-calendar text-primary"></span>
+                  Order status
+                </strong>
+              </td>
+              <td class="text-primary">
+                {{ orderInfo.status }}
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+      <div>
+
+
+        <div class="left-img" v-if="divDisplayLeftImage">
+          <h2>Pictures from sender</h2>
+          <div class="column">
+            <div class="flex-column" v-for="image in imageResponseS">
+              <div class="col-sm">
+                <img class="my-style" :src="image.base64">
+              </div>
+            </div>
+          </div>
+          <div v-if="divDisplaySenderPicture">
+
+            <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+            <br>
+            <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="uploadImage(typeS)">
+              Upload image
+            </button>
+
+          </div>
+        </div>
+
+        <div class="center-img" v-if="divDisplayCenterImage">
+          <h2>Images from courier on pickup</h2>
+          <div class="container">
+            <div class="row" v-for="image in imageResponseP">
+              <div class="row">
+                <img class="my-style" :src="image.base64"/>
+              </div>
+            </div>
+            <div v-if="divDisplayPickupPicture">
+              <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+              <br>
+              <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                      v-on:click="sendImageDataToBackend(typeP)">
+                Upload image
+              </button>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <div class="right-img" v-if="divDisplayRightImage">
+          <h2>Images from courier on dropoff</h2>
+          <div class="container">
+            <div class="row" v-for="image in imageResponseD">
+              <div class="col-sm">
+                <img class="my-style" :src="image.base64"><br><br><br><br><br>
+              </div>
+            </div>
+          </div>
+          <div v-if="divDisplayPickupPicture">
+            <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+            <br>
+            <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                    v-on:click="sendImageDataToBackend(typeD)">
+              Upload image
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+
     </div>
     <div v-if="orderInfo.status === 'Accepted' && roleSelected === 'courier'">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
@@ -157,7 +222,8 @@
               v-on:click="orderDelivery(orderInfo.orderId)">Delivered
       </button>
     </div>
-    <div v-if="(orderInfo.status === 'Waiting for acception' || orderInfo.status === 'Accepted') && roleSelected === 'sender'">
+    <div
+        v-if="(orderInfo.status === 'Waiting for acception' || orderInfo.status === 'Accepted') && roleSelected === 'sender'">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="navigateToModifyOrderView(orderInfo.orderId)">Modify order
       </button>
@@ -165,73 +231,7 @@
               v-on:click="deleteOrder(orderInfo.orderId)">Delete
       </button>
     </div>
-    <div>
 
-      <div class="left-img" v-if="divDisplayLeftImage">
-
-        <h2>Pictures from sender</h2>
-
-        <div class="column">
-          <div class="flex-column" v-for="image in imageResponseS">
-            <div class="col-sm">
-              <img class="my-style" :src="image.base64">
-            </div>
-          </div>
-        </div>
-        <div v-if="divDisplaySenderPicture">
-
-          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-          <br>
-          <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="uploadImage(typeS)">
-            Upload image
-          </button>
-
-        </div>
-
-
-      </div>
-
-      <div class="center-img" v-if="divDisplayCenterImage">
-        <h2>Images from courier on pickup</h2>
-        <div class="container">
-          <div class="row" v-for="image in imageResponseP">
-            <div class="row">
-              <img class="my-style" :src="image.base64"/>
-            </div>
-          </div>
-          <div v-if="divDisplayPickupPicture">
-            <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-            <br>
-            <button type="button" style="margin: 5px" class="btn btn-outline-primary"
-                    v-on:click="sendImageDataToBackend(typeP)">
-              Upload image
-            </button>
-          </div>
-
-        </div>
-
-
-      </div>
-
-      <div class="right-img" v-if="divDisplayRightImage">
-        <h2>Images from courier on dropoff</h2>
-        <div class="container">
-          <div class="row" v-for="image in imageResponseD">
-            <div class="col-sm">
-              <img class="my-style" :src="image.base64"><br><br><br><br><br>
-            </div>
-          </div>
-        </div>
-        <div v-if="divDisplayPickupPicture">
-          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-          <br>
-          <button type="button" style="margin: 5px" class="btn btn-outline-primary"
-                  v-on:click="sendImageDataToBackend(typeD)">
-            Upload image
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -364,7 +364,7 @@ export default {
       })
     },
     navigateToModifyOrderView: function (orderId) {
-        this.$router.push({name: 'modifyOrderView', query: {orderId: orderId}})
+      this.$router.push({name: 'modifyOrderView', query: {orderId: orderId}})
 
     },
     orderDelivery: function (orderId) {
