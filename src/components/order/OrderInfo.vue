@@ -1,10 +1,11 @@
 <template>
   <div class="container">
+
     <AlertSuccess :successMessage="successMessage"/>
     <AlertError :errorMessage="errorMessage"/>
+
     <div class="col-sm">
-      <div>
-        <strong>Order details</strong><br>
+      <h1>Order details</h1><br>
         <div class="table-responsive">
           <table class="table table-user-information">
             <tbody>
@@ -134,16 +135,19 @@
             </tr>
             </tbody>
           </table>
-        </div>
       </div>
+
+
+    </div>
+
+    <div class="col-sm">
+
       <div>
-
-
-        <div class="left-img" v-if="divDisplayLeftImage">
+        <div v-if="divDisplayLeftImage">
           <h2>Pictures from sender</h2>
-          <div class="column">
-            <div class="flex-column" v-for="image in imageResponseS">
-              <div class="col-sm">
+          <div>
+            <div v-for="image in imageResponseS">
+              <div>
                 <img class="my-style" :src="image.base64">
               </div>
             </div>
@@ -159,11 +163,11 @@
           </div>
         </div>
 
-        <div class="center-img" v-if="divDisplayCenterImage">
+        <div v-if="divDisplayCenterImage">
           <h2>Images from courier on pickup</h2>
-          <div class="container">
-            <div class="row" v-for="image in imageResponseP">
-              <div class="row">
+          <div>
+            <div v-for="image in imageResponseP">
+              <div>
                 <img class="my-style" :src="image.base64"/>
               </div>
             </div>
@@ -181,11 +185,11 @@
 
         </div>
 
-        <div class="right-img" v-if="divDisplayRightImage">
+        <div v-if="divDisplayRightImage">
           <h2>Images from courier on dropoff</h2>
-          <div class="container">
-            <div class="row" v-for="image in imageResponseD">
-              <div class="col-sm">
+          <div>
+            <div v-for="image in imageResponseD">
+              <div>
                 <img class="my-style" :src="image.base64"><br><br><br><br><br>
               </div>
             </div>
@@ -204,7 +208,7 @@
 
 
     </div>
-    <div v-if="orderInfo.status === 'Accepted' && roleSelected === 'courier'">
+    <div v-if="orderInfo.status === 'Accepted' && roleSelected === 'courier' && roleSelected === 'admin'">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="rejectAccept(orderInfo.orderId)">Cancel
       </button>
@@ -212,18 +216,18 @@
               v-on:click="orderPickedUp(orderInfo.orderId)">Picked Up
       </button>
     </div>
-    <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'courier'">
+    <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'courier' && roleSelected === 'admin'">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="acceptOrder(orderInfo.orderId)">Accept
       </button>
     </div>
-    <div v-if="orderInfo.status === 'Picked Up' && roleSelected === 'courier'">
+    <div v-if="orderInfo.status === 'Picked Up' && roleSelected === 'courier' && roleSelected === 'admin'">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="orderDelivery(orderInfo.orderId)">Delivered
       </button>
     </div>
     <div
-        v-if="(orderInfo.status === 'Waiting for acception' || orderInfo.status === 'Accepted') && roleSelected === 'sender'">
+        v-if="(orderInfo.status === 'Waiting for acception' || orderInfo.status === 'Accepted') && roleSelected === 'sender' && roleSelected === 'admin'">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="navigateToModifyOrderView(orderInfo.orderId)">Modify order
       </button>
@@ -419,10 +423,10 @@ export default {
       })
 
     },
-    getOrderByOrderId: function (orderId) {
+    getOrderByOrderId: function () {
       this.$http.get("/transabuddy/order", {
             params: {
-              orderId: orderId
+              orderId: this.orderId
             }
           }
       ).then(response => {
