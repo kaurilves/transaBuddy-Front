@@ -363,10 +363,10 @@ export default {
         return "Picked up by courier"
       }
       if (status === "D") {
-        return "Delivered"
+        return "Deleted"
       }
       if (status === "C") {
-        return "Cancelled"
+        return "Delivered"
       }
     }
   },
