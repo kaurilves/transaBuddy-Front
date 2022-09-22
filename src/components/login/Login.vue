@@ -34,7 +34,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 <!-- Checkbox -->
                 <div class="form-check mb-0">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3"/>
                   <label class="form-check-label" for="form2Example3">
                     Remember me
                   </label>
@@ -43,9 +43,10 @@
               </div>
 
               <div class="text-center text-lg-start mt-4 pt-2">
-                <button  type="button" class="btn btn-primary btn-lg" v-on:click="logIn">Login</button>
+                <button type="button" class="btn btn-primary btn-lg" v-on:click="logIn">Login</button>
                 <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
-                  <router-link to="/register"> Register </router-link></p>
+                  <router-link to="/register"> Register</router-link>
+                </p>
               </div>
             </div>
             <div v-if="divChooseRole">
@@ -54,7 +55,7 @@
               <h2>Choose role</h2>
               <div v-for="(role, index) in roles">
 
-                <input type="radio" v-model="roleSelected" :value="role">{{roles[index]}}
+                <input type="radio" v-model="roleSelected" :value="role">{{ roles[index] }}
 
               </div>
 
@@ -136,22 +137,24 @@ export default {
         this.contactInfo = response.data
         this.roles = this.contactInfo.roleNames
         console.log(this.roles)
-
+        sessionStorage.setItem('roles', JSON.stringify(this.roles))
         if (this.roles.length > 1) {
           this.divLoginInputForm = false
           this.divChooseRole = true
         } else {
           if (this.roles[0] == 'admin') {
             this.roleSelected = "admin"
-            sessionStorage.setItem('roleSelected', this.roleSelected )
+            sessionStorage.setItem('roleSelected', this.roleSelected)
+
             this.navigateToRoleHomeView('adminRoute')
           } else if (this.roles[0] == 'sender') {
             this.roleSelected = "sender"
-            sessionStorage.setItem('roleSelected', this.roleSelected )
+            sessionStorage.setItem('roleSelected', this.roleSelected)
             this.navigateToRoleHomeView('senderRoute')
+
           } else {
             this.roleSelected = "courier"
-            sessionStorage.setItem('roleSelected', this.roleSelected )
+            sessionStorage.setItem('roleSelected', this.roleSelected)
             this.navigateToRoleHomeView('courierRoute')
           }
         }
@@ -160,16 +163,17 @@ export default {
       })
     },
     LoginWithRole() {
+      sessionStorage.setItem('roleSelected', this.roleSelected)
+      sessionStorage.setItem('roles', JSON.stringify(this.roles))
       if (this.roleSelected == 'admin') {
-        sessionStorage.setItem('roleSelected', this.roleSelected )
         this.navigateToRoleHomeView('adminRoute')
       } else if (this.roleSelected == 'sender') {
-        sessionStorage.setItem('roleSelected', this.roleSelected )
         this.navigateToRoleHomeView('senderRoute')
       } else {
-        sessionStorage.setItem('roleSelected', this.roleSelected )
         this.navigateToRoleHomeView('courierRoute')
       }
+
+
     },
     navigateToRoleHomeView(roleHomeRoute) {
       sessionStorage.setItem('userId', this.contactInfo.userId)

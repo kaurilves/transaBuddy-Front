@@ -2,6 +2,7 @@
   <div>
     <AlertSuccess :successMessage="successMessage"/>
     <AlertError :errorMessage="errorMessage"/>
+
     <form>
       <div class="form-group row" >
         <label class="col-sm-2 col-form-label">Delivery start time</label>
@@ -144,7 +145,8 @@
         </div>
 
       </div>
-    </form>
+    </form><br>
+
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="addNewOrder()">Add order</button>
   </div>
 </template>

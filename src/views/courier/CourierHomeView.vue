@@ -8,6 +8,10 @@
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayActiveOrders">Active orders</button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="displayOrderHistory">Delivered orders</button>
     <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="navigateToViewProfile">View profile</button>
+    <select class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" v-model="roleSelected" v-on:change="changeRole">
+      <option v-for="role in roles" :value="role">{{ role }}</option>
+    </select>
 
     <div v-if="divDisplayActiveOrders">
       <CourierActiveOrdersTable/>
@@ -40,10 +44,13 @@ export default {
   },
   data: function () {
     return {
-      userId: sessionStorage.getItem('userId'),
       divDisplayAvailableOrders: false,
       divDisplayActiveOrders: true,
       divDisplayOrderHistory: false,
+      userId: this.$route.query.userId,
+      roleSelected: sessionStorage.getItem('roleSelected'),
+      roles: JSON.parse(sessionStorage.getItem('roles')),
+      roleHomeRoute: ''
     }
   },
   methods: {
@@ -78,6 +85,22 @@ export default {
 
     navigateToViewProfile: function () {
       this.$router.push({name: 'courierUserProfileView', query:{userId: this.userId}})
+    },
+    changeRole: function () {
+      sessionStorage.setItem('roles', JSON.stringify(this.roles))
+      if (this.roleSelected == 'admin') {
+        sessionStorage.setItem('roleSelected', this.roleSelected)
+        this.navigateToRoleHomeView('adminRoute')
+      } else if (this.roleSelected == 'sender') {
+        sessionStorage.setItem('roleSelected', this.roleSelected)
+        this.navigateToRoleHomeView('senderRoute')
+      } else {
+        sessionStorage.setItem('roleSelected', this.roleSelected)
+        this.navigateToRoleHomeView('courierRoute')
+      }
+    },
+    navigateToRoleHomeView(roleHomeRoute) {
+      this.$router.push({name: roleHomeRoute, query: {userId: this.userId}})
     },
   }
 }

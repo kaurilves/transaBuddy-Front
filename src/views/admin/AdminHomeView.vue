@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex justify-content-center">
     <head>
       <title>Bootstrap Example</title>
       <meta charset="utf-8">
@@ -8,90 +8,89 @@
     </head>
     <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button class="navbar-brand bg-dark" v-on:click="hideAllDivs">TransaBuddy</button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light ">
+      <button class="navbar-brand btn btn-primary btn-lg" v-on:click="hideAllDivs">TransaBuddy</button>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
               aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav btn-group btn-group-toggle" data-toggle="buttons">
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAllUsers">All users</button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayFindUsers">Search users</button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAddUser">Add user</button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAddNewOrder">Add order</button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAllOrders">All orders</button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="displayAdjustPricing">Pricing list
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayAllUsers">All users</button>
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayFindUsers">Search users</button>
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayAddUser">Add user</button>
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayAddNewOrder">Add order</button>
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayAllOrders">All orders</button>
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="displayAdjustPricing">Pricing list
           </button>
-          <button style="margin: 5px" class="btn btn-outline-light" v-on:click="navigateToProfileView">View profile
+          <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="navigateToProfileView">View profile
           </button>
-          <button id="logOutButton" style="margin: 5px" class="btn btn-outline-light" v-on:click="logOut">Logout
+          <button id="logOutButton" style="margin: 5px" class="btn btn-warning btn-lg" v-on:click="logOut">Logout
           </button>
+          <select class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false" v-model="roleSelected" v-on:change="changeRole">
+            <option v-for="role in roles" :value="role">{{ role }}</option>
+          </select>
 
         </div>
       </div>
-      </nav>
+    </nav>
 
-    <div class="container-fluid text-center">
+    <div class="container-fluid">
       <div class="row content">
 
-        <div class="col-sm-8 text-center" v-if="divDisplayAllUsers">
+        <div class="justify-content-center" v-if="divDisplayAllUsers">
           <h1>Users</h1>
-            <AllUsersTable :users="users" title="All users"/>
+          <AllUsersTable :users="users" title="All users"/>
           <hr>
-          <h3>Test</h3>
-          <p>Lorem ipsum...</p>
+
         </div>
 
-        <div class="col-sm-8 text-center" v-if="divDisplayFindUsers">
+        <div class="justify-content-center" v-if="divDisplayFindUsers">
           <UsersByNameAndCodeTable title="Find users" @usersResultSuccess="updateUsersFromResult"/>
           <div v-if="users.length > 0">
             <AllUsersTable :users="users" title="Found users"/>
           </div>
         </div>
 
-        <div class="col-sm-8 text-center" v-if="divDisplayAddUser">
+        <div class="justify-content-center" v-if="divDisplayAddUser">
           <RegisterUser/>
         </div>
 
-        <div class="col-sm-8 text-center" v-if="divDisplayAdjustPricing">
+        <div class="justify-content-center" v-if="divDisplayAdjustPricing">
           <div v-if="shipmentPriceInfos.length > 0">
             <AllShipmentPrices :shipmentPriceInfos="shipmentPriceInfos" title="Current pricing list"/>
           </div>
         </div>
-        <div class="col-sm-8 text-center" v-if="divDisplayUserProfile">
+        <div class="justify-content-center" v-if="divDisplayUserProfile">
           User profile
           <UserProfile/>
         </div>
 
-        <div class="col-sm-8 text-center" v-if="divDisplayAllOrders">
+        <div class="justify-content-center" v-if="divDisplayAllOrders">
           <AllOrdersTable :orders="orders" title="All orders"/>
         </div>
 
 
-
-
       </div>
     </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <footer class="container-fluid text-center">
       <p>Footer Text</p>
     </footer>
 
     </body>
   </div>
-
-
 
 
 </template>
@@ -118,10 +117,13 @@ export default {
   },
   data: function () {
     return {
-      userId: sessionStorage.getItem('userId'),
+      userId: this.$route.query.userId,
       user: {},
       users: [],
       orders: [],
+      roleSelected: sessionStorage.getItem('roleSelected'),
+      roles: JSON.parse(sessionStorage.getItem('roles')),
+      roleHomeRoute: '',
       shipmentPriceInfo: {
         shipmentPriceId: ''
       },
@@ -174,8 +176,8 @@ export default {
           this.divDisplayFindUsers = false,
           this.divDisplayAddUser = false,
           this.divDisplayAddNewOrder = false
-          this.divDisplayAdjustPricing = false
-          this.divDisplayViewProfile = false
+      this.divDisplayAdjustPricing = false
+      this.divDisplayViewProfile = false
       this.divDisplayAllOrders = false
     },
     displayAllUsers() {
@@ -211,7 +213,6 @@ export default {
     },
     navigateToProfileView() {
       this.$router.push({name: 'adminUserProfileView', query: {userId: this.userId}})
-
     },
     logOut() {
       sessionStorage.clear()
@@ -219,7 +220,22 @@ export default {
       this.$confirm("Are you sure you want to log out?").then(() => {
         this.$router.push({name: 'home'})
       });
-
+    },
+    changeRole: function () {
+      sessionStorage.setItem('roles', JSON.stringify(this.roles))
+      if (this.roleSelected == 'admin') {
+        sessionStorage.setItem('roleSelected', this.roleSelected)
+        this.navigateToRoleHomeView('adminRoute')
+      } else if (this.roleSelected == 'sender') {
+        sessionStorage.setItem('roleSelected', this.roleSelected)
+        this.navigateToRoleHomeView('senderRoute')
+      } else {
+        sessionStorage.setItem('roleSelected', this.roleSelected)
+        this.navigateToRoleHomeView('courierRoute')
+      }
+    },
+    navigateToRoleHomeView(roleHomeRoute) {
+      this.$router.push({name: roleHomeRoute, query: {userId: this.userId}})
     },
 
 
@@ -238,12 +254,15 @@ export default {
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {height: 450px}
+.row.content {
+  height: 450px
+}
 
 /* Set gray background color and 100% height */
 .sidenav {
+
   padding-top: 20px;
-  background-color: #f1f1f1;
+  background-color: #F6F0E0;
   height: 100%;
 }
 
@@ -260,8 +279,21 @@ footer {
     height: auto;
     padding: 15px;
   }
-  .row.content {height:auto;}
+
+  .row.content {
+    height: auto;
+  }
 }
+#wrapper{
+
+  width: 650px  ;
+  height: auto;
+  background-color: rgb(198, 241, 200);
+  margin: 0 auto;
+  margin-top: 200px;
+  border-radius: 10px;
+}
+
 
 
 </style>
