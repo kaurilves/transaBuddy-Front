@@ -164,7 +164,7 @@ export default {
       successMessage: '',
       orderRequest: {
         deliveryDate: '2022-09-20',
-        senderUserId: this.$route.query.userId,
+        senderUserId: sessionStorage.getItem('userId'),
         courierUserId: '',
         fromHour: '',
         toHour: '',

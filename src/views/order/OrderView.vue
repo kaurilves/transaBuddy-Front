@@ -1,8 +1,9 @@
 <template>
   <div>
-    <button type="button" v-on:click="backToMainView">Back</button>
+
     <div>
       <OrderInfo/>
+      <button class="btn btn-primary btn-lg"  type="button" v-on:click="backToMainView">Back</button>
     </div>
 
     <div>
