@@ -27,17 +27,21 @@
           </button>
           <button id="logOutButton" style="margin: 5px" class="btn btn-warning btn-lg" v-on:click="logOut">Logout
           </button>
+          <select class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false" v-model="roleSelected" v-on:change="changeRole">
+            <option v-for="role in roles" :value="role">{{ role }}</option>
+          </select>
 
         </div>
       </div>
-      </nav>
+    </nav>
 
     <div class="container-fluid">
       <div class="row content">
 
         <div class="justify-content-center" v-if="divDisplayAllUsers">
           <h1>Users</h1>
-            <AllUsersTable :users="users" title="All users"/>
+          <AllUsersTable :users="users" title="All users"/>
           <hr>
 
         </div>
@@ -68,29 +72,25 @@
         </div>
 
 
-
-
       </div>
     </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <footer class="container-fluid text-center">
       <p>Footer Text</p>
     </footer>
 
     </body>
   </div>
-
-
 
 
 </template>
@@ -117,10 +117,13 @@ export default {
   },
   data: function () {
     return {
-      userId: sessionStorage.getItem('userId'),
+      userId: this.$route.query.userId,
       user: {},
       users: [],
       orders: [],
+      roleSelected: sessionStorage.getItem('roleSelected'),
+      roles: JSON.parse(sessionStorage.getItem('roles')),
+      roleHomeRoute: '',
       shipmentPriceInfo: {
         shipmentPriceId: ''
       },
@@ -173,8 +176,8 @@ export default {
           this.divDisplayFindUsers = false,
           this.divDisplayAddUser = false,
           this.divDisplayAddNewOrder = false
-          this.divDisplayAdjustPricing = false
-          this.divDisplayViewProfile = false
+      this.divDisplayAdjustPricing = false
+      this.divDisplayViewProfile = false
       this.divDisplayAllOrders = false
     },
     displayAllUsers() {
@@ -210,7 +213,6 @@ export default {
     },
     navigateToProfileView() {
       this.$router.push({name: 'adminUserProfileView', query: {userId: this.userId}})
-
     },
     logOut() {
       sessionStorage.clear()
@@ -218,7 +220,22 @@ export default {
       this.$confirm("Are you sure you want to log out?").then(() => {
         this.$router.push({name: 'home'})
       });
-
+    },
+    changeRole: function () {
+      sessionStorage.setItem('roles', JSON.stringify(this.roles))
+      if (this.roleSelected == 'admin') {
+        sessionStorage.setItem('roleSelected', this.roleSelected)
+        this.navigateToRoleHomeView('adminRoute')
+      } else if (this.roleSelected == 'sender') {
+        sessionStorage.setItem('roleSelected', this.roleSelected)
+        this.navigateToRoleHomeView('senderRoute')
+      } else {
+        sessionStorage.setItem('roleSelected', this.roleSelected)
+        this.navigateToRoleHomeView('courierRoute')
+      }
+    },
+    navigateToRoleHomeView(roleHomeRoute) {
+      this.$router.push({name: roleHomeRoute, query: {userId: this.userId}})
     },
 
 
@@ -237,7 +254,9 @@ export default {
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {height: 450px}
+.row.content {
+  height: 450px
+}
 
 /* Set gray background color and 100% height */
 .sidenav {
@@ -260,7 +279,10 @@ footer {
     height: auto;
     padding: 15px;
   }
-  .row.content {height:auto;}
+
+  .row.content {
+    height: auto;
+  }
 }
 #wrapper{
 
