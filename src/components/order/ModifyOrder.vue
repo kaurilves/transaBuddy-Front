@@ -6,7 +6,7 @@
       <div class="form-group row" >
         <label class="col-sm-2 col-form-label">Delivery start time</label>
         <div class="col-sm-2">
-          <select id="inputStartTime" class="form-control" v-model="orderRequest.fromHour">
+          <select id="inputStartTime" class="form-control" v-model="this.fromHour">
             <option disabled value="">Choose start time...</option>
             <option value="7">0700</option>
             <option value="7">0700</option>
@@ -28,7 +28,7 @@
       <div class="form-group row" >
         <label class="col-sm-2 col-form-label">Delivery end time</label>
         <div class="col-sm-2">
-          <select id="inputEndTime" class="form-control" v-model="orderRequest.toHour">
+          <select id="inputEndTime" class="form-control" v-model="this.toHour">
             <option disabled value="">Choose end time...</option>
             <option value="7">0700</option>
             <option value="8">0800</option>
@@ -49,7 +49,7 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Pickup district</label>
         <div class="col-sm-2">
-          <select id="inputPickupDistrict" class="form-control" v-model="orderRequest.pickUpDistrictId">
+          <select id="inputPickupDistrict" class="form-control" v-model="modifiedOrderInfo.pickUpDistrictId" placeholder = "orderInfo.pickUpdDistrictId">
             <option disabled value="">Choose pickup district...</option>
             <option value="1">Mustamäe</option>
             <option value="2">Lasnamäe</option>
@@ -66,14 +66,14 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Pickup address</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="orderRequest.pickUpAddress" placeholder="Enter pickup address">
+            <input class="form-control" v-model="modifiedOrderInfo.pickUpAddress" placeholder="orderInfo.pickUpAddress">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Dropoff district</label>
           <div class="col-sm-2">
-            <select id="inputDropoffDistrict" class="form-control" v-model="orderRequest.dropOffDistrictId">
+            <select id="inputDropoffDistrict" class="form-control"  v-model="modifiedOrderInfo.dropOffDistrictId" placeholder="orderInfo.dropOffDistrict">
               <option disabled value="">Choose dropoff district...</option>
               <option value="1">Mustamäe</option>
               <option value="2">Lasnamäe</option>
@@ -89,29 +89,29 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Dropoff address</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="orderRequest.dropOffAddress" placeholder="Enter dropoff address">
+            <input class="form-control" v-model="modifiedOrderInfo.dropOffAddress" placeholder="orderInfo.dropOffAddress">
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Receiver name</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="orderRequest.receiverName" placeholder="Enter receiver name">
+            <input class="form-control" v-model="modifiedOrderInfo.receiverName" placeholder="orderInfo.receiverName">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Receiver phone number</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="orderRequest.receiverPhoneNumber"
-                   placeholder="Enter receiver phone number">
+            <input class="form-control" v-model="modifiedOrderInfo.receiverPhoneNumber"
+                   placeholder="orderInfo.receiverPhoneNumber">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Package amount</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="orderRequest.packageAmountInShipment"
-                   placeholder="Enter package amount">
+            <input class="form-control" v-model="modifiedOrderInfo.packageAmountInShipment"
+                   placeholder="orderInfo.packageAmountInShipment">
           </div>
 
         </div>
@@ -119,7 +119,7 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Package type</label>
         <div class="col-sm-2">
-          <select id="inputPackageType" class="form-control" v-model="orderRequest.shipmentPriceId">
+          <select id="inputPackageType" class="form-control" v-model="modifiedOrderInfo.shipmentPriceId" placeholder="orderInfo.shipmentPriceId">
             <option disabled value="">Choose package size...</option>
             <option value="1">XS</option>
             <option value="2">S</option>
@@ -131,53 +131,44 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Shipment description</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="orderRequest.shipmentDescription"
-                   placeholder="Enter shipment description">
+            <input class="form-control" v-model="modifiedOrderInfo.shipmentDescription"
+                   placeholder="orderInfo.shipmentDescription">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Extra comments</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="orderRequest.comment" placeholder="Enter comments">
+            <input class="form-control" v-model="modifiedOrderInfo.comment" placeholder="this.orderInfo.comment">
           </div>
 
         </div>
 
       </div>
     </form>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="toOrderView(orderId)">To order view</button>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="addNewOrder()">Save</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="modifyOrder()">Save</button>
   </div>
 </template>
 
 <script>
 import AlertError from "@/components/alerts/AlertError";
 import AlertSuccess from "@/components/alerts/AlertSuccess";
+
 export default {
-  name: "newOrder",
+  name: "modifyOrder",
   components: {AlertError, AlertSuccess},
   data: function () {
     return {
-      orderId: '',
+      UserId: sessionStorage.getItem(),
+      orderId: this.$route.query.orderId,
       errorMessage: '',
       successMessage: '',
-      orderRequest: {
-        deliveryDate: '2022-09-20',
-        senderUserId: this.$route.query.userId,
-        courierUserId: '',
-        fromHour: '',
-        toHour: '',
-        pickUpDistrictId: '',
-        pickUpAddress: '',
-        dropOffDistrictId: '',
-        dropOffAddress: '',
-        receiverName: '',
-        receiverPhoneNumber: '',
-        packageAmountInShipment: '',
-        shipmentPriceId: '',
-        shipmentDescription: '',
-        comment: '',
+      fromHour: 0,
+      toHour: 0,
+      modifiedOrderInfo: {
+        senderUserId: this.orderInfo.senderUserId
+      },
+      orderInfo:{
 
       }
     }
@@ -185,17 +176,17 @@ export default {
   methods:{
     toOrderView(orderId){
       this.$router.push({name: 'orderView', query:{orderId: orderId}})
-
-    },
-    addNewOrder() {
-      this.modifyOrder()
-
     },
     modifyOrder: function () {
-
-      this.$http.patch("/transabuddy/order/update", this.orderInfo,
+      this.$http.patch("/transabuddy/order/update", null,{
+          params: {
+            orderInfo: this.orderInfo,
+            hourFrom: this.fromHour,
+            toHour: this.toHour
+          }
+      }
       ).then(response => {
-        this.orderRequest = response.data
+        this.modifiedOrderInfo = response.data
         this.orderId = response.data.orderId
         this.successMessage = "Order has been changed successfully"
         console.log(response.data)
@@ -203,9 +194,35 @@ export default {
         this.errorMessage = 'Something went wrong'
         console.log(error)
       })
-    }
+    },
+    getOrderByOrderId: function () {
+      this.$http.get("/transabuddy/order", {
+            params: {
+              orderId: this.orderId
+            }
+          }
+      ).then(response => {
+        this.orderInfo = response.data
+        if (this.orderInfo.status === "N") {
+          this.orderInfo.status = "Waiting for acception"
+        } else if (this.orderInfo.status === "A") {
+          this.orderInfo.status = "Accepted"
+        } else if (this.orderInfo.status === "P") {
+          this.orderInfo.status = "Picked Up"
+        } else if (this.orderInfo.status === "D") {
+          this.orderInfo.status = "Deleted"
+        } else if (this.orderInfo.status === "C") {
+          this.orderInfo.status = "Delivered"
+        }
+        console.log(this.orderInfo)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+  },
+  mounted () {
+    this.getOrderByOrderId();
   }
-
 }
 
 
