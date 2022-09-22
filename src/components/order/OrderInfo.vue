@@ -165,7 +165,7 @@
     </div>
     <div>
 
-      <div class="left-img">
+      <div class="left-img" v-if="divDisplayLeftImage">
 
         <h2>Pictures from sender</h2>
 
@@ -189,7 +189,7 @@
 
       </div>
 
-      <div class="center-img">
+      <div class="center-img" v-if="divDisplayCenterImage">
         <h2>Images from courier on pickup</h2>
         <div class="container">
           <div class="row" v-for="image in imageResponseP">
@@ -211,7 +211,7 @@
 
       </div>
 
-      <div class="right-img">
+      <div class="right-img" v-if="divDisplayRightImage">
         <h2>Images from courier on dropoff</h2>
         <div class="container">
           <div class="row" v-for="image in imageResponseD">
@@ -263,6 +263,9 @@ export default {
       divDisplaySenderPicture: true,
       divDisplayDropOffPicture: true,
       divDisplayPickupPicture: true,
+      divDisplayRightImage: true,
+      divDisplayCenterImage: true,
+      divDisplayLeftImage: true,
       orderInfo: {
         deliveryDate: '',
         senderUserId: '',
@@ -311,17 +314,21 @@ export default {
       ).then(response => {
         if (type === "S") {
           this.imageResponseS = response.data
+          this.divDisplayRightImage = this.imageResponseS.length != 0
         }
         if (type === "P") {
           this.imageResponseP = response.data
+          this.divDisplayCenterImage = this.imageResponseP.length != 0
         }
         if (type === "D") {
           this.imageResponseD = response.data
+          this.divDisplayLeftImage = this.imageResponseD.length != 0
         }
-
       }).catch(error => {
         console.log(error)
       })
+
+
     },
     getImageDataFromFile(base64) {
       this.imageUploadRequest.base64 = base64
@@ -438,6 +445,7 @@ export default {
     this.findImageByOrderIdAndType(this.typeS)
     this.findImageByOrderIdAndType(this.typeP)
     this.findImageByOrderIdAndType(this.typeD)
+
   }
 
 }
