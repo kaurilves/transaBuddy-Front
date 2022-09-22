@@ -48,7 +48,7 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Pick-up district</label>
         <div class="col-sm-2">
-          <select id="inputPickupDistrict" class="form-control" v-model="modifiedOrderInfo.pickUpDistrictId">
+          <select id="inputPickupDistrict" class="form-control" v-model="orderInfo.pickUpDistrictId">
             <option disabled value="">Choose pick-up district...</option>
             <option value="1">Mustamäe</option>
             <option value="2">Lasnamäe</option>
@@ -65,14 +65,14 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Pick-up address</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.pickUpAddress" >
+            <input class="form-control" v-model="orderInfo.pickUpAddress" >
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Drop-off district</label>
           <div class="col-sm-2">
-            <select id="inputDropoffDistrict" class="form-control"  v-model="modifiedOrderInfo.dropOffDistrictId">
+            <select id="inputDropoffDistrict" class="form-control"  v-model="orderInfo.dropOffDistrictId">
               <option disabled value="">Choose drop-off district...</option>
               <option value="1">Mustamäe</option>
               <option value="2">Lasnamäe</option>
@@ -88,27 +88,27 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Drop-off address</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.dropOffAddress">
+            <input class="form-control" v-model="orderInfo.dropOffAddress">
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Receiver name</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.receiverName">
+            <input class="form-control" v-model="orderInfo.receiverName">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Receiver phone number</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.receiverPhoneNumber">
+            <input class="form-control" v-model="orderInfo.receiverPhoneNumber">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Package amount</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model=modifiedOrderInfo.packageAmount>
+            <input class="form-control" v-model=orderInfo.packageAmount>
           </div>
 
         </div>
@@ -116,7 +116,7 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Package type</label>
         <div class="col-sm-2">
-          <select id="inputPackageType" class="form-control" v-model="modifiedOrderInfo.priceCategory">
+          <select id="inputPackageType" class="form-control" v-model="orderInfo.priceCategory">
             <option disabled value="">Choose package size...</option>
             <option>XS</option>
             <option>S</option>
@@ -128,21 +128,21 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Shipment description</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.shipmentDescription">
+            <input class="form-control" v-model="orderInfo.shipmentDescription">
           </div>
 
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Extra comments</label>
           <div class="col-sm-2">
-            <input class="form-control" v-model="modifiedOrderInfo.comment">
+            <input class="form-control" v-model="orderInfo.comment">
           </div>
 
         </div>
 
       </div>
     </form>
-    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="modifyOrder()">SAVE</button>
+    <button style="margin: 5px" class="btn btn-outline-dark" v-on:click="modifyOrder()">Save changes</button>
   </div>
 </template>
 
@@ -161,21 +161,21 @@ export default {
       successMessage: '',
       fromHour: 0,
       toHour: 0,
-      modifiedOrderInfo: {
+      orderInfo: {
       },
     }
   },
   methods:{
     modifyOrder: function () {
-      this.$http.patch( "/transabuddy/order/update",null ,{
+      this.$http.patch( "/transabuddy/order/update", null ,{
           params: {
-            orderInfo: this.modifiedOrderInfo,
-            hourFrom: this.fromHour,
-            toHour: this.toHour,
+            orderInfo: this.orderInfo,
+            fromHour: this.fromHour,
+            toHour: this.toHour
           }
       }
       ).then(response => {
-        this.modifiedOrderInfo = response.data
+        this.orderInfo = response.data
         this.orderId = response.data.orderId
         this.successMessage = "Order has been changed successfully"
         console.log(response.data)
@@ -192,21 +192,21 @@ export default {
             }
           }
       ).then(response => {
-        this.modifiedOrderInfo = response.data
-        if (this.modifiedOrderInfo.status === "N") {
-          this.modifiedOrderInfo.status = "Waiting for acception"
-        } else if (this.modifiedOrderInfo.status === "A") {
-          this.modifiedOrderInfo.status = "Accepted"
-        } else if (this.modifiedOrderInfo.status === "P") {
-          this.modifiedOrderInfo.status = "Picked Up"
-        } else if (this.modifiedOrderInfo.status === "D") {
-          this.modifiedOrderInfo.status = "Deleted"
-        } else if (this.modifiedOrderInfo.status === "C") {
-          this.modifiedOrderInfo.status = "Delivered"
+        this.orderInfo = response.data
+        if (this.orderInfo.status === "N") {
+          this.orderInfo.status = "Waiting for acception"
+        } else if (this.orderInfo.status === "A") {
+          this.orderInfo.status = "Accepted"
+        } else if (this.orderInfo.status === "P") {
+          this.orderInfo.status = "Picked Up"
+        } else if (this.orderInfo.status === "D") {
+          this.orderInfo.status = "Deleted"
+        } else if (this.orderInfo.status === "C") {
+          this.orderInfo.status = "Delivered"
         }
-        this.fromHour = parseInt(this.modifiedOrderInfo.timeFrame.substring(0, 2).replace("0", ''));
-        this.toHour = parseInt(this.modifiedOrderInfo.timeFrame.substring(8, 10).replace("0", ''));
-        console.log(this.modifiedOrderInfo)
+        this.fromHour = parseInt(this.orderInfo.timeFrame.substring(0, 2).replace("0", ''));
+        this.toHour = parseInt(this.orderInfo.timeFrame.substring(8, 10).replace("0", ''));
+        console.log(this.orderInfo)
       }).catch(error => {
         console.log(error)
       })
