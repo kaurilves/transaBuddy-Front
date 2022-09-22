@@ -1,4 +1,5 @@
 <template>
+  <div>
   <tbody>
   <tr v-for="order in orderInfo">
     <td>{{order.deliveryDate}}</td>
@@ -16,6 +17,7 @@
     </td>
   </tr>
   </tbody>
+  </div>
 </template>
 <script>
 export default {
