@@ -49,9 +49,8 @@
                 </p>
               </div>
             </div>
-            <div v-if="divChooseRole">
+            <div v-if="divChooseRole"  class="justify-content-center justify-content-lg-start">
               <br>
-
               <h2>Choose role</h2>
               <div v-for="(role, index) in roles">
 
@@ -59,7 +58,8 @@
 
               </div>
 
-              <button type="button" v-on:click="LoginWithRole()">Sisene</button>
+              <button type="button" class="btn btn-primary btn-lg" v-on:click="LoginWithRole()">Select</button>
+
 
             </div>
 
