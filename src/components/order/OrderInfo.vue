@@ -143,70 +143,78 @@
     <div>
 
       <div>
-        <div v-if="divDisplayLeftImage">
-          <div >
-            <div v-for="image in imageResponseS">
-              <div >
-                <img class="my-style" :src="image.base64">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div v-if="divDisplaySenderPicture">
+        <div>
           <h2>Pictures from sender</h2>
-          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-          <br>
-          <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="uploadImage(typeS)">
-            Upload image
-          </button>
+          <div v-if="divDisplayLeftImage">
+            <div >
+              <div v-for="image in imageResponseS">
+                <div >
+                  <img class="my-style" :src="image.base64">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="divDisplaySenderPicture">
 
+            <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+            <br>
+            <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="uploadImage(typeS)">
+              Upload image
+            </button>
+
+          </div>
         </div>
 
-
-        <div v-if="divDisplayCenterImage">
+        <div>
           <h2>Images from courier on pickup</h2>
-          <div>
-            <div v-for="image in imageResponseP">
-              <div>
-                <img class="my-style" :src="image.base64"/>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-
-        <div v-if="divDisplayPickupPicture">
-          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-          <br>
-          <button type="button" style="margin: 5px" class="btn btn-outline-primary"
-                  v-on:click="sendImageDataToBackend(typeP)">
-            Upload image
-          </button>
-        </div>
-
-        <div v-if="divDisplayRightImage">
-          <h2>Images from courier on dropoff</h2>
-          <div>
-            <div v-for="image in imageResponseD">
-              <div>
-                <img class="my-style" :src="image.base64"><br><br><br><br><br>
+          <div v-if="divDisplayCenterImage">
+            <div>
+              <div v-for="image in imageResponseP">
+                <div>
+                  <img class="my-style" :src="image.base64"/>
+                </div>
               </div>
             </div>
           </div>
 
+          <div v-if="divDisplayPickupPicture">
+
+            <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+            <br>
+            <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                    v-on:click="sendImageDataToBackend(typeP)">
+              Upload image
+            </button>
+          </div>
         </div>
 
+
+        <div>
+          <div v-if="divDisplayRightImage">
+            <div>
+              <div v-for="image in imageResponseD">
+                <div>
+                  <img class="my-style" :src="image.base64"><br><br><br><br><br>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="divDisplayPickupPicture">
+            <h2>Images from courier on dropoff</h2>
+            <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+            <br>
+            <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                    v-on:click="sendImageDataToBackend(typeD)">
+              Upload image
+            </button>
+          </div>
+        </div>
+
+
+
+
       </div>
-      <div v-if="divDisplayPickupPicture">
-        <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-        <br>
-        <button type="button" style="margin: 5px" class="btn btn-outline-primary"
-                v-on:click="sendImageDataToBackend(typeD)">
-          Upload image
-        </button>
-      </div>
+
 
 
     <div v-if="orderInfo.status === 'Accepted' && roleSelected === 'courier'">
