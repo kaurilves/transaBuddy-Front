@@ -1,7 +1,8 @@
-INSERT INTO public.contact (id, first_name, last_name, personal_code, phone_number, email) VALUES (DEFAULT, 'Mai', 'Legaalne', '40000000001', '1234', 'mailegaalne@com');
-INSERT INTO public.contact (id, first_name, last_name, personal_code, phone_number, email) VALUES (DEFAULT, 'Siim', 'Massiiv', '40000000002', '4566', 'siimmassiiv@com');
-INSERT INTO public.contact (id, first_name, last_name, personal_code, phone_number, email) VALUES (DEFAULT, 'James', 'Bond', '30000000003', '6775', 'jamesbond@com');
-INSERT INTO public.contact (id, first_name, last_name, personal_code, phone_number, email) VALUES (DEFAULT, 'Eno', 'Raud', '30000000004', '87686', 'enoraud@com');
+INSERT INTO public.contact (id, first_name, last_name, personal_code, phone_number, email) VALUES (DEFAULT, 'Mai', 'Legaalne', '49000000001', '5551112', 'mailegaalne@com');
+INSERT INTO public.contact (id, first_name, last_name, personal_code, phone_number, email) VALUES (DEFAULT, 'Siim', 'Massiiv', '39000000002', '5125122', 'siimmassiiv@com');
+INSERT INTO public.contact (id, first_name, last_name, personal_code, phone_number, email) VALUES (DEFAULT, 'James', 'Bond', '39000000003', '5353122', 'jamesbond@com');
+INSERT INTO public.contact (id, first_name, last_name, personal_code, phone_number, email) VALUES (DEFAULT, 'Eno', 'Raud', '39000000004', '5622110', 'enoraud@com');
+INSERT INTO public.contact (id, first_name, last_name, personal_code, phone_number, email) VALUES (DEFAULT, 'Niar', 'Rüüt', '39000000005', '5232110', 'niarruut@com');
 
 INSERT INTO public.district (id, name) VALUES (DEFAULT, 'Mustamäe');
 INSERT INTO public.district (id, name) VALUES (DEFAULT, 'Lasnamäe');
@@ -24,11 +25,14 @@ INSERT INTO public."user" (id, user_name, password, contact_id, is_active) VALUE
 INSERT INTO public."user" (id, user_name, password, contact_id, is_active) VALUES (DEFAULT, 'siimmassiiv', '1234', 2, DEFAULT);
 INSERT INTO public."user" (id, user_name, password, contact_id, is_active) VALUES (DEFAULT, 'jamesbond', '1234', 3, DEFAULT);
 INSERT INTO public."user" (id, user_name, password, contact_id, is_active) VALUES (DEFAULT, 'enoraud', '1234', 4, DEFAULT);
+INSERT INTO public."user" (id, user_name, password, contact_id, is_active) VALUES (DEFAULT, 'niarruut', '1234', 5, DEFAULT);
 
 INSERT INTO public.user_role (id, user_id, role_id) VALUES (DEFAULT, 2, 1);
 INSERT INTO public.user_role (id, user_id, role_id) VALUES (DEFAULT, 3, 1);
+INSERT INTO public.user_role (id, user_id, role_id) VALUES (DEFAULT, 3, 2);
 INSERT INTO public.user_role (id, user_id, role_id) VALUES (DEFAULT, 4, 2);
 INSERT INTO public.user_role (id, user_id, role_id) VALUES (DEFAULT, 4, 2);
+INSERT INTO public.user_role (id, user_id, role_id) VALUES (DEFAULT, 5, 3);
 
 INSERT INTO public.shipment_price (id, dimensions, weight, price, type) VALUES (DEFAULT, '5x35x45cm', 5, 5, 'XS');
 INSERT INTO public.shipment_price (id, dimensions, weight, price, type) VALUES (DEFAULT, '12x35x45cm', 35, 7, 'S');
@@ -46,12 +50,15 @@ INSERT INTO public."order" (id, sender_user_id, receiver_name, receiver_phone_nu
 INSERT INTO public."order" (id, sender_user_id, receiver_name, receiver_phone_number, courier_user_id, delivery_date, from_hour, to_hour, comment, status, shipment_id) VALUES (DEFAULT, 4, 'Kristi', '3333', 3, '2022-09-27', 13, 17, 'ei ole kiire', 'D', 3);
 INSERT INTO public."order" (id, sender_user_id, receiver_name, receiver_phone_number, courier_user_id, delivery_date, from_hour, to_hour, comment, status, shipment_id) VALUES (DEFAULT, 4, 'Siim', '4444', 4, '2022-09-27', 15, 16, 'õrn kaup', 'C', 4);
 
+INSERT INTO public.pickup_dropoff (id, order_id, location_id, type) VALUES (DEFAULT, 1, 1, 'P');
+INSERT INTO public.pickup_dropoff (id, order_id, location_id, type) VALUES (DEFAULT, 1, 2, 'D');
 INSERT INTO public.pickup_dropoff (id, order_id, location_id, type) VALUES (DEFAULT, 2, 1, 'P');
 INSERT INTO public.pickup_dropoff (id, order_id, location_id, type) VALUES (DEFAULT, 2, 2, 'D');
 INSERT INTO public.pickup_dropoff (id, order_id, location_id, type) VALUES (DEFAULT, 4, 3, 'P');
 INSERT INTO public.pickup_dropoff (id, order_id, location_id, type) VALUES (DEFAULT, 4, 1, 'D');
 INSERT INTO public.pickup_dropoff (id, order_id, location_id, type) VALUES (DEFAULT, 3, 3, 'P');
 INSERT INTO public.pickup_dropoff (id, order_id, location_id, type) VALUES (DEFAULT, 3, 1, 'D');
+
 
 
 INSERT INTO public.image (id, base64)
