@@ -165,7 +165,7 @@
 
 
         <div v-if="divDisplayCenterImage">
-          <h2>Images from courier on pickup</h2>
+
           <div>
             <div v-for="image in imageResponseP">
               <div>
@@ -178,6 +178,7 @@
         </div>
 
         <div v-if="divDisplayPickupPicture">
+          <h2>Images from courier on pickup</h2>
           <ImageInput @imageInputSuccess="getImageDataFromFile"/>
           <br>
           <button type="button" style="margin: 5px" class="btn btn-outline-primary"
@@ -187,7 +188,7 @@
         </div>
 
         <div v-if="divDisplayRightImage">
-          <h2>Images from courier on dropoff</h2>
+
           <div>
             <div v-for="image in imageResponseD">
               <div>
@@ -200,6 +201,7 @@
 
       </div>
       <div v-if="divDisplayPickupPicture">
+        <h2>Images from courier on dropoff</h2>
         <ImageInput @imageInputSuccess="getImageDataFromFile"/>
         <br>
         <button type="button" style="margin: 5px" class="btn btn-outline-primary"
