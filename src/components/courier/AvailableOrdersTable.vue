@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Available orders</h1>
     <br>
     <label>Sort by pick-up district:</label>
     <select class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
