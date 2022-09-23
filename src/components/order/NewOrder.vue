@@ -9,18 +9,18 @@
         <div class="col-sm-2">
           <select id="inputStartTime" class="form-control" v-model="orderRequest.fromHour">
             <option disabled value="">Choose start time...</option>
-            <option value="7">0700</option>
-            <option value="8">0800</option>
-            <option value="9">0900</option>
-            <option value="10">1000</option>
-            <option value="11">1100</option>
-            <option value="12">1200</option>
-            <option value="13">1300</option>
-            <option value="14">1400</option>
-            <option value="15">1500</option>
-            <option value="16">1600</option>
-            <option value="17">1700</option>
-            <option value="18">1800</option>
+            <option value="7">07:00</option>
+            <option value="8">08:00</option>
+            <option value="9">09;00</option>
+            <option value="10">10:00</option>
+            <option value="11">11:00</option>
+            <option value="12">12:00</option>
+            <option value="13">13:00</option>
+            <option value="14">14:00</option>
+            <option value="15">15:00</option>
+            <option value="16">16:00</option>
+            <option value="17">17:00</option>
+            <option value="18">18:00</option>
           </select>
         </div>
       </div>
@@ -30,18 +30,18 @@
         <div class="col-sm-2">
           <select id="inputEndTime" class="form-control" v-model="orderRequest.toHour">
             <option disabled value="">Choose end time...</option>
-            <option value="7">0700</option>
-            <option value="8">0800</option>
-            <option value="9">0900</option>
-            <option value="10">1000</option>
-            <option value="11">1100</option>
-            <option value="12">1200</option>
-            <option value="13">1300</option>
-            <option value="14">1400</option>
-            <option value="15">1500</option>
-            <option value="16">1600</option>
-            <option value="17">1700</option>
-            <option value="18">1800</option>
+            <option value="7">07:00</option>
+            <option value="8">08:00</option>
+            <option value="9">09;00</option>
+            <option value="10">10:00</option>
+            <option value="11">11:00</option>
+            <option value="12">12:00</option>
+            <option value="13">13:00</option>
+            <option value="14">14:00</option>
+            <option value="15">15:00</option>
+            <option value="16">16:00</option>
+            <option value="17">17:00</option>
+            <option value="18">18:00</option>
           </select>
         </div>
 
