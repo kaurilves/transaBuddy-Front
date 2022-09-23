@@ -78,7 +78,7 @@ export default {
           }
       ).then(response => {
         console.log(response.data)
-        this.findActiveOrdersByCourierUserId()
+        location.reload()
       }).catch(error => {
         console.log(error)
       })
@@ -91,7 +91,7 @@ export default {
           }
       ).then(response => {
         console.log(response.data)
-        this.findActiveOrdersByCourierUserId()
+        location.reload()
       }).catch(error => {
         console.log(error)
       })

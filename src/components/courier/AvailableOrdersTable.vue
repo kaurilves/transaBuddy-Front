@@ -63,6 +63,7 @@ export default {
       ).then(response => {
         this.orderInfo = response.data
         console.log(this.orders)
+        this.findAvailableOrdersByDistrict()
       }).catch(error => {
         console.log(error)
       })
