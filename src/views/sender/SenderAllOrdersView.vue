@@ -2,7 +2,7 @@
   <div>
     <div>
       <h1>All orders</h1>
-      <select class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+      <select class="btn btn btn-primary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown"
               aria-expanded="false" v-model="selectedStatus" v-on:change="findOrdersBySenderUserIdAndStatus">
         <option value=" "> All</option>
         <option value="N"> New</option>
@@ -16,7 +16,7 @@
       </table>
     </div>
     <div>
-      <button type="button" v-on:click="backToMainView">Back</button>
+      <button type="button" class="btn btn-primary btn-lg" v-on:click="backToMainView">Back</button>
     </div>
   </div>
 </template>

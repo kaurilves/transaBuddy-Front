@@ -7,7 +7,7 @@
     <td>{{ order.dropOffAddress }}</td>
     <td>{{ order.status }}</td>
     <td>
-      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+      <button type="button" style="margin: 5px" class="btn btn-primary btn-lg"
               v-on:click="toOrderView(order.orderId )">View order
       </button>
     </td>

@@ -8,23 +8,23 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
       </head>
       <body>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-brand bg-dark">TransaBuddy</button>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+        <button class="navbar-brand btn btn-primary btn-lg">TransaBuddy</button>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav btn-group btn-group-toggle" data-toggle="buttons">
-            <button style="margin: 5px" class="btn btn-outline-light" v-on:click="navigateToAddOrder">Add new order
+            <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="navigateToAddOrder">Add new order
             </button>
-            <button style="margin: 5px" class="btn btn-outline-light" v-on:click="navigateToAllSenderOrders">All orders
+            <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="navigateToAllSenderOrders">All orders
             </button>
-            <button style="margin: 5px" class="btn btn-outline-light" v-on:click="navigateToViewProfile">View profile
+            <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="navigateToViewProfile">View profile
             </button>
-            <button id="logOutButton" style="margin: 5px" class="btn btn-outline-light" v-on:click="logOut">Logout
+            <button id="logOutButton" style="margin: 5px" class="btn btn-warning btn-lg" v-on:click="logOut">Logout
             </button>
-            <select class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            <select class="btn btn-warning btn-lg  dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false" v-model="roleSelected" v-on:change="changeRole">
               <option v-for="role in roles" :value="role">{{ role }}</option>
             </select>
@@ -32,11 +32,13 @@
         </div>
       </nav>
       <div class="container-fluid text-center">
-        <div class="row content"></div>
+        <div class="row content">
+          <SenderActiveOrdersTable/>
+        </div>
       </div>
       </body>
     </div>
-    <SenderActiveOrdersTable/>
+
   </div>
 </template>
 
@@ -52,7 +54,7 @@ export default {
   },
   data: function () {
     return {
-      userId: this.$route.query.userId,
+      userId: sessionStorage.getItem('userId'),
       roleSelected: sessionStorage.getItem('roleSelected'),
       roles: JSON.parse(sessionStorage.getItem('roles')),
       roleHomeRoute: ''
@@ -96,4 +98,53 @@ export default {
 </script>
 
 <style scoped>
+
+  /* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+  height: 450px
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+
+  padding-top: 20px;
+  background-color: #F6F0E0;
+  height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+
+  .row.content {
+    height: auto;
+  }
+}
+#wrapper{
+
+  width: 650px  ;
+  height: auto;
+  background-color: rgb(198, 241, 200);
+  margin: 0 auto;
+  margin-top: 200px;
+  border-radius: 10px;
+}
+
+
 </style>

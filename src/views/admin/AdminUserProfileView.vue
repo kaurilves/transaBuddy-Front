@@ -2,10 +2,10 @@
 
   <div>
 
-    <div>
+    <div class="justify-content-center">
       <ViewUserProfile/>
 
-      <button type="button" v-on:click="backToAdminView">Back</button>
+      <button type="button" class="btn btn-primary btn-lg" v-on:click="backToAdminView">Back</button>
     </div>
 
   </div>

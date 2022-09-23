@@ -207,8 +207,8 @@
       </div>
 
 
-    </div>
-    <div v-if="orderInfo.status === 'Accepted' && roleSelected === 'courier' && roleSelected === 'admin'">
+
+    <div v-if="orderInfo.status === 'Accepted' && roleSelected === 'courier'">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="rejectAccept(orderInfo.orderId)">Cancel
       </button>
@@ -216,7 +216,7 @@
               v-on:click="orderPickedUp(orderInfo.orderId)">Picked Up
       </button>
     </div>
-    <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'courier' && roleSelected === 'admin'">
+    <div v-if="orderInfo.status === 'Waiting for acception' && roleSelected === 'courier'">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="acceptOrder(orderInfo.orderId)">Accept
       </button>
@@ -227,7 +227,7 @@
       </button>
     </div>
     <div
-        v-if="(orderInfo.status === 'Waiting for acception' || orderInfo.status === 'Accepted') && (roleSelected === 'sender' && roleSelected === 'admin')">
+        v-if="(orderInfo.status === 'Waiting for acception' || orderInfo.status === 'Accepted') && roleSelected === 'sender'">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="navigateToModifyOrderView(orderInfo.orderId)">Modify order
       </button>
@@ -236,6 +236,7 @@
       </button>
     </div>
 
+  </div>
   </div>
 </template>
 

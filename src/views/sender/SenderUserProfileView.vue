@@ -4,7 +4,7 @@
     <div>
       <ViewUserProfile/>
 
-      <button type="button" v-on:click="backToMainView">Back</button>
+      <button type="button" class="btn btn-primary btn-lg" v-on:click="backToMainView">Back</button>
     </div>
 
   </div>
@@ -14,7 +14,7 @@
 import ViewUserProfile from "@/components/users/UserProfile";
 
 export default {
-  name: "SenderUserProfi  leView",
+  name: "SenderUserProfileView",
   components: {ViewUserProfile},
   methods: {
     backToMainView() {

@@ -7,10 +7,10 @@
     <td>{{order.dropOffAddress}}</td>
     <td>{{order.priceCategory}}</td>
     <td>
-      <button type="button" style="margin: 5px" class="btn btn-outline-dark"
+      <button type="button" style="margin: 5px" class="btn btn-primary btn-lg"
               v-on:click="acceptOrder(order.orderId)">Accept
       </button>
-      <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="toOrderView(order.orderId)">
+      <button type="button" style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="toOrderView(order.orderId)">
         View order
       </button>
     </td>

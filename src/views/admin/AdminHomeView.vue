@@ -27,7 +27,7 @@
           </button>
           <button id="logOutButton" style="margin: 5px" class="btn btn-warning btn-lg" v-on:click="logOut">Logout
           </button>
-          <select class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+          <select class="btn btn-warning btn-lg  dropdown-toggle" type="button" data-bs-toggle="dropdown"
                   aria-expanded="false" v-model="roleSelected" v-on:change="changeRole">
             <option v-for="role in roles" :value="role">{{ role }}</option>
           </select>
@@ -117,7 +117,7 @@ export default {
   },
   data: function () {
     return {
-      userId: this.$route.query.userId,
+      userId: sessionStorage.getItem('userId'),
       user: {},
       users: [],
       orders: [],

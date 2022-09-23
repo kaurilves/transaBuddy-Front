@@ -12,6 +12,7 @@ import OrderView from "@/views/order/OrderView";
 import SenderUserProfileView from "@/views/sender/SenderUserProfileView";
 import SenderAllOrdersView from "@/views/sender/SenderAllOrdersView";
 import ModifyOrderView from "@/views/order/ModifyOrderView";
+import CourierUserProfileView from "@/views/courier/CourierUserProfileView";
 
 Vue.use(VueRouter)
 
@@ -80,6 +81,11 @@ const routes = [
         path: '/sender/users/profile',
         name: 'senderUserProfileView',
         component: SenderUserProfileView
+    },
+    {
+        path: '/courier/users/profile',
+        name: 'courierUserProfileView',
+        component: CourierUserProfileView
     },
     {
         path: '/sender/orders',

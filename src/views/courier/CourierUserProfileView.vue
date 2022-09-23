@@ -4,7 +4,7 @@
     <div>
       <ViewUserProfile/>
 
-      <button type="button" v-on:click="backToMainView">Back</button>
+      <button type="button" class="btn btn-primary btn-lg" v-on:click="backToMainView">Back</button>
     </div>
 
   </div>
