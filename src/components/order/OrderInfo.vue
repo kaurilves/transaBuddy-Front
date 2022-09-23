@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div>
 
     <AlertSuccess :successMessage="successMessage"/>
     <AlertError :errorMessage="errorMessage"/>
 
-    <div class="col-sm">
+    <div>
       <h1>Order details</h1><br>
         <div class="table-responsive">
           <table class="table table-user-information">
@@ -140,28 +140,29 @@
 
     </div>
 
-    <div class="col-sm">
+    <div>
 
       <div>
         <div v-if="divDisplayLeftImage">
-          <h2>Pictures from sender</h2>
-          <div>
+          <div >
             <div v-for="image in imageResponseS">
-              <div>
+              <div >
                 <img class="my-style" :src="image.base64">
               </div>
             </div>
           </div>
-          <div v-if="divDisplaySenderPicture">
-
-            <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-            <br>
-            <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="uploadImage(typeS)">
-              Upload image
-            </button>
-
-          </div>
         </div>
+
+        <div v-if="divDisplaySenderPicture">
+          <h2>Pictures from sender</h2>
+          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+          <br>
+          <button type="button" style="margin: 5px" class="btn btn-outline-primary" v-on:click="uploadImage(typeS)">
+            Upload image
+          </button>
+
+        </div>
+
 
         <div v-if="divDisplayCenterImage">
           <h2>Images from courier on pickup</h2>
@@ -171,18 +172,18 @@
                 <img class="my-style" :src="image.base64"/>
               </div>
             </div>
-            <div v-if="divDisplayPickupPicture">
-              <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-              <br>
-              <button type="button" style="margin: 5px" class="btn btn-outline-primary"
-                      v-on:click="sendImageDataToBackend(typeP)">
-                Upload image
-              </button>
-            </div>
+
 
           </div>
+        </div>
 
-
+        <div v-if="divDisplayPickupPicture">
+          <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+          <br>
+          <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                  v-on:click="sendImageDataToBackend(typeP)">
+            Upload image
+          </button>
         </div>
 
         <div v-if="divDisplayRightImage">
@@ -194,18 +195,18 @@
               </div>
             </div>
           </div>
-          <div v-if="divDisplayPickupPicture">
-            <ImageInput @imageInputSuccess="getImageDataFromFile"/>
-            <br>
-            <button type="button" style="margin: 5px" class="btn btn-outline-primary"
-                    v-on:click="sendImageDataToBackend(typeD)">
-              Upload image
-            </button>
-          </div>
+
         </div>
 
       </div>
-
+      <div v-if="divDisplayPickupPicture">
+        <ImageInput @imageInputSuccess="getImageDataFromFile"/>
+        <br>
+        <button type="button" style="margin: 5px" class="btn btn-outline-primary"
+                v-on:click="sendImageDataToBackend(typeD)">
+          Upload image
+        </button>
+      </div>
 
 
     <div v-if="orderInfo.status === 'Accepted' && roleSelected === 'courier'">
