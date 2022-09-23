@@ -161,11 +161,13 @@ export default {
       successMessage: '',
       fromHour: 0,
       toHour: 0,
-      orderInfo: {
-      },
+    orderInfo: {
+    }
     }
   },
   methods:{
+
+
     modifyOrder: function () {
       this.$http.patch( "/transabuddy/order/update", null ,{
           params: {

@@ -190,6 +190,7 @@
 
 
         <div>
+          <h2>Images from courier on dropoff</h2>
           <div v-if="divDisplayRightImage">
             <div>
               <div v-for="image in imageResponseD">
@@ -200,7 +201,7 @@
             </div>
           </div>
           <div v-if="divDisplayPickupPicture">
-            <h2>Images from courier on dropoff</h2>
+
             <ImageInput @imageInputSuccess="getImageDataFromFile"/>
             <br>
             <button type="button" style="margin: 5px" class="btn btn-outline-primary"
