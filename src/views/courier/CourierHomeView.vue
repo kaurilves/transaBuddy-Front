@@ -25,11 +25,11 @@
           </button>
           <button style="margin: 5px" class="btn btn-primary btn-lg" v-on:click="navigateToViewProfile">View profile
           </button>
-          <button id="logOutButton" type="button" class="btn btn-warning btn-lg" v-on:click="logOut">Logout</button>
-          <select class="btn btn-warning btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown"
+          <select style="margin: 5px" class="btn btn-warning btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown"
                   aria-expanded="false" v-model="roleSelected" v-on:change="changeRole">
             <option v-for="role in roles" :value="role">{{ role }}</option>
           </select>
+          <button style="margin: 5px" id="logOutButton" type="button" class="btn btn-danger btn-lg" v-on:click="logOut">Logout</button>
 
         </div>
       </div>
