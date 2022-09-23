@@ -1,8 +1,9 @@
 <template>
   <div>
-    <br> <label>Find by district:</label>
+    <br>
+    <label>Sort by pick-up district:</label>
     <select class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false" v-model="pickUpDistrictId">
+            aria-expanded="false" v-model="pickUpDistrictId" v-on:change="findAvailableOrdersByDistrict">
       <option disabled="">Choose pick-up district</option>
       <option value="0">All districts</option>
       <option value="1">Mustamäe</option>
@@ -14,8 +15,9 @@
       <option value="7">Kristiine</option>
       <option value="8">Pirita</option>
     </select>
+    <label>        Sort by drop-off district:</label>
     <select class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false"v-model="dropOffDistrictId">
+            aria-expanded="false"v-model="dropOffDistrictId"v-on:change="findAvailableOrdersByDistrict">
       <option disabled value="">Choose drop-off district</option>
       <option value="0">All districts</option>
       <option value="1">Mustamäe</option>
@@ -27,9 +29,6 @@
       <option value="7">Kristiine</option>
       <option value="8">Pirita</option>
     </select>
-    <button type="button" style="margin: 5px" class="btn btn-outline-dark"
-            v-on:click="findAvailableOrdersByDistrict()">Search
-    </button>
     <table class="table table-hover">
       <AvailableOrdersTableHeader/>
       <AvailableOrdersTableBody :order-info="orderInfo"/>
@@ -63,14 +62,13 @@ export default {
       ).then(response => {
         this.orderInfo = response.data
         console.log(this.orders)
-        this.findAvailableOrdersByDistrict()
       }).catch(error => {
         console.log(error)
       })
     },
   },
-  mounted() {
-    this.findAvailableOrdersByDistrict()
+  mounted(){
+    this.findAvailableOrdersByDistrict();
   }
 }
 </script>
