@@ -222,7 +222,7 @@
               v-on:click="acceptOrder(orderInfo.orderId)">Accept
       </button>
     </div>
-    <div v-if="orderInfo.status === 'Picked Up' && roleSelected === 'courier' && roleSelected === 'admin'">
+    <div v-if="orderInfo.status === 'Picked Up' && roleSelected === 'courier' || roleSelected === 'admin'">
       <button type="button" style="margin: 5px" class="btn btn-outline-dark"
               v-on:click="orderDelivery(orderInfo.orderId)">Delivered
       </button>
